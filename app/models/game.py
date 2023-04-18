@@ -11,7 +11,7 @@ class Game(db.Model):
     title = db.Column(db.String(255), nullable=False)
     image = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    release_date = db.Column(db.String(255), nullable=False)
+    release_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     short_description = db.Column(db.String(255), nullable=False)
     full_description = db.Column(db.String(255), nullable=False)
     developer = db.Column(db.String(100), nullable=False)
@@ -21,4 +21,12 @@ class Game(db.Model):
     other_images = db.Column(db.String(255))
 
 
-    # * Relationships 💚
+    
+    # * Relationship to reviews
+    reviews = db.relationship('Review', back_populates='game')
+
+    # * Relationship to library_games
+    library_games = db.relationship('LibraryGame', back_populates='game')
+
+    # * Relationship to cart_games
+    cart_games = db.relationship('CartGame', back_populates='game')

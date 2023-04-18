@@ -8,3 +8,9 @@ class CartGame(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
+
+    # * Relationships
+    user = db.relationship('User', backref=db.backref('cart_items'))
+    game = db.relationship('Game', backref=db.backref('cart_items'))
