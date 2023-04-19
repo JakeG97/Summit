@@ -7,7 +7,6 @@ from datetime import datetime
 
 review_routes = Blueprint('reviews', __name__)
 
-#TODO READS
 
 # * -----------  GET  --------------
 # Returns a list of all reviews that have been made
@@ -65,3 +64,16 @@ def update_review(review_id):
         return review.to_dict(), 200
     else:
         return {'error': 'Review not found'}, 404
+
+
+#! -----------  DELETE  --------------
+@review_routes.route('/<int:review_id>', methods=['DELETE'])
+@login_required
+def delete_review(review_id):
+    review = Review.query.get(review_id)
+    if review:
+        db.session.delete(review)
+        db.session.commit()
+        return {"message": "Review deleted"}
+    else:
+        return {"errors": "Review not found"}, 404

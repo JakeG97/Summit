@@ -7,8 +7,6 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 game_routes = Blueprint('games', __name__)
 
 
-#TODO READS
-
 # * -----------  GET  --------------
 # Returns all games that are listed on the landing page(store) for purchase
 
