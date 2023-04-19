@@ -36,7 +36,7 @@ class Game(db.Model):
             'id': self.id,
             'title': self.title,
             'image': self.image,
-            'price': float(self.price),
+            'price': self.price,
             'release_date': self.release_date,
             'short_description': self.short_description,
             'full_description': self.full_description,
@@ -44,4 +44,13 @@ class Game(db.Model):
             'publisher': self.publisher,
             'banner_image': self.banner_image,
             'other_images': self.other_images,
+        }
+
+    
+    def to_dict_simple(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'image': self.image,
+            'price': self.price
         }
