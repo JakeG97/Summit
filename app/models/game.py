@@ -10,7 +10,7 @@ class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     image = db.Column(db.String(255), nullable=False)
-    price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
+    price = db.Column(db.String, nullable=False)
     release_date = db.Column(db.String(255), nullable=False)
     short_description = db.Column(db.Text, nullable=False)
     full_description = db.Column(db.Text, nullable=False)
