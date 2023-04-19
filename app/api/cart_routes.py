@@ -49,6 +49,38 @@ def add_to_cart():
 
 
 
+#TODO -----------  POST  --------------
+# Add all games in cart to user's library
+
+@cart_routes.route('/add-to-library', methods=['POST'])
+@login_required
+def add_cart_to_library():
+    user_id = current_user.id
+    cart_games = CartGame.query.filter_by(user_id=user_id).all()
+    added_games = []
+
+    # Iterate through all games in cart and add to user's library if not already there
+    for cart_game in cart_games:
+        game_id = cart_game.game_id
+        game = Game.query.get(game_id)
+        if game:
+            if LibraryGame.query.filter_by(user_id=user_id, game_id=game_id).first():
+                continue
+            else:
+                library_game = LibraryGame(user_id=user_id, game_id=game_id)
+                db.session.add(library_game)
+                added_games.append(game.to_dict())
+        else:
+            continue
+
+    # Remove all games in cart after adding to user's library
+    CartGame.query.filter_by(user_id=user_id).delete()
+    db.session.commit()
+
+    return jsonify({'added_games': added_games, 'message': 'Games added to library'}), 200
+
+
+
 #! -----------  DELETE  -------------- 
 # Remove specific game from cart
 
