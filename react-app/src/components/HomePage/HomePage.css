@@ -1,0 +1,43 @@
+.games-list-image {
+    height: 69px;
+    width: 184px;
+    margin-right: 4px;
+}
+
+.games-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-card {
+    background-color: #203748;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 618px;
+    height: 69px;
+    margin: 4px;
+}
+
+.game-card:hover{
+    cursor: pointer;
+    background-color: #a4c8de;
+    color: #181f26;
+}
+
+.game-card h2 {
+    margin-right: auto;
+}
+
+.game-card p {
+    margin-left: auto;
+}
+
+.title-text {
+    font-size: 15px;
+}
+  
+#home-price {
+    margin-right: 8px;
+}

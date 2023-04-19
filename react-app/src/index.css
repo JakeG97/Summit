@@ -1,1 +1,15 @@
 /* TODO Add site wide styles */
+
+@font-face {
+    font-family: 'Motiva Sans';
+    src: url('./fonts/MotivaSansRegular.woff.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+body {
+    background-color: #1b2838;
+    color: #fff;
+    font-family: 'Motiva Sans', sans-serif;
+}
+
