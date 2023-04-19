@@ -29,9 +29,13 @@ const HomePage = () => {
       <div className="games-container">
         {games.map((game) => (
           <div key={game.id} className="game-card">
-            <img  className="games-list-image" src={game.image} alt={game.title} />
+            <img className="games-list-image" src={game.image} alt={game.title} />
             <h2 className="title-text">{game.title}</h2>
-            <p id="home-price"className="title-text">{game.price}</p>
+            <p id="home-price" className="title-text">{game.price}</p>
+            <div className="hover-container">
+              <h3>{game.title}</h3>
+              <p>test test test test test test </p>
+            </div>
           </div>
         ))}
       </div>

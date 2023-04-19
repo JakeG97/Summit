@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: 20em;
 }
 
 .game-card {
@@ -40,4 +41,20 @@
   
 #home-price {
     margin-right: 8px;
+}
+
+.hover-container {
+    display: none;
+    position: absolute;
+    top: 8.8em;
+    right: 15em;
+    width: 300px;
+    height: 300px;
+    padding: 10px;
+    background-color: #a4c8de;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+.game-card:hover .hover-container {
+    display: block;
 }

@@ -5,3 +5,8 @@
 .hidden {
   display: none;
 }
+
+.navbar-container {
+  background-color: #181a21;
+  width: 100vw;
+}
