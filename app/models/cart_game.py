@@ -20,5 +20,8 @@ class CartGame(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'game_id': self.game_id
+            'game_id': self.game_id,
+            'title': self.game.title,
+            'banner_image': self.game.banner_image,
+            'price': self.game.price
         }
