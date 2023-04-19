@@ -13,6 +13,17 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    profile_picture = db.Column(db.String)
+
+    # * Relationship to reviews
+    reviews = db.relationship('Review', back_populates='reviewer')
+
+    # * Relationship to library_games
+    library_games = db.relationship('LibraryGame', back_populates='user')
+
+    # * Relationship to cart_games
+    cart_games = db.relationship('CartGame', back_populates='user')
+
 
     @property
     def password(self):

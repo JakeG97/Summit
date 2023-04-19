@@ -1,3 +1,6 @@
-from .db import db
+from .db import db, environment, SCHEMA
 from .user import User
-from .db import environment, SCHEMA
+from .game import Game
+from .review import Review
+from .library_game import LibraryGame
+from .cart_game import CartGame
