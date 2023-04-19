@@ -48,7 +48,7 @@ def create_review():
         return {"errors": form.errors}, 400
 
 
-#TODO -----------  PUT  --------------
+#? -----------  PUT  --------------
 @review_routes.route('/<int:review_id>', methods=['PUT'])
 @login_required
 def update_review(review_id):
