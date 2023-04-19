@@ -7,10 +7,16 @@ const normalizer = (data) => {
   };
 
   const LOAD_GAMES = "games/LOAD_GAMES";
+  const LOAD_SINGLE_GAME = "games/LOAD_SINGLE_GAME"
 
   const loadGames = (allGameData) => ({
     type: LOAD_GAMES,
     payload: allGameData,
+  });
+
+  const loadSingleGame = (gameData) => ({
+    type: LOAD_SINGLE_GAME,
+    payload: gameData,
   });
 
 
@@ -24,6 +30,14 @@ const normalizer = (data) => {
     }
   };
 
+  export const getSingleGameThunk = (gameId) => async (dispatch) => {
+    const response = await fetch(`/api/games/${gameId}`);
+  
+    if (response.ok) {
+      const gameData = await response.json();
+      dispatch(loadSingleGame(gameData));
+    }
+  };
 
 
 
@@ -34,6 +48,8 @@ const gamesReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_GAMES:
           return { ...state, ...action.payload };
+        case LOAD_SINGLE_GAME:
+          return { ...state, [action.payload.id]: action.payload };
         default:
             return state;
     }

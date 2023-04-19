@@ -1,7 +1,7 @@
 .games-list-image {
     height: 69px;
     width: 184px;
-    margin-right: 4px;
+    margin-right: 6px;
 }
 
 .games-container {
@@ -58,3 +58,9 @@
 .game-card:hover .hover-container {
     display: block;
 }
+
+/* .active-link {
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Motiva Sans', sans-serif;
+} */

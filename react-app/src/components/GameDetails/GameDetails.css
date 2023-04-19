@@ -1,0 +1,34 @@
+/* .game-detail-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+} */
+  
+.game-detail-logo {
+    height: 150px;
+    width: 325px;
+}
+
+.game-detail-images {
+    height: 65px;
+    width: 115px;
+}
+
+.game-detail-subtext {
+    color: #556772;
+    font-size: 10px;
+    text-align: start;
+    text-transform: uppercase;
+    width: 104px;
+}
+
+.short-description {
+    color: #c6d4df;
+    font-size: 13px;
+}
+
+.full-description-container {
+    border-top: 1px solid grey;
+}

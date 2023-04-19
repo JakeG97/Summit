@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import { login } from "../../store/session";
 import { getAllGamesThunk } from "../../store/game";
 import "./HomePage.css";
@@ -28,7 +28,7 @@ const HomePage = () => {
       <h1>SUMMIT</h1>
       <div className="games-container">
         {games.map((game) => (
-          <div key={game.id} className="game-card">
+          <NavLink to={`/games/${game.id}`} style={{ textDecoration: 'none', color: '#fff', fontFamily: 'Motiva Sans, sans-serif' }} activeClassName="active-link" className="game-card">
             <img className="games-list-image" src={game.image} alt={game.title} />
             <h2 className="title-text">{game.title}</h2>
             <p id="home-price" className="title-text">{game.price}</p>
@@ -36,7 +36,7 @@ const HomePage = () => {
               <h3>{game.title}</h3>
               <p>test test test test test test </p>
             </div>
-          </div>
+          </NavLink>
         ))}
       </div>
     </>
