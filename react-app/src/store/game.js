@@ -20,7 +20,7 @@ const normalizer = (data) => {
     if (response.ok) {
       const allGameData = await response.json();
       const normalizedGameData = normalizer(allGameData);
-      dispatch(loadWorkspaces(normalizedGameData));
+      dispatch(loadGames(normalizedGameData));
     }
   };
 
