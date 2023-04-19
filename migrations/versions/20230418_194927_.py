@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 931a7ae9897d
+Revision ID: dbfe35d1c45e
 Revises: 
-Create Date: 2023-04-18 14:54:17.110804
+Create Date: 2023-04-18 19:49:27.339737
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '931a7ae9897d'
+revision = 'dbfe35d1c45e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,14 +22,14 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('image', sa.String(length=255), nullable=False),
-    sa.Column('price', sa.Integer(), nullable=False),
-    sa.Column('release_date', sa.DateTime(), nullable=False),
-    sa.Column('short_description', sa.String(length=255), nullable=False),
-    sa.Column('full_description', sa.String(length=255), nullable=False),
+    sa.Column('price', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('release_date', sa.String(length=255), nullable=False),
+    sa.Column('short_description', sa.Text(), nullable=False),
+    sa.Column('full_description', sa.Text(), nullable=False),
     sa.Column('developer', sa.String(length=100), nullable=False),
     sa.Column('publisher', sa.String(length=100), nullable=False),
-    sa.Column('banner_image', sa.String(length=255), nullable=False),
-    sa.Column('other_images', sa.String(length=255), nullable=True),
+    sa.Column('banner_image', sa.String(length=255), nullable=True),
+    sa.Column('other_images', sa.JSON(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',

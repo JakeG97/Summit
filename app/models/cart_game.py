@@ -12,5 +12,5 @@ class CartGame(db.Model):
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
 
     # * Relationships
-    user = db.relationship('User', backref=db.backref('cart_items'))
-    game = db.relationship('Game', backref=db.backref('cart_items'))
+    user = db.relationship('User', back_populates=('cart_games'))
+    game = db.relationship('Game', back_populates=('cart_games'))

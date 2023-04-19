@@ -15,3 +15,7 @@ class Review(db.Model):
     description = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+
+     # * Relationship
+    reviewer = db.relationship('User', back_populates='reviews')
+    game = db.relationship('Game', back_populates='reviews')

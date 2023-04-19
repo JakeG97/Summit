@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
+
 class Game(db.Model):
     __tablename__ = 'games'
 
@@ -16,7 +17,7 @@ class Game(db.Model):
     developer = db.Column(db.String(100), nullable=False)
     publisher = db.Column(db.String(100), nullable=False)
     banner_image = db.Column(db.String(255))
-    other_images = db.Column(ARRAY(db.Text))
+    other_images = db.Column(db.JSON)
 
 
     
@@ -30,12 +31,17 @@ class Game(db.Model):
     cart_games = db.relationship('CartGame', back_populates='game')
 
 
-    # def to_dict(self):
-    #     return {
-    #         "id": self.id,
-    #         "title": self.title,
-    #         "image": self.image,
-    #         "price": self.price,
-    #         "release_date": self.release_date,
-    #         "short_description": self.
-    #     }
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'image': self.image,
+            'price': float(self.price),
+            'release_date': self.release_date,
+            'short_description': self.short_description,
+            'full_description': self.full_description,
+            'developer': self.developer,
+            'publisher': self.publisher,
+            'banner_image': self.banner_image,
+            'other_images': self.other_images,
+        }
