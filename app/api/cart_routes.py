@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import User, Game, CartGame, db
+from app.models import User, Game, CartGame, LibraryGame, db
 from flask_login import current_user, login_required
 from sqlalchemy.exc import IntegrityError
 
@@ -32,10 +32,13 @@ def add_to_cart():
     if not game:
         return jsonify({'error': 'game not found'}), 404
 
+    # Check if the user already owns the game
+    if LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first():
+        return jsonify({'error': 'This game is already in your library'}), 400
+
     # Check if the game is already in the cart
-    cart_game = CartGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
-    if cart_game:
-        return jsonify({'error': f'{game.title} is already in your cart'}), 400
+    if CartGame.query.filter_by(user_id=current_user.id, game_id=game_id).first():
+        return jsonify({'error': 'game is already in cart'}), 400
 
     # Add the game to the cart
     cart_game = CartGame(user_id=current_user.id, game_id=game_id)
