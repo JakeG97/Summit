@@ -3,8 +3,8 @@ const normalizer = (data) => {
     data.forEach((item) => {
       obj[item.id] = item;
     });
-    return obj;
-  };
+  return obj;
+};
 
   const LOAD_GAMES = "games/LOAD_GAMES";
   const LOAD_SINGLE_GAME = "games/LOAD_SINGLE_GAME"
@@ -25,7 +25,7 @@ const normalizer = (data) => {
   
     if (response.ok) {
       const allGameData = await response.json();
-      console.log("HEY LOOK HERE", allGameData)
+      // console.log("HEY LOOK HERE", allGameData)
       const normalizedGameData = normalizer(allGameData);
       dispatch(loadGames(normalizedGameData));
     }

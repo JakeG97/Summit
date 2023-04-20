@@ -10,12 +10,10 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // Retrieve games from the store
   const games = useSelector((state) => Object.values(state.games));
 
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Dispatch action to load all games when the component mounts
   useEffect(() => {
     dispatch(getAllGamesThunk());
   }, [dispatch]);
