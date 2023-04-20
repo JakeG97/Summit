@@ -8,6 +8,7 @@ const normalizer = (data) => {
 
 const LOAD_CART = "cart_games/LOAD_CART";
 const ADD_TO_CART = "cart_games/ADD_TO_CART"
+const CLEAR_CART = "cart_games/CLEAR_CART";
 
 
 const loadCartGames = (allCartData) => ({
@@ -19,6 +20,11 @@ const addGameToCart = (newCartGame) => ({
     type: ADD_TO_CART,
     payload: newCartGame
 })
+
+export const clearCart = (cartData) => ({
+  type: CLEAR_CART,
+  payload: cartData
+});
 
 
 export const getAllCartThunk = () => async (dispatch) => {
@@ -52,6 +58,16 @@ export const addToCartThunk = (gameId) => async (dispatch) => {
     }
   };
 
+export const clearCartThunk = (cartData) => async (dispatch) => {
+  const response = await fetch(`api/cart/clear`, {
+    method: "DELETE",
+  })
+
+  if (response.ok) {
+    dispatch(clearCart(cartData));
+  }
+}
+
 
 
 const initialState = {};
@@ -63,6 +79,8 @@ const cartReducer = (state = initialState, action) => {
             return { ...state, ...action.payload };
         case ADD_TO_CART:
             return { ...state, [action.payload.id]: action.payload };
+        case CLEAR_CART:
+          {}
         default:
             return state;
     }
