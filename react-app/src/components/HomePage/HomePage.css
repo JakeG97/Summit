@@ -19,13 +19,14 @@
     width: 618px;
     height: 69px;
     margin: 4px;
+    cursor: pointer;
 }
 
-.game-card:hover{
-    cursor: pointer;
+.game-card.active{
     background-color: #a4c8de;
-    color: #181f26;
+    color: #181f26 !important;
 }
+
 
 .game-card h2 {
     margin-right: auto;
@@ -59,8 +60,6 @@
     display: block;
 }
 
-/* .active-link {
-    text-decoration: none;
-    color: #fff;
-    font-family: 'Motiva Sans', sans-serif;
-} */
+.active .hover-container {
+    display: block;
+}

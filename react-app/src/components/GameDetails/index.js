@@ -34,11 +34,13 @@ const GameDetails = () => {
         {game.other_images.map((image, index) => (
                 <img key={index} className="game-detail-images" src={image} alt={game.title} />
             ))}
-        <p className="short-description">{game.short_description}</p>
-        <p><span className="game-detail-subtext">Release Date:</span> {game.release_date}</p>
-        <p><span className="game-detail-subtext">Developer:</span> {game.developer}</p>
-        <p><span className="game-detail-subtext">Publisher:</span> {game.publisher}</p>
-        <p>{game.price}</p>
+        <p className="side-text-details">{game.short_description}</p>
+        <p className="side-text-details"><span className="game-detail-subtext">Release Date:</span> {game.release_date}</p>
+        <p className="side-text-details"><span className="game-detail-subtext">Developer:</span> {game.developer}</p>
+        <p className="side-text-details"><span className="game-detail-subtext">Publisher:</span> {game.publisher}</p>
+        <div className="price-container">
+            <p>{game.price}</p>
+        </div>
         <h2 className="title-text">About This Game</h2>
         <div className="full-description-container">
             <p>{game.full_description}</p>
