@@ -25,6 +25,7 @@ const normalizer = (data) => {
   
     if (response.ok) {
       const allGameData = await response.json();
+      console.log("HEY LOOK HERE", allGameData)
       const normalizedGameData = normalizer(allGameData);
       dispatch(loadGames(normalizedGameData));
     }
