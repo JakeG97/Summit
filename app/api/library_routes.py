@@ -68,8 +68,9 @@ def update_library_game(game_id):
         library_game.game_id = game_id
         library_game.title = form.title.data
         library_game.banner_image = form.banner_image.data
+        print('HEY OVER HERE!!!!', library_game.title, 'AND HERE!!', library_game.banner_image)
         db.session.commit()
-        return jsonify({'success': 'Game updated successfully', 'game': library_game.to_dict()})
+        return jsonify({'success': 'Game updated successfully', 'game': library_game.to_dict_update()})
     return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
 
 

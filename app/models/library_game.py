@@ -24,5 +24,13 @@ class LibraryGame(db.Model):
             'game_id': self.game_id,
             'title': self.game.title,
             'banner_image': self.game.banner_image,
-            'price': self.game.price
+        }
+
+    def to_dict_update(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'game_id': self.game_id,
+            'title': self.title,
+            'banner_image': self.banner_image
         }
