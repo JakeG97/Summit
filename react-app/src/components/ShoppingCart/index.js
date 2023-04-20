@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getAllCartThunk, clearCartThunk } from "../../store/cart";
+import { addGameToLibraryThunk } from "../../store/library";
 import './ShoppingCart.css';
 
 const Cart = () => {
@@ -19,6 +20,11 @@ const Cart = () => {
     history.push(`/cart`)
   };
 
+  
+  const handlePurchase = () => {
+    dispatch(addGameToLibraryThunk());
+  };
+
   return (
     <div>
       <h2>Cart</h2>
@@ -30,7 +36,7 @@ const Cart = () => {
         </div>
       ))}
       <button onClick={handleClearCart}>Clear Cart</button>
-      <button>Purchase for myself</button>
+      <button onClick={handlePurchase}>Purchase for myself</button>
     </div>
   );
 };
