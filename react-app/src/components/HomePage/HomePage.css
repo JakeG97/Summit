@@ -47,14 +47,15 @@
 .hover-container {
     display: none;
     position: absolute;
-    top: 8.8em;
-    right: 15em;
+    top: 14%;
+    right: 15%;
     width: 300px;
     height: 675px;
     padding: 10px;
     background-color: #a4c8de;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
+  
   
 .game-card:hover .hover-container {
     display: block;
