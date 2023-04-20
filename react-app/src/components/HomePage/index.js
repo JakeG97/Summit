@@ -41,8 +41,12 @@ return (
             <h2 className="title-text">{game.title}</h2>
             <p id="home-price" className="title-text">{game.price}</p>
             <div className="hover-container">
-              <h3>{game.title}</h3>
-              <p>test test test test test test </p>
+              <h3 className="title-hover">{game.title}</h3>
+                <div className="other-images-container">
+                {game.other_images.map((image, index) => (
+                  <img key={index} className="game-hover-images" src={image} alt={game.title} />
+              ))}
+                </div>
             </div>
           </NavLink>
         ))}

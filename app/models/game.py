@@ -52,5 +52,6 @@ class Game(db.Model):
             'id': self.id,
             'title': self.title,
             'image': self.image,
-            'price': self.price
+            'price': self.price,
+            'other_images': self.other_images
         }

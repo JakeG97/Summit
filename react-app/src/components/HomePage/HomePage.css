@@ -50,7 +50,7 @@
     top: 8.8em;
     right: 15em;
     width: 300px;
-    height: 300px;
+    height: 675px;
     padding: 10px;
     background-color: #a4c8de;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -62,4 +62,21 @@
 
 .active .hover-container {
     display: block;
+}
+
+.game-hover-images {
+    width: 274px;
+    height: 150px;
+    margin-bottom: 4px;
+}
+
+.other-images-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-hover {
+    margin-left: .6em;
 }
