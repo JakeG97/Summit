@@ -1,16 +1,27 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllReviewsThunk } from "../../store/review";
+import { deleteReviewThunk } from "../../store/review";
 
 const Review = ({ review }) => {
-  return (
-    <div className="review">
-      <p className="review-rating">{review.recommended}</p>
-      <p className="review-content">{review.description}</p>
-      <p className="review-content">{review.created_at}</p>
-    </div>
-  );
-};
+    const dispatch = useDispatch();
+    const currentUserId = useSelector((state) => state.session.user?.id);
+  
+    const handleDelete = () => {
+      dispatch(deleteReviewThunk(review.id));
+    };
+  
+    return (
+      <div className="review">
+        <p className="review-rating">{review.recommended}</p>
+        <p className="review-content">{review.description}</p>
+        <p className="review-content">{review.created_at}</p>
+        {review.reviewer_id === currentUserId && (
+          <button onClick={handleDelete}>Delete</button>
+        )}
+      </div>
+    );
+  };
 
 const Reviews = ({ gameId }) => {
   const dispatch = useDispatch();

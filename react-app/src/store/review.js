@@ -1,5 +1,6 @@
 const READ_REVIEWS = "reviews/READ_REVIEWS";
 const CREATE_REVIEW = "reviews/CREATE_REVIEW";
+const DELETE_REVIEW = "reviews/DELETE_REVIEW";
 
 const readReviews = (reviews) => ({
     type: READ_REVIEWS,
@@ -9,6 +10,11 @@ const readReviews = (reviews) => ({
 const createReview = (review) => ({
     type: CREATE_REVIEW,
     payload: review,
+});
+
+const deleteReview = (reviewId) => ({
+  type: DELETE_REVIEW,
+  payload: reviewId,
 });
   
 
@@ -36,6 +42,16 @@ export const createReviewThunk = (game) => async (dispatch) => {
       dispatch(createReview(review));
     }
   };
+
+export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/${reviewId}`, {
+        method: "DELETE",
+    });
+
+    if (res.ok) {
+    dispatch(deleteReview(reviewId));
+    }
+};
   
 
 const initialState = {};
@@ -56,6 +72,9 @@ const reviewsReducer = (state = initialState, action) => {
         });
       }
       return reviews;
+    case DELETE_REVIEW:
+        delete newState[action.payload];
+        return newState;
     default:
         return state
     }
