@@ -5,6 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import HomePage from "./components/HomePage";
 import GameDetails from "./components/GameDetails";
+import Cart from "./components/ShoppingCart"
+import Library from "./components/Library";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -22,6 +24,12 @@ function App() {
         <Switch>
           <Route path="/games/:gameId">
             <GameDetails />
+          </Route>
+          <Route path="/cart">
+            <Cart />
+          </Route>
+          <Route path="/library">
+            <Library />
           </Route>
           <Route path="/login" >
             <LoginFormPage />

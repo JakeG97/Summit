@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSingleGameThunk } from "../../store/game";
+import { addToCartThunk } from "../../store/cart";
 import './GameDetails.css'
 
 const GameDetails = () => {
@@ -26,6 +27,11 @@ const GameDetails = () => {
     return <div>Game not found</div>;
   }
 
+
+  const handleAddToCart = () => {
+      dispatch(addToCartThunk(game.id));
+  };
+
   return (
     <>
     <div className="game-detail-container">
@@ -45,6 +51,7 @@ const GameDetails = () => {
         <div className="full-description-container">
             <p>{game.full_description}</p>
         </div>
+        <button onClick={handleAddToCart}>Add to Cart</button>
     </div>
     </>
   );

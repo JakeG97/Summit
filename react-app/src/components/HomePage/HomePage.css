@@ -11,6 +11,8 @@
     margin-right: 20em;
 }
 
+
+
 .game-card {
     background-color: #203748;
     display: flex;
@@ -21,6 +23,9 @@
     margin: 4px;
     cursor: pointer;
 }
+
+
+
 
 .game-card.active{
     background-color: #a4c8de;
@@ -42,8 +47,11 @@
   
 #home-price {
     margin-right: 8px;
+    color: #acdbf5;
 }
 
+
+/* TODO set display flex and visibility value maybe (ie. visibility: visible) */
 .hover-container {
     display: none;
     position: absolute;
