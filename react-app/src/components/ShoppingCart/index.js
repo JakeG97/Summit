@@ -3,20 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getAllCartThunk, clearCartThunk } from "../../store/cart";
 import { addGameToLibraryThunk } from "../../store/library";
+import { refreshUser } from "../../store/session"; //TODO look into this for clearing the cart
 import './ShoppingCart.css';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const history = useHistory();
+  const sessionUser = useSelector((state) => state.session.user);
   
 
   useEffect(() => {
     dispatch(getAllCartThunk());
   }, [dispatch]);
 
-  const handleClearCart = () => {
-    dispatch(clearCartThunk(cart));
+  const handleClearCart = async () => {
+    await dispatch(clearCartThunk(cart));
+    dispatch(refreshUser(sessionUser.id));
     history.push(`/cart`)
   };
 
