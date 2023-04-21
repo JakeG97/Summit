@@ -27,6 +27,10 @@ const removeFromLibrary = (gameId) => ({
   payload: gameId,
 })
 
+const updateLibrary = (updatedGameData) => ({
+  type: UPDATE_LIBRARY_GAME,
+  payload: updatedGameData,
+})
 
 export const getAllLibraryGamesThunk = () => async (dispatch) => {
   const response = await fetch('/api/library');
@@ -64,6 +68,23 @@ export const removeGameThunk = (gameId) => async (dispatch) => {
   }
 }
 
+export const updatedGameThunk = (newGameData, gameId) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/library/${gameId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newGameData),
+    });
+    const data = await response.json();
+    const normalizedLibraryData = {};
+    normalizedLibraryData[data.id] = data;
+    dispatch(updateLibrary(normalizedLibraryData));
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 
 
@@ -76,6 +97,8 @@ const libraryReducer = (state = initialState, action) => {
       return { ...state, ...action.payload };
     case ADD_TO_LIBRARY:
       return { ...state, [action.payload.id]: action.payload };
+    case UPDATE_LIBRARY_GAME:
+      return { ...state, ...action.payload };
     case REMOVE_FROM_LIBRARY:
       delete newState[action.payload];
       return newState;
