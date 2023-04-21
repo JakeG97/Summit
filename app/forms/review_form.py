@@ -6,5 +6,5 @@ class ReviewForm(FlaskForm):
     reviewer_id = IntegerField('Reviewer ID')
     game_id = IntegerField('Game ID')
     recommended = BooleanField('Recommend? (T or F)')
-    description =  StringField('Description')
+    description =  StringField('Description', validators=[DataRequired()])
     

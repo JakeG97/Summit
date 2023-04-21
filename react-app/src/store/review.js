@@ -22,21 +22,21 @@ export const getAllReviewsThunk = (gameId) => async (dispatch) => {
 };
 
 
-export const createReviewThunk = (review) => async (dispatch) => {
-    const res = await fetch(`/api/reviews`, {
+export const createReviewThunk = (game) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/games/${game.gameId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(review),
+      body: JSON.stringify(game),
     });
   
     if (res.ok) {
-      const newReview = await res.json();
-      dispatch(createReview(newReview));
-      return newReview;
+      const review = await res.json();
+      dispatch(createReview(review));
     }
   };
+  
 
 const initialState = {};
 
@@ -44,8 +44,10 @@ const reviewsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case CREATE_REVIEW:
-      newState[action.payload.id] = action.payload;
-      return newState;
+      return {
+        ...state,
+        [action.payload.id]: action.payload,
+      };
     case READ_REVIEWS:
       const reviews = {};
       if (action.payload) {

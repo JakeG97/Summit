@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getSingleGameThunk } from "../../store/game";
 import { addToCartThunk } from "../../store/cart";
 import Reviews from "../Reviews";
+import ReviewForm from "../ReviewForm";
 import './GameDetails.css'
 
 const GameDetails = () => {
@@ -53,6 +54,7 @@ const GameDetails = () => {
             <p>{game.full_description}</p>
         </div>
         <button onClick={handleAddToCart}>Add to Cart</button>
+        <ReviewForm gameId={gameId} />
         <Reviews gameId={gameId} />
     </div>
     </>

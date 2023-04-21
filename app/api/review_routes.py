@@ -38,15 +38,15 @@ def get_reviews_for_game(game_id):
 #TODO -----------  POST  --------------
 # Create a review for a game when logged in
 
-@review_routes.route('', methods=['POST'])
+@review_routes.route('/games/<int:game_id>', methods=['POST'])
 @login_required
-def create_review():
+def create_review(game_id):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_review = Review(
-            reviewer_id=form.data['reviewer_id'],
-            game_id=form.data['game_id'],
+            reviewer_id=current_user.id,
+            game_id=game_id,
             recommended=form.data['recommended'],
             description=form.data['description']
         )
