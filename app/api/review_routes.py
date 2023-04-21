@@ -14,7 +14,7 @@ review_routes = Blueprint('reviews', __name__)
 @review_routes.route('')
 def get_all_reviews():
     reviews = Review.query.all()
-    return ([review.to_dict() for review in reviews])
+    return {"reviews": [review.to_dict() for review in reviews]}
 
 
 # * -----------  GET  --------------
@@ -24,6 +24,15 @@ def get_all_reviews():
 def get_single_review(review_id):
     review = Review.query.get(review_id)
     return review.to_dict()
+
+
+# * -----------  GET  --------------
+# Returns all reviews for a single game
+
+@review_routes.route('/games/<int:game_id>')
+def get_reviews_for_game(game_id):
+    reviews = Review.query.filter_by(game_id=game_id).all()
+    return {"reviews": [review.to_dict() for review in reviews]}
 
 
 #TODO -----------  POST  --------------

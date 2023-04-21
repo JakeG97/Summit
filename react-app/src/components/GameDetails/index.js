@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSingleGameThunk } from "../../store/game";
 import { addToCartThunk } from "../../store/cart";
+import Reviews from "../Reviews";
 import './GameDetails.css'
 
 const GameDetails = () => {
@@ -52,6 +53,7 @@ const GameDetails = () => {
             <p>{game.full_description}</p>
         </div>
         <button onClick={handleAddToCart}>Add to Cart</button>
+        <Reviews gameId={gameId} />
     </div>
     </>
   );
