@@ -17,8 +17,8 @@ const Cart = () => {
     dispatch(getAllCartThunk());
   }, [dispatch]);
 
-  const handleClearCart = async () => {
-    await dispatch(clearCartThunk(cart));
+  const handleClearCart = () => {
+    dispatch(clearCartThunk(cart));
     dispatch(refreshUser(sessionUser.id));
     history.push(`/cart`)
   };

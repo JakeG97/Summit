@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllLibraryGamesThunk, removeGameThunk } from '../../store/library';
+import UpdateGame from '../LibraryUpdate';
 
 const Library = () => {
   const dispatch = useDispatch();
   const library = useSelector((state) => state.library);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [selectedGame, setSelectedGame] = useState(null);
 
   useEffect(() => {
     dispatch(getAllLibraryGamesThunk());
@@ -14,6 +17,18 @@ const Library = () => {
     dispatch(removeGameThunk(game.game_id));
   };
 
+  const handleUpdateClick = (game) => {
+    console.log("Selected game ID:", game.game_id);
+    setShowUpdateForm(true);
+    setSelectedGame(game);
+  };
+
+  const handleFormClose = () => {
+    setShowUpdateForm(false);
+    setSelectedGame(null);
+  };
+
+
   return (
     <div>
       <h2>Library</h2>
@@ -22,8 +37,12 @@ const Library = () => {
           <img className="games-list-image"src={game.banner_image} alt={game.title} />
           <h3>{game.title}</h3>
           <button onClick={() => handleRemove(game)}>Remove</button>
+          <button onClick={() => handleUpdateClick(game)}>Update</button>
         </div>
       ))}
+      {showUpdateForm && (
+        <UpdateGame game={selectedGame} onClose={handleFormClose} />
+      )}
     </div>
   );
 };
