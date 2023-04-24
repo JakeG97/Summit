@@ -89,3 +89,20 @@
 .title-hover {
     margin-left: .6em;
 }
+
+
+.cart-button {
+    color: #a4d007;
+    background-color: #789901;
+    border: solid 1px black;
+    cursor: pointer;
+    width: 96px;
+    height: 20px;
+    /* box-shadow: ; */
+}
+
+.add-button:hover,
+.cart-button:hover {
+    color: black;
+    background-color: #88ac01;
+}

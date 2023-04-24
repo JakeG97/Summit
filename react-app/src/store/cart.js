@@ -58,6 +58,7 @@ export const addToCartThunk = (gameId) => async (dispatch) => {
     }
   };
 
+  
 export const clearCartThunk = (cartData) => async (dispatch) => {
   const response = await fetch(`api/cart/clear`, {
     method: "DELETE",

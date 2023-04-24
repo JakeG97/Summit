@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getAllCartThunk, clearCartThunk } from "../../store/cart";
-import { addGameToLibraryThunk } from "../../store/library";
+import { addGameToLibraryThunk, getAllLibraryGamesThunk } from "../../store/library";
 import { refreshUser } from "../../store/session"; //TODO look into this for clearing the cart
 import './ShoppingCart.css';
 
@@ -26,6 +26,8 @@ const Cart = () => {
   
   const handlePurchase = () => {
     dispatch(addGameToLibraryThunk());
+    dispatch(getAllLibraryGamesThunk())
+    history.push(`/library`);
   };
 
   return (

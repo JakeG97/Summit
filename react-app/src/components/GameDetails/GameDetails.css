@@ -1,10 +1,10 @@
-/* .game-detail-container {
+.game-detail-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
-} */
+    justify-content: center;
+}
+  
   
 .game-detail-logo {
     height: 150px;
@@ -33,10 +33,113 @@
     border-top: 1px solid grey;
 }
 
-/* .price-container {
+.right-bar-container {
+    display: flex;
+    flex-direction: column;
+    width: 325px;
+}
+
+.right-bar {
+    display: flex;
+    justify-content: flex-end;
+    width: 325px;
+    margin-left: 20px;
+}
+
+.left-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 600px;
+    float: left;
+    margin-right: 20px;
+}
+
+.selected-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.top-half-container {
+    background: linear-gradient(90deg,transparent 50%,rgba(0,0,0,.4));
+}
+  
+.selected-image {
+    max-height: 338px;
+    max-width: 600;
+}
+  
+.game-detail-images.selected {
+    border: 3px solid #3d3d3d;
+}
+
+.small-images-container {
+    display: flex;
+    flex-direction: row;
+}
+
+#details-title {
+    margin-left: 8.2em;
+    margin-top: 0;
+}
+
+.price-container{
+    background-image: linear-gradient(-60deg,rgba(226,244,255,.3) 5%,rgba(84,107,115,.3) 95%);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 1em;
+    margin-right: 15.5em;
+    font-size: 21px;
+    width: 616px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    padding: 20px 16px 26px;
+}
+
+.purchase-box {
     align-items: center;
     background-color: #000;
     border-radius: 2px;
+    display: flex;
     font-size: 13px;
     height: 32px;
-} */
+    justify-content: space-between;
+    padding: 2px;
+    position: absolute;
+    right: 50em;
+    top: 52em;
+}
+
+.add-button {
+    background: linear-gradient(90deg,#75b022 5%,#588a1b 95%);
+    border: none;
+    border-radius: 2px;
+    color: #d2efa9;
+    font-size: 15px;
+    height: 30px;
+    margin-right: 1px;
+    margin-left: 10px;
+    padding: 0 15px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.3);
+    cursor: pointer;
+}
+
+#actual-price {
+    margin-left: 10px;
+}
+
+.about-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 616px;
+    flex-direction: column;
+    margin-right: 20.5em;
+    margin-top: 2em;
+}
+
+.cart-details-page {
+    margin-left: 69.3em;
+}
