@@ -104,9 +104,12 @@ def remove_game_from_cart(game_id):
         db.session.delete(cart_game_to_remove)
         db.session.commit()
 
-        return jsonify({'message': 'Game removed from cart'})
+        # Get the updated cart data and return as JSON
+        updated_cart = CartGame.query.filter_by(user_id=user_id).all()
+        return jsonify([cart_game.to_dict() for cart_game in updated_cart])
 
     return jsonify({'error': 'Game not found in cart'}), 404
+
 
 
 

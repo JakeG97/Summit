@@ -1,12 +1,3 @@
-const normalizer = (data) => {
-  const obj = {};
-  data.forEach((item) => {
-    obj[item.id] = item;
-  });
-return obj;
-};
-
-
 const LOAD_LIBRARY = 'library/LOAD_LIBRARY';
 const ADD_TO_LIBRARY = 'library/ADD_TO_LIBRARY';
 const UPDATE_LIBRARY_GAME = 'library/UPDATE_LIBRARY_GAME';
@@ -59,6 +50,7 @@ export const addGameToLibraryThunk = (gameId) => async (dispatch) => {
     dispatch(addToLibrary(game));
   }
 };
+
 
 export const removeGameThunk = (gameId) => async (dispatch) => {
   const response = await fetch(`/api/library/${gameId}`, {
