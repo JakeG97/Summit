@@ -9,6 +9,7 @@ const Review = ({ review }) => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [recommended, setRecommended] = useState(review.recommended);
   const [description, setDescription] = useState(review.description);
+  const [activeButton, setActiveButton] = useState(null);
 
   const handleDelete = () => {
     dispatch(deleteReviewThunk(review.id));
@@ -19,6 +20,12 @@ const Review = ({ review }) => {
     dispatch(updateReviewThunk(review.id, { recommended, description }));
     setShowEditForm(false);
   };
+
+  const handleRecommendationClick = (value) => {
+    setRecommended(value);
+    setActiveButton(value);
+  };
+
 
   return (
     <div className="review">
@@ -55,30 +62,46 @@ const Review = ({ review }) => {
           </div>
           {showEditForm && (
             <form onSubmit={handleEdit}>
-              <div>
-                <label>
-                  Do you still recommend this game?
-                  <select
-                    value={recommended}
-                    onChange={(e) => setRecommended(e.target.value === "true")}
-                  >
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
-                  </select>
-                </label>
-              </div>
-              <div>
-                <label>
-                  Write a review:
+              <div className="edit-form-container">
+                  <p>Update your review: </p>
                   <textarea
+                    className="review-edit-textarea"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Enter your review here"
                     rows={5}
                   />
-                </label>
               </div>
-              <button type="submit">Save Changes</button>
+              <div className="edit-thumb-buttons">
+              <button
+                id="yes-button"
+                type="button"
+                className={
+                  recommended
+                  ? "active thumb-button"
+                  : "hover thumb-button"
+                }
+                onClick={() => handleRecommendationClick(true)}
+              >
+                <i className="fas fa-thumbs-up fa-flip-horizontal"></i>
+                {" "}
+                Yes
+              </button>
+              <button
+                id="no-button"
+                type="button"
+                className={
+                  !recommended
+                  ? "active thumb-button"
+                  : "hover thumb-button"
+                }
+                onClick={() => handleRecommendationClick(false)}
+              >
+                <i className="fas fa-thumbs-down fa-flip-horizontal"></i>
+                {" "}
+                No
+              </button>
+              <button className="edit-review-button" type="submit">Update Review</button>
+            </div>
             </form>
           )}
         </div>

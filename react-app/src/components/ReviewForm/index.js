@@ -12,9 +12,6 @@ const ReviewForm = ({ gameId }) => {
   const { id } = useSelector((state) => state.session.user);
   const game = useSelector((state) => state.games[gameId]);
 
-  const handleRecommendationChange = (e) => {
-    setRecommended(e.target.value === "true" ? true : false);
-  };
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
