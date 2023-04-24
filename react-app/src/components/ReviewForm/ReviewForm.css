@@ -1,0 +1,92 @@
+.review-form {
+    width: 945px;
+    background: linear-gradient(-60deg,rgba(226,244,255,.3) 5%,rgba(84,107,115,.3) 95%);
+    padding: 1em;
+}
+
+.review-title-text {
+    font-size: 18px;
+    color: #66c0f4;
+}
+
+.review-subtext {
+    color: #8b939c;
+    font-size: 14px;
+    text-align: start;
+    margin: 0;
+}
+
+.review-sub-subtext {
+    color: #fff;
+    font-size: 14px;
+    text-align: start;
+    margin-left: 9em;
+}
+
+.profile-pic-review {
+    width: 94px;
+    height: 94px;
+    border: 1px solid grey;
+    margin-bottom: 3.5em;
+}
+
+.review-textarea {
+    margin-left: 2em;
+    margin-top: 1.5em;
+    border: 1px solid #233c51;
+    border-radius: 3px;
+    height: 132px;
+    width: 764px;
+    max-width: 800px;
+    background-color: #222b35;
+    color: #d6d7d8;
+    padding: 10px 11px;
+    font-size: 13px;
+    font-family: "Motiva Sans", Sans-serif;
+    box-shadow: inset 0px 0px 7px rgba( 0, 0, 0, 0.5 );
+}
+
+.thumb-buttons {
+    margin-left: 8em;
+    display: flex;
+}
+
+#no-button,
+#yes-button {
+    width: 76px;
+    height: 40px;
+    color: #67c1f5;
+    background: linear-gradient(#355f7b,#234e6a);
+    border: none;
+    margin-right: 4px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.post-review-button {
+    width: 108px;
+    height: 30px;
+    color: #2B5066;
+    background-color: #a6c9dd;
+    font-size: 16px;
+    font-weight: 30;
+    border: 1px solid;
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: 2.5em;
+    cursor: pointer;
+}
+
+.thumb-button.active,
+#no-button:hover,
+#yes-button:hover, 
+.post-review-button:hover {
+    background: linear-gradient( -60deg, #417a9b 5%,#67c1f5 95%) !important;
+    color: #fff;
+}
+
+.thumb-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
