@@ -103,6 +103,6 @@
 
 .add-button:hover,
 .cart-button:hover {
+    background: linear-gradient( to right, #8ed629 5%, #6aa621 95%);
     color: black;
-    background-color: #88ac01;
 }

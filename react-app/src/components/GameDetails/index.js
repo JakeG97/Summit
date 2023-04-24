@@ -40,7 +40,7 @@ const GameDetails = () => {
   return (
     <>
       <a className="cart-details-page" href="/cart">
-        <button className="cart-button">Cart</button>
+        <button className="cart-button">CART</button>
       </a>
       <h1 id="details-title">{game.title}</h1>
       <div className="game-detail-container">
