@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { getAllCartThunk, clearCartThunk, removeCartGameThunk } from "../../store/cart";
 import { addGameToLibraryThunk, getAllLibraryGamesThunk } from "../../store/library"
 import './ShoppingCart.css';
@@ -42,17 +42,28 @@ const Cart = () => {
   
 
   return (
-    <div>
+    <div className="cart">
+      <h2 className="cart-title">YOUR SHOPPING CART</h2>
       {Object.values(cart).map((game) => (
-        <div className="game-card" key={game.id}>
-          <img className="games-list-image" src={game.banner_image} alt={game.title} />
-          <h3>{game.title}</h3>
-          <p>{game.price}</p>
-          <button className="remove-button" onClick={() => handleRemove(game)}>Remove</button>
+        <div className="game-card-cart" key={game.id}>
+          <img className="games-cart-image" src={game.banner_image} alt={game.title} />
+          <h2 className="cart-game-titles">{game.title}</h2>
+          <div className="price-remove-container">
+            <p className="cart-game-price">{game.price}</p>
+            <button className="remove-button" onClick={() => handleRemove(game)}>Remove</button>
+          </div>
         </div>
       ))}
-      <button onClick={handleClearCart}>Clear Cart</button>
-      <button onClick={handlePurchase}>Purchase for myself</button>
+      {Object.keys(cart).length !== 0 && (
+        <div className="total-card">
+          <p className="total-math">Estimated Total: TBC</p>
+          <button id="purchase-button" className="add-button" onClick={handlePurchase}>Purchase for myself</button>
+        </div>
+      )}
+      <div>
+        <Link id="continue-shopping-cart" to="/" className="post-review-button">Continue Shopping</Link>
+        <button className="clear-cart" onClick={handleClearCart}>Remove all items</button>
+      </div>
     </div>
   );
 };

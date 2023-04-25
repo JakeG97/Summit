@@ -9,4 +9,17 @@
 .navbar-container {
   background-color: #181a21;
   width: 100vw;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 104px;
 }
+
+.main-title {
+  font-size: 32px;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* .header-container {
+} */

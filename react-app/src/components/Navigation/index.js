@@ -9,16 +9,14 @@ function Navigation({ isLoaded }){
 
 	return (
 		<div className="navbar-container">
-			<ul>
-				<li>
-					<NavLink exact to="/">Home</NavLink>
-				</li>
-				{isLoaded && (
-					<li>
-						<ProfileButton user={sessionUser} />
-					</li>
-				)}
-			</ul>
+			<div className="header-container">
+				<NavLink className="main-title" exact to="/">Summit</NavLink>
+			</div>
+			{isLoaded && (
+				<div>
+					<ProfileButton user={sessionUser} />
+				</div>
+			)}
 		</div>
 	);
 }

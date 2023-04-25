@@ -1,0 +1,112 @@
+.cart {
+    background: linear-gradient(180deg, #2A475E 0%, #1B2838 80%);
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cart-title {
+    font-size: 34px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 1em;
+    margin-right: 6em;
+}
+
+.cart-game-titles {
+    font-size: 14px;
+    color: #c7d5e0;
+    margin-bottom: 1em;
+    width: 300px;
+}
+  
+
+.cart-game-price {
+    font-size: 13px;
+    color: #c7d5e0;
+}
+  
+.cart-title-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.remove-button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    color: #8b939c;
+    cursor: pointer;
+}
+  
+.price-remove-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.total-card {
+    background-color: #16202d;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 618px;
+    height: 69px;
+    margin: 4px;
+    margin-bottom: 2em; 
+}
+
+.game-card-cart {
+    background-color: #16202d;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 618px;
+    height: 69px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.games-cart-image {
+    height: 69px;
+    width: 184px;
+    margin-right: 1em;
+}
+
+#purchase-button {
+    margin-right: 2em;
+    margin-bottom: 1em;
+}
+
+#continue-shopping-cart{
+    text-decoration: none;
+    padding: .5em;
+}
+
+.clear-cart {
+    background: none;
+    border: none;
+    font-size: 11px;
+    text-decoration: underline;
+    color: #8b939c;
+    cursor: pointer;
+}
+
+.clear-cart:hover,
+.remove-button:hover {
+    color: #66C0F4;
+}
+
+.total-math {
+    background: none;
+    border: none;
+    font-size: 12px;
+    color: #8b939c;
+    margin-right: 41em;
+}
