@@ -1,10 +1,10 @@
-const normalizer = (data) => {
-  const obj = {};
-  data.forEach((item) => {
-    obj[item.id] = item;
-  });
-return obj;
-};
+// const normalizer = (data) => {
+//   const obj = {};
+//   data.forEach((item) => {
+//     obj[item.id] = item;
+//   });
+// return obj;
+// };
 
 const LOAD_CART = "cart_games/LOAD_CART";
 const ADD_TO_CART = "cart_games/ADD_TO_CART"

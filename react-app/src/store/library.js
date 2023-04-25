@@ -53,14 +53,15 @@ export const addGameToLibraryThunk = (gameId) => async (dispatch) => {
 
 
 export const removeGameThunk = (gameId) => async (dispatch) => {
-  const response = await fetch(`/api/library/${gameId}`, {
-    method: "DELETE",
-  })
+const response = await fetch(`/api/library/${gameId}`, {
+  method: "DELETE",
+});
 
-  if (response.ok) {
-    dispatch(removeFromLibrary(gameId))
-  }
+if (response.ok) {
+  dispatch(removeFromLibrary(gameId));
 }
+};
+
 
 //! WORKING JUST GOES BACK TO OLD DATA ON REFRESH
 export const updatedGameThunk = (newGameData, gameId) => async (dispatch) => {
