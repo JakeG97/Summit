@@ -146,8 +146,8 @@
 
 .popup {
     position: fixed;
-    top: 50%;
-    left: 73%;
+    top: 80%;
+    left: 71.5%;
     transform: translate(-50%, -50%);
     background: linear-gradient(-60deg,rgba(226,244,255,.3) 5%,rgba(84,107,115,.3) 95%);
     border: 1px solid #000;

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { getAllReviewsThunk, deleteReviewThunk, updateReviewThunk } from "../../store/review";
+import { getAllReviewsThunk, deleteReviewThunk, updateReviewThunk, updateUser, getUserByIdThunk } from "../../store/review";
 import './Reviews.css'
 
 const Review = ({ review }) => {
