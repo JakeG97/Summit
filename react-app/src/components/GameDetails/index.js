@@ -13,10 +13,23 @@ const GameDetails = () => {
   const game = useSelector((state) => state.games[gameId]);
   const [loading, setLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+  const sessionUser = useSelector((state) => state.session.user);
 
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
+  
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartButton = document.querySelector(".add-button");
+    if (cartButton && cartItems.includes(gameId)) {
+      cartButton.textContent = "In Cart";
+      cartButton.disabled = true;
+      cartButton.onclick = () => {
+        window.location.href = "/cart";
+      };
+    }
+  }, [gameId]);
+  
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -35,10 +48,25 @@ const GameDetails = () => {
   }
 
 
+
   const handleAddToCart = () => {
-      dispatch(addToCartThunk(game.id));
-      setShowPopup(true);
+    dispatch(addToCartThunk(game.id));
+    setShowPopup(true);
+    const cartButton = document.querySelector(".add-button");
+    if (cartButton) {
+      cartButton.textContent = "In Cart";
+      cartButton.disabled = true;
+      cartButton.onclick = () => {
+        window.location.href = "/cart";
+      };
+  
+      // Save cart items to local storage
+      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      localStorage.setItem("cart", JSON.stringify([...cartItems, game.id]));
+    }
   };
+  
+  
 
   return (
     <>
@@ -105,8 +133,12 @@ const GameDetails = () => {
             <div className="popup">
               <p className="title-text">Item added to cart!</p>
               <div className="popup-button-container">
-                <button className="popup-buttons" onClick={() => setShowPopup(false)}>Continue Shopping</button>
-                <a id="cart-redirect" className="popup-buttons" href="/cart">Go to Cart</a>
+                <a id="cart-redirect" className="popup-buttons" href="/">
+                  Continue Shopping
+                </a>
+                <a id="cart-redirect" className="popup-buttons" href="/cart">
+                  Go to Cart
+                </a>
               </div>
             </div>
           )}
@@ -117,8 +149,16 @@ const GameDetails = () => {
             <p>{game.full_description}</p>
           </div>
         </div>
-        <ReviewForm gameId={gameId} />
-        <Reviews gameId={gameId} />
+        {sessionUser ? (
+          <>
+            <ReviewForm gameId={gameId} />
+            <Reviews gameId={gameId} />
+          </>
+        ) : (
+          <p>Please log in to leave a review</p>
+          //! need to fix the profile picture and username for this to work
+          // <Reviews gameId={gameId} />
+        )}
       </div>
     </>
   );  
