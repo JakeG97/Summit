@@ -101,49 +101,49 @@ export const removeGameThunk = (gameId) => async (dispatch) => {
 
 
 //! WORKING JUST GOES BACK TO OLD DATA ON REFRESH
-// export const updatedGameThunk = (newGameData, gameId) => async (dispatch) => {
-//   try {
-//     console.log('updating game:', gameId);
-//     console.log('new game data:', newGameData);
-//     const response = await fetch(`/api/library/${gameId}`, {
-//       method: "PUT",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(newGameData),
-//     });
-//     const data = await response.json();
-//     console.log('Received updated game data:', data);
+export const updatedGameThunk = (newGameData, gameId) => async (dispatch) => {
+  try {
+    console.log('updating game:', gameId);
+    console.log('new game data:', newGameData);
+    const response = await fetch(`/api/library/${gameId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newGameData),
+    });
+    const data = await response.json();
+    console.log('Received updated game data:', data);
 
-//     // Create normalized data object with correct structure
-//     const normalizedLibraryData = {
-//       [data.game.id]: {
-//         id: data.game.id,
-//         title: data.game.title,
-//         banner_image: data.game.banner_image,
-//       },
-//     };
-//     console.log('Normalized game data:', normalizedLibraryData);
+    // Create normalized data object with correct structure
+    const normalizedLibraryData = {
+      [data.game.id]: {
+        id: data.game.id,
+        title: data.game.title,
+        banner_image: data.game.banner_image,
+      },
+    };
+    console.log('Normalized game data:', normalizedLibraryData);
 
-//     dispatch(updateLibrary(normalizedLibraryData));
-//     return data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-export const updatedGameThunk = (gameId, gameData) => async (dispatch) => {
-  const response = await fetch(`/api/library/${gameId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(gameData),
-  })
-
-  if (response.ok) {
-    const game = await response.json();
-    dispatch(updateLibrary(game))
+    dispatch(updateLibrary(normalizedLibraryData));
+    return data;
+  } catch (error) {
+    console.log(error);
   }
 };
+
+// export const updatedGameThunk = (gameId, gameData) => async (dispatch) => {
+//   const response = await fetch(`/api/library/${gameId}`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(gameData),
+//   })
+
+//   if (response.ok) {
+//     const game = await response.json();
+//     dispatch(updateLibrary(game))
+//   }
+// };
 
 
 
@@ -160,7 +160,7 @@ const libraryReducer = (state = initialState, action) => {
       return { ...state, [action.payload.id]: action.payload };
     case UPDATE_LIBRARY_GAME:
       console.log('Updating game in reducer:', action.payload);
-      return { ...state, [action.payload.id]: action.payload, };
+      return { ...state, ...action.payload, };
     case REMOVE_FROM_LIBRARY:
       delete newState[action.payload];
       return newState;
