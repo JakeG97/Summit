@@ -9,6 +9,7 @@
     flex-direction: column;
     align-items: center;
     margin-right: 20em;
+    margin-top: 10em;
 }
 
 
@@ -55,7 +56,7 @@
 .hover-container {
     display: none;
     position: absolute;
-    top: 14%;
+    top: 30%;
     right: 15%;
     width: 300px;
     height: 675px;
@@ -89,8 +90,7 @@
 .title-hover {
     margin-left: .6em;
 }
-
-
+  
 .cart-button {
     color: #a4d007;
     background-color: #789901;
@@ -98,12 +98,12 @@
     cursor: pointer;
     width: 96px;
     height: 20px;
-    /* box-shadow: ; */
 }
-
+  
 .popup-buttons:hover,
 .add-button:hover,
 .cart-button:hover {
     background: linear-gradient( to right, #8ed629 5%, #6aa621 95%);
     color: #fff;
 }
+  

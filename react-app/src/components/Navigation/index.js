@@ -13,7 +13,7 @@ function Navigation({ isLoaded }){
 				<NavLink className="main-title" exact to="/">Summit</NavLink>
 			</div>
 			{isLoaded && (
-				<div>
+				<div className="profile-icon-container">
 					<ProfileButton user={sessionUser} />
 				</div>
 			)}
