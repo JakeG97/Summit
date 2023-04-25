@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getSingleGameThunk } from "../../store/game";
 import { addToCartThunk } from "../../store/cart";
 import Reviews from "../Reviews";
@@ -14,22 +14,11 @@ const GameDetails = () => {
   const [loading, setLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
 
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartButton = document.querySelector(".add-button");
-    if (cartButton && cartItems.includes(gameId)) {
-      cartButton.textContent = "In Cart";
-      cartButton.disabled = true;
-      cartButton.onclick = () => {
-        window.location.href = "/cart";
-      };
-    }
-  }, [gameId]);
-  
+
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -48,24 +37,17 @@ const GameDetails = () => {
   }
 
 
-
   const handleAddToCart = () => {
     dispatch(addToCartThunk(game.id));
     setShowPopup(true);
     const cartButton = document.querySelector(".add-button");
     if (cartButton) {
       cartButton.textContent = "In Cart";
-      cartButton.disabled = true;
       cartButton.onclick = () => {
-        window.location.href = "/cart";
+        history.push("/cart")
       };
-  
-      // Save cart items to local storage
-      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-      localStorage.setItem("cart", JSON.stringify([...cartItems, game.id]));
     }
   };
-  
   
 
   return (
