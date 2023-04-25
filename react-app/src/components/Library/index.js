@@ -16,6 +16,7 @@ const Library = () => {
 
   const handleRemove = async (game) => {
     dispatch(removeGameThunk(game.game_id));
+    dispatch(getAllLibraryGamesThunk())
   };
 
   const handleUpdateClick = (game) => {

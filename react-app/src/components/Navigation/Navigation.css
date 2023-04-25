@@ -16,9 +16,20 @@
 }
 
 .main-title {
-  font-size: 32px;
+  font-size: 28px;
   text-decoration: none;
   color: #fff;
+}
+
+.library-main-title {
+  font-size: 14px;
+  text-decoration: none;
+  color: #556772;
+  margin-left: 1em;
+}
+
+.library-main-title:hover {
+  color:#fff;
 }
 
 .profile-icon-container {

@@ -43,9 +43,7 @@ const GameDetails = () => {
     const cartButton = document.querySelector(".add-button");
     if (cartButton) {
       cartButton.textContent = "In Cart";
-      cartButton.onclick = () => {
-        history.push("/cart")
-      };
+      cartButton.disabled = true;
     }
   };
   

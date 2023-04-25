@@ -11,6 +11,7 @@ function Navigation({ isLoaded }){
 		<div className="navbar-container">
 			<div className="header-container">
 				<NavLink className="main-title" exact to="/">Summit</NavLink>
+				<NavLink className="library-main-title" exact to="/Library">Library</NavLink>
 			</div>
 			{isLoaded && (
 				<div className="profile-icon-container">

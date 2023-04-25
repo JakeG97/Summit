@@ -37,7 +37,8 @@ const Cart = () => {
   };
   
   const handleRemove = async (game) => {
-    dispatch(removeCartGameThunk(game.game_id));
+    await dispatch(removeCartGameThunk(game.game_id));
+    dispatch(getAllCartThunk());
   };
   
 
