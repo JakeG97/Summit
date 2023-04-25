@@ -5,6 +5,7 @@ import { ModalProvider } from "../../context/Modal";
 import RemoveGameModal from '../RemoveGameModal';
 import UpdateGame from '../LibraryUpdate';
 import "./Library.css"
+import { useHistory } from 'react-router-dom';
 
 const Library = () => {
   const dispatch = useDispatch();
@@ -12,10 +13,11 @@ const Library = () => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     dispatch(getAllLibraryGamesThunk());
-  }, [dispatch]);
+  }, [dispatch, refreshKey]);
 
   const handleRemoveClick = (game) => {
     setShowRemoveModal(true);
@@ -25,15 +27,12 @@ const Library = () => {
   const handleRemoveClose = () => {
     setShowRemoveModal(false);
     setSelectedGame(null);
-    dispatch(getAllLibraryGamesThunk());
+    setRefreshKey((prevKey) => prevKey + 1); // force re-render the component
   };
   
-
   const handleRemove = async (game) => {
-    await dispatch(removeGameThunk(game.game_id));
-    dispatch(getAllLibraryGamesThunk());
-    handleRemoveClose();
-  };  
+    dispatch(removeGameThunk(game.game_id));
+  };
 
   const handleUpdateClick = (game) => {
     console.log("Selected game ID:", game.game_id);
@@ -61,13 +60,12 @@ const Library = () => {
       {showUpdateForm && (
         <UpdateGame game={selectedGame} onClose={handleFormClose} />
       )}
-      <ModalProvider>
-        {showRemoveModal && (
-          <RemoveGameModal game={selectedGame} onRemove={handleRemove} onClose={handleRemoveClose} />
-        )}
-      </ModalProvider>
+      {showRemoveModal && (
+        <RemoveGameModal game={selectedGame} onClose={handleRemoveClose} onRemove={handleRemove} />
+      )}
     </div>
   );
 };
+
 
 export default Library;
