@@ -14,7 +14,7 @@ review_routes = Blueprint('reviews', __name__)
 @review_routes.route('')
 def get_all_reviews():
     reviews = Review.query.all()
-    return ([review.to_dict() for review in reviews])
+    return {"reviews": [review.to_dict() for review in reviews]}
 
 
 # * -----------  GET  --------------
@@ -26,18 +26,27 @@ def get_single_review(review_id):
     return review.to_dict()
 
 
+# * -----------  GET  --------------
+# Returns all reviews for a single game
+
+@review_routes.route('/games/<int:game_id>')
+def get_reviews_for_game(game_id):
+    reviews = Review.query.filter_by(game_id=game_id).all()
+    return {"reviews": [review.to_dict() for review in reviews]}
+
+
 #TODO -----------  POST  --------------
 # Create a review for a game when logged in
 
-@review_routes.route('', methods=['POST'])
+@review_routes.route('/games/<int:game_id>', methods=['POST'])
 @login_required
-def create_review():
+def create_review(game_id):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_review = Review(
-            reviewer_id=form.data['reviewer_id'],
-            game_id=form.data['game_id'],
+            reviewer_id=current_user.id,
+            game_id=game_id,
             recommended=form.data['recommended'],
             description=form.data['description']
         )

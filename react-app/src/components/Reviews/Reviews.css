@@ -1,0 +1,143 @@
+.review {
+    margin-bottom: 20px;
+    margin-right: 20.5em;
+    background-color: rgba(0,0,0,.2);
+}
+  
+.review-container {
+    background-color: rgba(0,0,0,.2);
+    display: flex;
+    margin-bottom: 26px;
+    position: relative;
+    width: 616px;
+}
+  
+.profile-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    padding: 1em;
+    gap: 1em;
+}
+  
+.review-info {
+    width: 100%;
+    padding-bottom: 1em;
+}
+  
+.review-rating {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+  
+.review-content {
+    margin-bottom: 10px;
+    color: #8091a2;
+    font-size: 10px;
+    margin-bottom: 8px;
+    opacity: .6;
+    text-transform: uppercase;
+}
+
+.review-description {
+    border-bottom: 1px solid #363f4c;
+    padding-bottom: 1em;
+    width: 90%;
+}
+
+.review-details {
+    width: 80%;
+}
+  
+.review-buttons {
+    margin-right: 10px;
+    color: #67c1f5;
+    background: linear-gradient(#355f7b,#234e6a);
+    border: none;
+    cursor: pointer;
+}
+
+.review-buttons:hover {
+    color: #fff;
+    background: linear-gradient( -60deg, #417a9b 5%,#67c1f5 95%) !important;
+}
+
+.profile-pic-review-list {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #67c1f5;
+}
+
+#thumb-up {
+    width: 40px;
+    height: 35px;
+    color: #67c1f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#355f7b,#234e6a);
+    border-radius: .1em;
+    font-size: x-large;
+}
+
+#thumb-down {
+    width: 40px;
+    height: 35px;
+    color: #e06463;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #542429;
+    border-radius: .1em;
+    font-size: x-large;
+}
+
+.review-list-title {
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-top: 2em;
+    text-transform: uppercase;
+}
+
+.review-edit-textarea {
+    margin-left: 2em;
+    margin-top: 1.5em;
+    border: 1px solid #233c51;
+    border-radius: 3px;
+    height: 132px;
+    width: 240px;
+    max-width: 800px;
+    background-color: #222b35;
+    color: #d6d7d8;
+    padding: 10px 11px;
+    font-size: 13px;
+    font-family: "Motiva Sans", Sans-serif;
+    box-shadow: inset 0px 0px 7px rgba( 0, 0, 0, 0.5 );
+}
+
+.edit-form-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+}
+
+.edit-thumb-buttons {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.edit-review-button {
+    width: 108px;
+    height: 50px;
+    color: #2B5066;
+    background-color: #a6c9dd;
+    font-size: 16px;
+    font-weight: 30;
+    border: 1px solid;
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: 2.5em;
+    cursor: pointer;
+}

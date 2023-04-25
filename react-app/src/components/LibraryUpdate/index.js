@@ -2,18 +2,23 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updatedGameThunk } from '../../store/library';
 
+
 const UpdateGame = ({ game, onClose }) => {
   const dispatch = useDispatch();
+
   const [newTitle, setNewTitle] = useState(game.title);
   const [newBannerImage, setNewBannerImage] = useState(game.banner_image);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newGameData = { title: newTitle, banner_image: newBannerImage };
     console.log('updating game with data:', newGameData);
     dispatch(updatedGameThunk(newGameData, game.game_id));
+    console.log('!!!dispatch THUNK WORKED!!')
     onClose();
   };
+
 
   return (
     <form onSubmit={handleSubmit}>

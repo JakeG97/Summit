@@ -1,0 +1,15 @@
+.library {
+    background: radial-gradient(farthest-corner at 40px 40px,#3D4450 0%, #23262E 80%);
+    margin-top: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.library-title {
+    font-size: 34px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}

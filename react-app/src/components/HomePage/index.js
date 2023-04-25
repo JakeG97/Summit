@@ -26,7 +26,9 @@ const HomePage = () => {
 
 return (
     <>
-      <h1>SUMMIT</h1>
+      <a className="cart-details-page" href="/cart">
+      <button className="cart-button">CART</button>
+      </a>
       <div className="games-container">
         {games.map((game, index) => (
           <NavLink

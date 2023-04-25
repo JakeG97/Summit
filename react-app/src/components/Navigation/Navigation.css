@@ -9,4 +9,32 @@
 .navbar-container {
   background-color: #181a21;
   width: 100vw;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 104px;
 }
+
+.main-title {
+  font-size: 28px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.library-main-title {
+  font-size: 14px;
+  text-decoration: none;
+  color: #556772;
+  margin-left: 1em;
+}
+
+.library-main-title:hover {
+  color:#fff;
+}
+
+.profile-icon-container {
+  margin-left: 15em;
+}
+
+/* .header-container {
+} */

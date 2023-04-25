@@ -1,12 +1,3 @@
-const normalizer = (data) => {
-  const obj = {};
-  data.forEach((item) => {
-    obj[item.id] = item;
-  });
-return obj;
-};
-
-
 const LOAD_LIBRARY = 'library/LOAD_LIBRARY';
 const ADD_TO_LIBRARY = 'library/ADD_TO_LIBRARY';
 const UPDATE_LIBRARY_GAME = 'library/UPDATE_LIBRARY_GAME';
@@ -32,6 +23,7 @@ const updateLibrary = (updatedGameData) => ({
   payload: updatedGameData,
 });
 
+
 export const getAllLibraryGamesThunk = () => async (dispatch) => {
   const response = await fetch('/api/library');
 
@@ -44,6 +36,7 @@ export const getAllLibraryGamesThunk = () => async (dispatch) => {
     dispatch(loadLibrary(normalizedLibraryData));
   }
 };
+
 
 export const addGameToLibraryThunk = (gameId) => async (dispatch) => {
   const response = await fetch('/api/cart/add-to-library', {
@@ -58,6 +51,7 @@ export const addGameToLibraryThunk = (gameId) => async (dispatch) => {
   }
 };
 
+
 export const removeGameThunk = (gameId) => async (dispatch) => {
   const response = await fetch(`/api/library/${gameId}`, {
     method: "DELETE",
@@ -68,44 +62,35 @@ export const removeGameThunk = (gameId) => async (dispatch) => {
   }
 }
 
-export const updatedGameThunk = (newGameData, gameId) => async (dispatch, getState) => {
+//! WORKING JUST GOES BACK TO OLD DATA ON REFRESH
+export const updatedGameThunk = (newGameData, gameId) => async (dispatch) => {
   try {
+    console.log('updating game:', gameId);
+    console.log('new game data:', newGameData);
     const response = await fetch(`/api/library/${gameId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newGameData),
     });
     const data = await response.json();
-    if (getState().library[data.id]) {
-      dispatch(updateLibrary({ [data.id]: data }));
-    }
+    console.log('Received updated game data:', data);
+
+    // Create normalized data object with correct structure
+    const normalizedLibraryData = {
+      [data.game.id]: {
+        id: data.game.id,
+        title: data.game.title,
+        banner_image: data.game.banner_image,
+      },
+    };
+    console.log('Normalized game data:', normalizedLibraryData);
+
+    dispatch(updateLibrary(normalizedLibraryData));
     return data;
   } catch (error) {
     console.log(error);
   }
 };
-
-// export const updatedGameThunk = (newGameData, gameId) => async (dispatch) => {
-//   try {
-//     console.log('updating game:', gameId);
-//     console.log('new game data:', newGameData);
-//     const response = await fetch(`/api/library/${gameId}`, {
-//       method: "PUT",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(newGameData),
-//     });
-//     const data = await response.json();
-//     console.log('updated game:', data);
-//     const normalizedLibraryData = {};
-//     normalizedLibraryData[data.id] = data;
-//     dispatch(updateLibrary(normalizedLibraryData));
-//     return data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-
 
 
 
@@ -119,13 +104,8 @@ const libraryReducer = (state = initialState, action) => {
     case ADD_TO_LIBRARY:
       return { ...state, [action.payload.id]: action.payload };
     case UPDATE_LIBRARY_GAME:
-      return {
-        ...state,
-        [action.payload.game.id]: {
-          ...state[action.payload.game.id],
-          ...action.payload.game,
-        },
-      };
+      console.log('Updating game in reducer:', action.payload);
+      return { ...state, ...action.payload, };
     case REMOVE_FROM_LIBRARY:
       delete newState[action.payload];
       return newState;

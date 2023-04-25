@@ -62,16 +62,12 @@ def update_library_game(game_id):
         library_game = LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
         if not library_game:
             return jsonify({'error': 'Game not found in library'}), 404
-        game = Game.query.get(game_id)
-        if not game:
-            return jsonify({'error': 'Game not found'}), 404
-        library_game.game_id = game_id
-        library_game.title = form.title.data
-        library_game.banner_image = form.banner_image.data
-        print('HEY OVER HERE!!!!', library_game.title, 'AND HERE!!', library_game.banner_image)
+        library_game.library_title = form.title.data
+        library_game.library_banner_image = form.banner_image.data
         db.session.commit()
-        return jsonify({'success': 'Game updated successfully', 'game': library_game.to_dict_update()})
+        return jsonify({'success': 'Game updated successfully', 'game': library_game.to_dict()})
     return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
+
 
 
 

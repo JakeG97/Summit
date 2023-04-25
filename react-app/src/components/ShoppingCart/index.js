@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { getAllCartThunk, clearCartThunk } from "../../store/cart";
-import { addGameToLibraryThunk } from "../../store/library";
-import { refreshUser } from "../../store/session"; //TODO look into this for clearing the cart
+import { useHistory, Link } from 'react-router-dom';
+import { getAllCartThunk, clearCartThunk, removeCartGameThunk } from "../../store/cart";
+import { addGameToLibraryThunk, getAllLibraryGamesThunk } from "../../store/library"
 import './ShoppingCart.css';
 
 const Cart = () => {
@@ -17,29 +16,55 @@ const Cart = () => {
     dispatch(getAllCartThunk());
   }, [dispatch]);
 
+  
   const handleClearCart = () => {
     dispatch(clearCartThunk(cart));
-    dispatch(refreshUser(sessionUser.id));
-    history.push(`/cart`)
   };
-
+  
+  useEffect(() => {
+    if (Object.keys(cart).length === 0) {
+      history.push(`/cart`);
+    }
+  }, [cart, history]);
   
   const handlePurchase = () => {
-    dispatch(addGameToLibraryThunk());
+    Object.values(cart).forEach((game) => {
+      dispatch(addGameToLibraryThunk(game));
+    });
+    dispatch(clearCartThunk(cart));
+    dispatch(getAllLibraryGamesThunk())
+    history.push(`/library`);
   };
+  
+  const handleRemove = async (game) => {
+    await dispatch(removeCartGameThunk(game.game_id));
+    dispatch(getAllCartThunk());
+  };
+  
 
   return (
-    <div>
-      <h2>Cart</h2>
+    <div className="cart">
+      <h2 className="cart-title">YOUR SHOPPING CART</h2>
       {Object.values(cart).map((game) => (
-        <div className="game-card" key={game.id}>
-          <img className="games-list-image"src={game.banner_image} alt={game.title} />
-          <h3>{game.title}</h3>
-          <p>{game.price}</p>
+        <div className="game-card-cart" key={game.id}>
+          <img className="games-cart-image" src={game.banner_image} alt={game.title} />
+          <h2 className="cart-game-titles">{game.title}</h2>
+          <div className="price-remove-container">
+            <p className="cart-game-price">{game.price}</p>
+            <button className="remove-button" onClick={() => handleRemove(game)}>Remove</button>
+          </div>
         </div>
       ))}
-      <button onClick={handleClearCart}>Clear Cart</button>
-      <button onClick={handlePurchase}>Purchase for myself</button>
+      {Object.keys(cart).length !== 0 && (
+        <div className="total-card">
+          <p className="total-math">Estimated Total: TBC</p>
+          <button id="purchase-button" className="add-button" onClick={handlePurchase}>Purchase for myself</button>
+        </div>
+      )}
+      <div>
+        <Link id="continue-shopping-cart" to="/" className="post-review-button">Continue Shopping</Link>
+        <button className="clear-cart" onClick={handleClearCart}>Remove all items</button>
+      </div>
     </div>
   );
 };
