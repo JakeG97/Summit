@@ -31,8 +31,8 @@ const Cart = () => {
     Object.values(cart).forEach((game) => {
       dispatch(addGameToLibraryThunk(game));
     });
-    dispatch(getAllLibraryGamesThunk())
     dispatch(clearCartThunk(cart));
+    dispatch(getAllLibraryGamesThunk())
     history.push(`/library`);
   };
   

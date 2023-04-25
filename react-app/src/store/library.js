@@ -62,44 +62,6 @@ export const removeGameThunk = (gameId) => async (dispatch) => {
   }
 }
 
-// export const updatedGameThunk = (newGameData, gameId) => async (dispatch, getState) => {
-//   try {
-//     const response = await fetch(`/api/library/${gameId}`, {
-//       method: "PUT",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(newGameData),
-//     });
-//     const data = await response.json();
-//     console.log('Received updated game data:', data);
-//     dispatch(updateLibrary({ [data.game_id]: data }));
-//     return data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// export const updatedGameThunk = (newGameData, gameId) => async (dispatch) => {
-//   try {
-//     console.log('updating game:', gameId);
-//     console.log('new game data:', newGameData);
-//     const response = await fetch(`/api/library/${gameId}`, {
-//       method: "PUT",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(newGameData),
-//     });
-//     const data = await response.json();
-//     console.log('Received updated game data:', data);
-//     console.log('updated game:', data);
-//     const normalizedLibraryData = { [data.id]: data };
-//     console.log('Normalized game data:', normalizedLibraryData);
-//     dispatch(updateLibrary(normalizedLibraryData));
-//     return data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-
 //! WORKING JUST GOES BACK TO OLD DATA ON REFRESH
 export const updatedGameThunk = (newGameData, gameId) => async (dispatch) => {
   try {
@@ -129,23 +91,6 @@ export const updatedGameThunk = (newGameData, gameId) => async (dispatch) => {
     console.log(error);
   }
 };
-
-// export const updatedGameThunk = (gameId, gameData) => async (dispatch) => {
-//   const response = await fetch(`/api/library/${gameId}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(gameData),
-//   })
-
-//   if (response.ok) {
-//     const game = await response.json();
-//     dispatch(updateLibrary(game))
-//   }
-// };
-
-
 
 
 
