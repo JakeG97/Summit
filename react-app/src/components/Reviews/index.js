@@ -10,6 +10,7 @@ const Review = ({ review }) => {
   const [recommended, setRecommended] = useState(review.recommended);
   const [description, setDescription] = useState(review.description);
   const [activeButton, setActiveButton] = useState(null);
+  const [reviewer, setReviewer] = useState(null);
 
   const handleDelete = () => {
     dispatch(deleteReviewThunk(review.id));
@@ -26,6 +27,15 @@ const Review = ({ review }) => {
     setActiveButton(value);
   };
 
+  useEffect(() => {
+    async function fetchReviewer() {
+      const res = await fetch(`/api/users/${review.reviewer_id}`);
+      const data = await res.json();
+      setReviewer(data);
+    }
+    fetchReviewer();
+  }, [review]);
+
 
   return (
     <div className="review">
@@ -33,10 +43,10 @@ const Review = ({ review }) => {
         <div className="profile-container">
           <img
             className="profile-pic-review-list"
-            src={sessionUser.profile_picture}
+            src={reviewer?.profile_picture}
             alt="User profile picture"
           />
-          <p>{sessionUser.username}</p>
+          <p>{reviewer?.username}</p>
         </div>
         <div className="review-details">
           <div className="review-info">
