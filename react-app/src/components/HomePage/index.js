@@ -18,7 +18,7 @@ const HomePage = () => {
     dispatch(getAllGamesThunk());
   }, [dispatch]);
 
-  const onClick = () => {
+  const DemoLogin = () => {
     dispatch(login("demo@aa.io", "password"));
     history.push("/");
   };

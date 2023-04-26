@@ -8,11 +8,11 @@
 
 .signup-background {
     position: absolute;
-    width: 490px;
+    width: 700px;
     height: 740px;
     right: 80%;
-    background-position: 62% 60%;
-    background-image: radial-gradient(30% 40% at center, transparent 0%, rgb(33, 36, 41, 0.3) 0%, rgba(33, 36, 41, 0.3) 100%);
+    background-position: 40% 50%;
+    background-image: radial-gradient(30% 40% at center, transparent 0%, rgba(33, 36, 41, 0.05) 0%, rgba(33, 36, 41, 0.05) 100%), url(signup-page.jpeg);
 }
 
 .signup-form-box {
@@ -32,7 +32,7 @@
     background-color: #101010;
     width: 676px;
     line-height: 23px;
-    padding: 10px;
+    padding: 2em;
     margin-left: -7px;
     margin-bottom: 13px;
     font-size: 15px;

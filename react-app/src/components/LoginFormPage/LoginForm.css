@@ -1,0 +1,204 @@
+.login-main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 650px;
+    background-image: radial-gradient(transparent 0%, rgb(24, 26, 33, 80%) 100%), url(login-page.jpeg);
+    background-position: center;
+  }
+
+  
+.login-form-container {
+    background-color: #181a21;
+    display: flex;
+    justify-content: space-between;
+    width: 636px;
+    height: 280px;
+    margin-top: 174px;
+    padding: 26px 32px;
+    color: #1999ff;
+}
+  
+.login-form {
+    width: 412px;
+    height: 280px;
+    position: relative;
+}
+  
+.login-form h1 {
+    position: absolute;
+    text-transform: uppercase;
+    font-family:'Motiva Sans 100', sans-serif;
+    font-size: 32px;
+    color: white;
+    font-weight: 200;
+    top: -105px;
+    left: -10px;
+}
+  
+.login-form-label {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: 'Motiva Sans 500', sans-serif;
+    display: flex;
+    margin-bottom: 4px;
+    width: 100%;
+}
+  
+.login-form-label:nth-of-type(2) {
+    color: #afafaf;
+    font-family: 'Motiva Sans 400', sans-serif;
+}
+  
+.login-form input {
+    box-sizing: border-box;
+    padding: 0 10px 0 10px;
+    width: 412px;
+    height: 39px;
+    font-size: 15px;
+    background-color: #32353c;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    outline: none;
+    color: white;
+}
+  
+.login-form input:hover {
+    background-color: #393c44;
+}
+  
+.remember-me {
+    font-size: 12px;
+    color: #afafaf;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+}
+  
+.remember-me:hover {
+    cursor: pointer;
+}
+  
+.remember-me input {
+    width: 16px;
+    margin: 0 6px 0 0;
+    cursor: pointer;
+}
+
+  
+.login-form button {
+    width: 270px;
+    height: 50px;
+    background: linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%);
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Motiva Sans 500', sans-serif;
+    font-size: 18px;
+    color: white;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 56px;
+}
+  
+.login-form button:hover {
+    cursor: pointer;
+    background: linear-gradient(90deg, #06BFFF 30%, #2D73FF 100%);
+}
+  
+.login-form button:active {
+    outline: 1px solid #06bfff;
+    background: linear-gradient(90deg, #06BFFF 60%, #2D73FF 100%);
+}
+  
+.error-border {
+    border: 1px solid #c15755 !important;
+}
+  
+.login-form-errors {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    margin: 16px auto 0 auto;
+    bottom: 28px;
+    width: 412px;
+    height: 17px;
+    left: 0;
+    right: 0;
+}
+  
+.login-form-errors li {
+    font-family: 'Motiva Sans 500', sans-serif;
+    font-size: 12px;
+    color: #c15755;
+}
+  
+.cant-sign-in {
+    color: #b8b6b4;
+    font-size: 12px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+  
+.cant-sign-in:hover {
+    color: #E9E9E9;
+}
+  
+.guest-login {
+    width: 200px;
+    height: 280px;
+}
+  
+.guest-login div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2px;
+    padding: 16px 4px 16px 4px;
+    color: #afafaf;
+}
+  
+.guest-login div:first-of-type i {
+    font-size: 48px;
+    margin-right: 8px;
+}
+  
+.guest-login div:first-of-type p {
+    font-size: 12px;
+    line-height: 16px;
+}
+  
+.guest-login button {
+    border: none;
+    border-radius: 2px;
+    background-color: #303138;
+    color: white;
+    padding: 8px 16px;
+    font-family: 'Motiva Sans 700', sans-serif;
+    margin-left: 3em;
+}
+  
+.guest-login button:hover {
+    background: linear-gradient(90deg, #06BFFF 30%, #2D73FF 100%);
+    cursor: pointer;
+}
+    
+.guest-login a {
+    display: flex;
+    font-size: 12px;
+    width: 100%;
+    height: 24px;
+    margin-top: 16px;
+    color: #b8b6b4;
+}
