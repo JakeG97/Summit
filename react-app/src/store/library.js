@@ -29,13 +29,16 @@ export const getAllLibraryGamesThunk = () => async (dispatch) => {
 
   if (response.ok) {
     const allLibraryData = await response.json();
-    const normalizedLibraryData = {}
+    const normalizedLibraryData = {};
     allLibraryData.forEach((e) => {
-      normalizedLibraryData[e.id] = e;
-    })
+      if (!normalizedLibraryData[e.game_id]) {
+        normalizedLibraryData[e.game_id] = e;
+      }
+    });
     dispatch(loadLibrary(normalizedLibraryData));
   }
 };
+
 
 
 export const addGameToLibraryThunk = (gameId) => async (dispatch) => {
