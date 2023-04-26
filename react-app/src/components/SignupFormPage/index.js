@@ -10,7 +10,7 @@ function SignupFormPage() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [profile_picture, setProfile_picture] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -25,7 +25,7 @@ function SignupFormPage() {
       const user = {
         "username": username,
         "email": email,
-        "profile_picture": profile_picture,
+        "profile_picture": profilePicture,
         "password": password,
       }
       try {
@@ -86,8 +86,8 @@ function SignupFormPage() {
                 : "signup-form-label"
             }
             id="profile_picture"
-            value={profile_picture}
-            onChange={(e) => setProfile_picture(e.target.value)}
+            value={profilePicture}
+            onChange={(e) => setProfilePicture(e.target.value)}
           />
           <label htmlFor="password">Password</label>
           <input
