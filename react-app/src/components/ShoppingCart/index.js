@@ -29,12 +29,13 @@ const Cart = () => {
   
   const handlePurchase = () => {
     Object.values(cart).forEach((game) => {
-      dispatch(addGameToLibraryThunk(game));
+      dispatch(addGameToLibraryThunk(game.id));
     });
     dispatch(clearCartThunk(cart));
-    dispatch(getAllLibraryGamesThunk())
+    dispatch(getAllLibraryGamesThunk());
     history.push(`/library`);
   };
+  
   
   const handleRemove = async (game) => {
     await dispatch(removeCartGameThunk(game.game_id));

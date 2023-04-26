@@ -39,17 +39,25 @@ export const getAllLibraryGamesThunk = () => async (dispatch) => {
 
 
 export const addGameToLibraryThunk = (gameId) => async (dispatch) => {
+  console.log('addGameToLibraryThunk called with gameId', gameId);
+
   const response = await fetch('/api/cart/add-to-library', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ game_id: gameId }),
   });
 
+  console.log('addGameToLibraryThunk response', response);
+
   if (response.ok) {
     const game = await response.json();
+    console.log('addGameToLibraryThunk game added to library', game);
     dispatch(addToLibrary(game));
+  } else {
+    console.log('addGameToLibraryThunk error', response.status, response.statusText);
   }
 };
+
 
 
 export const removeGameThunk = (gameId) => async (dispatch) => {
@@ -99,8 +107,17 @@ const initialState = {};
 const libraryReducer = (state = initialState, action) => {
   let newState = { ...state }
   switch (action.type) {
-    case LOAD_LIBRARY:
-      return { ...state, ...action.payload };
+    case LOAD_LIBRARY: {
+      console.log('LOAD_LIBRARY called with payload', action.payload);
+      const newState = { ...state };
+      Object.values(action.payload).forEach((game) => {
+        if (game) {
+          newState[game.id] = game;
+        }
+      });
+      console.log('LOAD_LIBRARY new state', newState);
+      return newState;
+    }
     case ADD_TO_LIBRARY:
       return { ...state, [action.payload.id]: action.payload };
     case UPDATE_LIBRARY_GAME:
