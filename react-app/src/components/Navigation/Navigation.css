@@ -28,13 +28,54 @@
   margin-left: 1em;
 }
 
+.nav-user-links:hover,
 .library-main-title:hover {
   color:#fff;
+  cursor: pointer;
 }
 
 .profile-icon-container {
   margin-left: 15em;
 }
 
-/* .header-container {
-} */
+.username-dropdown {
+  background: none;
+  border: none;
+  height: 40px;
+  font-size: 11px;
+  color: #c5c3c2;
+  margin-right: 5em;
+}
+
+.dropdown-list {
+  background: #171a21;
+  box-shadow: 0 0 12px #000;
+  margin-right: 4em;
+}
+
+.dropdown-text {
+  text-decoration: none;
+  background: none;
+  border: none;
+  color: #b8b6b4;
+  font-family: inherit;
+  font-size: 12px;
+  height: 27px;
+  padding: 5px;
+}
+
+.dropdown-text:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+#user-name-list {
+  color: #57cbde;
+}
+
+.nav-user-links {
+  font-size: 13px;
+  text-decoration: none;
+  color: #556772;
+  margin-right: 1em;
+}
