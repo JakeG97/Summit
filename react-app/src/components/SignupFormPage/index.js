@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import './SignupForm.css';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [profile_picture, setProfile_picture] = useState("");
@@ -17,17 +18,26 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(signUp({email, username, password}))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) {
-            setErrors(data.errors);
-          }
-        });
+      const user = {
+        "username": username,
+        "email": email,
+        "profile_picture": profile_picture,
+        "password": password,
+      }
+      try {
+        console.log(user);
+        dispatch(signUp(user));
+        // history.push('/')
+      } catch (res) {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        }
+      }
     } else {
       setErrors(['Passwords do not match'])
     }
@@ -75,7 +85,7 @@ function SignupFormPage() {
                 ? "signup-label error-border"
                 : "signup-form-label"
             }
-            id="username"
+            id="profile_picture"
             value={profile_picture}
             onChange={(e) => setProfile_picture(e.target.value)}
           />
@@ -116,7 +126,7 @@ function SignupFormPage() {
           </div>
           <label className="agreement-wrapper">
             <input type="checkbox"></input>
-            I am 13 years of age or older and agree to the terms of the Summit Subscriber Agreemen and the{" "}
+            I am 13 years of age or older and agree to the terms of the Summit Subscriber Agreement and the{" "}
             <span style={{ display: "block" }}>Gularte Privacy Policy.</span>
           </label>
           <button type="submit">Continue</button>
