@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllLibraryGamesThunk, removeGameThunk } from '../../store/library';
+import { useModal } from '../../context/Modal';
 import UpdateGame from '../LibraryUpdate';
+import UninstallGameModal from '../UninstallGameModal';
 import "./Library.css"
 
 const Library = () => {
@@ -9,14 +11,16 @@ const Library = () => {
   const library = useSelector((state) => state.library);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
+  const { setModalContent } = useModal();
 
   useEffect(() => {
     dispatch(getAllLibraryGamesThunk());
   }, [dispatch]);
 
   const handleRemove = async (game) => {
-    dispatch(removeGameThunk(game.game_id));
-    dispatch(getAllLibraryGamesThunk())
+    setModalContent(
+      <UninstallGameModal game={game} onClose={() => dispatch(getAllLibraryGamesThunk())} />
+    );
   };
 
   const handleUpdateClick = (game) => {
