@@ -17,6 +17,11 @@ function LoginFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errors.push('Must be a valid email');
+    }
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);

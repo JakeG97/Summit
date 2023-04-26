@@ -16,17 +16,49 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-        const data = await dispatch(signUp(username, email, profilePicture, password));
-        if (data) {
-          setErrors(data)
-        }
-    } else {
-        setErrors(['Confirm Password field must be the same as the Password field']);
+  
+    let errors = [];
+  
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errors.push('Must be a valid email');
     }
-  };
+  
+    const captchaCheckbox = document.querySelector('input[type="checkbox"]');
+    if (!captchaCheckbox.checked) {
+      errors.push('User must prove he is not a robot');
+    }
+  
+    const agreementCheckbox = document.querySelector('.agreement-wrapper input[type="checkbox"]');
+    if (!agreementCheckbox.checked) {
+      errors.push('User must prove they are an adult that can follow rules');
+    }
+  
+    if (password !== confirmPassword) {
+      errors.push('Confirm Password field must be the same as the Password field');
+    }
+  
+    if (errors.length > 0) {
+      setErrors(errors);
+      return;
+    }
+  
+
+    if (password === confirmPassword) {
+      const data = await dispatch(signUp(username, email, profilePicture, password));
+      if (data) {
+        setErrors(data)
+      }
+    } else {
+      setErrors(['Confirm Password field must be the same as the Password field']);
+    }
+};
+  
+  
+  
 
   return (
     <div className="signup-main">
@@ -73,6 +105,7 @@ function SignupFormPage() {
             id="profile_picture"
             value={profilePicture}
             onChange={(e) => setProfilePicture(e.target.value)}
+            placeholder="(Optional)"
           />
           <label htmlFor="password">Password</label>
           <input

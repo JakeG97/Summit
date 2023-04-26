@@ -124,6 +124,7 @@
     display: flex;
     justify-content: center;
     position: absolute;
+    gap: 1em;
     margin: 16px auto 0 auto;
     bottom: 28px;
     width: 412px;

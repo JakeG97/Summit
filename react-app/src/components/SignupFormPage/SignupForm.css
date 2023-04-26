@@ -3,7 +3,7 @@
     width: 100%;
     background-color: #212429;
     position: relative;
-    height: 847px;
+    height: 1000px;
 }
 
 .signup-background {
@@ -28,7 +28,7 @@
 }
 
 .signup-errors {
-    border: 2px solid #b44040;
+    border: 2px solid #cb3232;
     background-color: #101010;
     width: 676px;
     line-height: 23px;
