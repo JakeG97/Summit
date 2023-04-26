@@ -86,4 +86,4 @@ def remove_from_library(game_id):
     game_title = library_game.game.title
     db.session.delete(library_game)
     db.session.commit()
-    return jsonify({'success': f'{game_title} uninstalled'})
+    return jsonify({'message': f'{game_title} uninstalled'})

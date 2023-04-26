@@ -13,10 +13,13 @@ const addToLibrary = (newLibraryGame) => ({
   payload: newLibraryGame,
 });
 
-const removeFromLibrary = (gameId) => ({
-  type: REMOVE_FROM_LIBRARY,
-  payload: gameId,
-})
+const removeFromLibrary = (gameId) => {
+  console.log('removeFromLibrary called with gameId', gameId);
+  return {
+    type: REMOVE_FROM_LIBRARY,
+    payload: gameId,
+  };
+}
 
 const updateLibrary = (updatedGameData) => ({
   type: UPDATE_LIBRARY_GAME,
@@ -69,6 +72,7 @@ export const removeGameThunk = (gameId) => async (dispatch) => {
   })
 
   if (response.ok) {
+    console.log('removeGameThunk dispatching removeFromLibrary action with gameId', gameId);
     dispatch(removeFromLibrary(gameId))
   }
 }
@@ -110,24 +114,27 @@ const initialState = {};
 const libraryReducer = (state = initialState, action) => {
   let newState = { ...state }
   switch (action.type) {
-    case LOAD_LIBRARY: {
-      console.log('LOAD_LIBRARY called with payload', action.payload);
-      const newState = { ...state };
-      Object.values(action.payload).forEach((game) => {
-        if (game) {
-          newState[game.id] = game;
-        }
-      });
-      console.log('LOAD_LIBRARY new state', newState);
-      return newState;
-    }
+    case LOAD_LIBRARY: //{
+    //   console.log('LOAD_LIBRARY called with payload', action.payload);
+    //   const newState = { ...state };
+    //   Object.values(action.payload).forEach((game) => {
+    //     if (game) {
+    //       newState[game.id] = game;
+    //     }
+    //   });
+    //   console.log('LOAD_LIBRARY new state', newState);
+    //   return newState;
+    // }
+    return { ...action.payload };
     case ADD_TO_LIBRARY:
       return { ...state, [action.payload.id]: action.payload };
     case UPDATE_LIBRARY_GAME:
       console.log('Updating game in reducer:', action.payload);
       return { ...state, ...action.payload, };
     case REMOVE_FROM_LIBRARY:
+      console.log('Removing game from library', action.payload);
       delete newState[action.payload];
+      console.log('New library state', newState);
       return newState;
     default:
       return state;
