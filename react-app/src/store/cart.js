@@ -1,10 +1,10 @@
-const normalizer = (data) => {
-  const obj = {};
-  data.forEach((item) => {
-    obj[item.id] = item;
-  });
-return obj;
-};
+// const normalizer = (data) => {
+//   const obj = {};
+//   data.forEach((item) => {
+//     obj[item.id] = item;
+//   });
+// return obj;
+// };
 
 const LOAD_CART = "cart_games/LOAD_CART";
 const ADD_TO_CART = "cart_games/ADD_TO_CART"
@@ -48,7 +48,7 @@ export const getAllCartThunk = () => async (dispatch) => {
       const allCartData = await response.json();
       const normalizedCartData = {};
       allCartData.forEach((e) => {
-        normalizedCartData[e.id] = e;
+        normalizedCartData[e.game_id] = e;
       })
       dispatch(loadCartGames(normalizedCartData));
   }
@@ -86,6 +86,7 @@ const response = await fetch(`/api/cart/${gameId}`, {
 
 if (response.ok) {
   dispatch(removeGameFromCart(gameId));
+  dispatch(loadCartGames())
 }
 };
 

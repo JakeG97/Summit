@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { getAllCartThunk, clearCartThunk, removeCartGameThunk } from "../../store/cart";
-import { addGameToLibraryThunk, getAllLibraryGamesThunk } from "../../store/library"
+import { addToLibraryThunk, getAllLibraryGamesThunk } from "../../store/library"
 import './ShoppingCart.css';
 
 const Cart = () => {
@@ -27,14 +27,26 @@ const Cart = () => {
     }
   }, [cart, history]);
   
-  const handlePurchase = () => {
-    Object.values(cart).forEach((game) => {
-      dispatch(addGameToLibraryThunk(game));
-    });
-    dispatch(clearCartThunk(cart));
-    dispatch(getAllLibraryGamesThunk())
+  const handlePurchase = async () => {
+    // Get an array of all game IDs in the cart
+    const gameIds = Object.values(cart).map((game) => game.id);
+  
+    // Add all games to the library
+    for (const gameId of gameIds) {
+      await dispatch(addToLibraryThunk(gameId));
+    }
+  
+    // Clear the cart
+    await dispatch(clearCartThunk());
+  
+    // Get the updated library data
+    await dispatch(getAllLibraryGamesThunk());
+  
+    // Redirect to the library page
     history.push(`/library`);
   };
+  
+  
   
   const handleRemove = async (game) => {
     await dispatch(removeCartGameThunk(game.game_id));

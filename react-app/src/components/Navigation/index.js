@@ -9,17 +9,29 @@ function Navigation({ isLoaded }){
 
 	return (
 		<div className="navbar-container">
-			<div className="header-container">
-				<NavLink className="main-title" exact to="/">Summit</NavLink>
-				<NavLink className="library-main-title" exact to="/Library">Library</NavLink>
+		  <div className="header-container">
+			<NavLink className="main-title" exact to="/">Summit</NavLink>
+			<NavLink className="library-main-title" exact to="/Library">Library</NavLink>
+		  </div>
+		  {isLoaded && (
+			<div className="profile-icon-container">
+			  {sessionUser ? (
+				<>
+				  <ProfileButton user={sessionUser} />
+				  <NavLink to="/library" className="profile-picture-button">
+					<img className="profile-pic-review-list" src={sessionUser.profile_picture || "https://avatars.cloudflare.steamstatic.com/8ac27aecdce197c83213d6fb7257f7b55eb18a6c_full.jpg"} alt="Profile" />
+				  </NavLink>
+				</>
+			  ) : (
+				<>
+				  <NavLink to="/login" className="nav-user-links">Log In</NavLink>
+				  <NavLink to="/signup" className="nav-user-links">Sign Up</NavLink>
+				</>
+			  )}
 			</div>
-			{isLoaded && (
-				<div className="profile-icon-container">
-					<ProfileButton user={sessionUser} />
-				</div>
-			)}
+		  )}
 		</div>
-	);
+	  );
 }
 
 export default Navigation;

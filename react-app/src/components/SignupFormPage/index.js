@@ -9,71 +9,149 @@ function SignupFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/" />;
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-        const data = await dispatch(signUp(username, email, password));
-        if (data) {
-          setErrors(data)
-        }
-    } else {
-        setErrors(['Confirm Password field must be the same as the Password field']);
+  
+    let errors = [];
+  
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errors.push('Must be a valid email');
     }
-  };
+  
+    const captchaCheckbox = document.querySelector('input[type="checkbox"]');
+    if (!captchaCheckbox.checked) {
+      errors.push('User must prove he is not a robot');
+    }
+  
+    const agreementCheckbox = document.querySelector('.agreement-wrapper input[type="checkbox"]');
+    if (!agreementCheckbox.checked) {
+      errors.push('User must prove they are an adult that can follow rules');
+    }
+  
+    if (password !== confirmPassword) {
+      errors.push('Confirm Password field must be the same as the Password field');
+    }
+  
+    if (errors.length > 0) {
+      setErrors(errors);
+      return;
+    }
+  
+
+    if (password === confirmPassword) {
+      const data = await dispatch(signUp(username, email, profilePicture, password));
+      if (data) {
+        setErrors(data)
+      }
+    } else {
+      setErrors(['Confirm Password field must be the same as the Password field']);
+    }
+};
+  
+  
+  
 
   return (
-    <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-        <label>
-          Email
+    <div className="signup-main">
+      <section className="signup-background"></section>
+      <section className="signup-form-box">
+        {errors.length > 0 && (
+          <ul className="signup-errors">
+            {errors.map((error) => (
+              <li key={error}>{error}.</li>
+            ))}
+          </ul>
+        )}
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <h1>Create your account</h1>
+          <label htmlFor="email">Email Address</label>
           <input
-            type="text"
+            className={
+              errors.length
+                ? "signup-label error-border"
+                : "signup-form-label"
+            }
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
-        </label>
-        <label>
-          Username
+          <label htmlFor="username">Username</label>
           <input
-            type="text"
+            className={
+              errors.length
+                ? "signup-label error-border"
+                : "signup-form-label"
+            }
+            id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
           />
-        </label>
-        <label>
-          Password
+          <label htmlFor="profile_picture">Profile Picture</label>
           <input
-            type="password"
+            className={
+              errors.length
+                ? "signup-label error-border"
+                : "signup-form-label"
+            }
+            id="profile_picture"
+            value={profilePicture}
+            onChange={(e) => setProfilePicture(e.target.value)}
+            placeholder="(Optional)"
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            className={
+              errors.length
+                ? "signup-label error-border"
+                : "signup-form-label"
+            }
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Confirm Password
-          <input
             type="password"
+          />
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            className={
+              errors.length
+                ? "signup-label error-border"
+                : "signup-form-label"
+            }
+            id="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+            type="password"
           />
-        </label>
-        <button type="submit">Sign Up</button>
-      </form>
-    </>
-  );
+          <div className="captcha-wrapper">
+            <label>
+              <input type="checkbox"></input>
+              I'm not a robot... I'm Hal
+            </label>
+            <div className="captcha-logo-wrapper">
+              <i className="fa-solid fa-shield-check"></i>
+              <h3>reCAPTCHA</h3>
+              <h4>Privacy - Terms</h4>
+            </div>
+          </div>
+          <label className="agreement-wrapper">
+            <input type="checkbox"></input>
+            I am 13 years of age or older and agree to the terms of the Summit Subscriber Agreement and the{" "}
+            <span style={{ display: "block" }}>Gularte Privacy Policy.</span>
+          </label>
+          <button type="submit">Continue</button>
+        </form>
+      </section>
+    </div>
+  ); 
 }
 
 export default SignupFormPage;

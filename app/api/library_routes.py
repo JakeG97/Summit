@@ -53,20 +53,38 @@ def add_to_library():
 
 
 #? -----------  PUT  --------------
+# @library_routes.route('/<int:game_id>', methods=['PUT'])
+# @login_required
+# def update_library_game(game_id):
+#     form = LibraryGameForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         library_game = LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
+#         if not library_game:
+#             return jsonify({'error': 'Game not found in library'}), 404
+#         library_game.library_title = form.title.data
+#         library_game.library_banner_image = form.banner_image.data
+#         db.session.commit()
+#         return jsonify({'success': 'Game updated successfully', 'game': library_game.to_dict()})
+#     return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
+
+
+#? -----------  PUT  --------------
 @library_routes.route('/<int:game_id>', methods=['PUT'])
 @login_required
 def update_library_game(game_id):
-    form = LibraryGameForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        library_game = LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
-        if not library_game:
-            return jsonify({'error': 'Game not found in library'}), 404
-        library_game.library_title = form.title.data
-        library_game.library_banner_image = form.banner_image.data
-        db.session.commit()
-        return jsonify({'success': 'Game updated successfully', 'game': library_game.to_dict()})
-    return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
+    library_game = LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
+    if not library_game:
+        return jsonify({'error': 'Game not found in library'}), 404
+
+    # Update the library game's title and banner image
+    library_game.library_title = request.json.get('title', library_game.library_title)
+    library_game.library_banner_image = request.json.get('banner_image', library_game.library_banner_image)
+    db.session.commit()
+
+    return jsonify(library_game.to_dict()), 200
+
+
 
 
 
@@ -86,4 +104,4 @@ def remove_from_library(game_id):
     game_title = library_game.game.title
     db.session.delete(library_game)
     db.session.commit()
-    return jsonify({'success': f'{game_title} uninstalled'})
+    return jsonify({'message': f'{game_title} uninstalled'})

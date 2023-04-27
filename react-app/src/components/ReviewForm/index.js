@@ -46,7 +46,7 @@ const ReviewForm = ({ gameId }) => {
         <div>
           <img
             className="profile-pic-review"
-            src={sessionUser.profile_picture}
+            src={sessionUser.profile_picture || "https://avatars.cloudflare.steamstatic.com/8ac27aecdce197c83213d6fb7257f7b55eb18a6c_full.jpg"}
             alt="User profile picture"
           />
           <textarea
@@ -54,6 +54,7 @@ const ReviewForm = ({ gameId }) => {
             value={description}
             onChange={handleDescriptionChange}
             rows={5}
+            maxLength={1000}
           />
           <p className="review-sub-subtext">Do you recommend this game?</p>
           <div className="thumb-buttons-container">

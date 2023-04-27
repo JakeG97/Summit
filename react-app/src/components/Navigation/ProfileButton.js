@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import { Link, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -39,18 +39,26 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className="username-dropdown" onClick={openMenu}>
+        {user.username} ▼
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
-            </li>
-          </>
+          <div className="dropdown-list">
+            <ul>
+            <NavLink to="/library" className="dropdown-text">
+              View Profile
+            </NavLink>
+            </ul>
+            <ul>
+            <NavLink to="/library" className="dropdown-text">
+              Account Details
+            </NavLink>
+            </ul>
+            <ul>
+            <button className="dropdown-text" onClick={handleLogout}>Log Out: <span id="user-name-list">{user.username}</span></button>
+            </ul>
+          </div>
         ) : (
           <>
             <li>
