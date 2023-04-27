@@ -48,7 +48,7 @@ export const getAllCartThunk = () => async (dispatch) => {
       const allCartData = await response.json();
       const normalizedCartData = {};
       allCartData.forEach((e) => {
-        normalizedCartData[e.id] = e;
+        normalizedCartData[e.game_id] = e;
       })
       dispatch(loadCartGames(normalizedCartData));
   }
@@ -86,6 +86,7 @@ const response = await fetch(`/api/cart/${gameId}`, {
 
 if (response.ok) {
   dispatch(removeGameFromCart(gameId));
+  dispatch(loadCartGames())
 }
 };
 

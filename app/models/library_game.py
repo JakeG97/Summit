@@ -30,6 +30,7 @@ class LibraryGame(db.Model):
         }
 
 
+
     def to_dict_update(self):
         return {
             'id': self.id,

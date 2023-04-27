@@ -50,45 +50,87 @@ def add_to_cart():
 
 
 #TODO -----------  POST  --------------
-# Add all games in cart to user's library
+#Add single game to library
 
-# Add all games in cart to user's library
 @cart_routes.route('/add-to-library', methods=['POST'])
 @login_required
-def add_cart_to_library():
-    user_id = current_user.id
-    cart_games = CartGame.query.filter_by(user_id=user_id).all()
-    added_games = []
-    added_game_ids = set()
+def add_to_library():
+    game_id = request.json.get('game_id')
+    if not game_id:
+        return jsonify({'error': 'game_id is required'}), 400
 
-    # Group cart games by game_id and user_id
-    grouped_cart_games = {}
-    for cart_game in cart_games:
-        if (cart_game.game_id, cart_game.user_id) in grouped_cart_games:
-            grouped_cart_games[(cart_game.game_id, cart_game.user_id)].append(cart_game)
-        else:
-            grouped_cart_games[(cart_game.game_id, cart_game.user_id)] = [cart_game]
+    # Check if the game exists
+    game = Game.query.get(game_id)
+    if not game:
+        return jsonify({'error': 'game not found'}), 404
 
-    for (game_id, user_id), cart_games in grouped_cart_games.items():
-        game = Game.query.get(game_id)
-        if game:
-            if LibraryGame.query.filter_by(user_id=user_id, game_id=game_id).first():
-                continue
-            elif game_id in added_game_ids:
-                continue
-            else:
-                library_game = LibraryGame(user_id=user_id, game_id=game_id)
-                db.session.add(library_game)
-                added_games.append(game.to_dict())
-                added_game_ids.add(game_id)
-        else:
-            continue
+    # Check if the user already owns the game
+    if LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first():
+        return jsonify({'error': 'This game is already in your library'}), 400
 
-    # Remove all games in cart after adding to user's library
-    CartGame.query.filter_by(user_id=user_id).delete()
+    # Check if the game is in the cart
+    cart_game = CartGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
+    if not cart_game:
+        return jsonify({'error': 'game is not in cart'}), 400
+
+    # Add the game to the library
+    library_game = LibraryGame(user_id=current_user.id, game_id=game_id)
+    db.session.add(library_game)
+
+    # Remove the game from the cart
+    db.session.delete(cart_game)
+
     db.session.commit()
 
-    return jsonify({added_games}), 200
+    # Get the most up-to-date version of the LibraryGame object
+    library_game = LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
+
+    # return jsonify("success")
+
+
+
+
+
+
+# # Add all games in cart to user's library
+
+# # Add all games in cart to user's library
+# @cart_routes.route('/add-to-library', methods=['POST'])
+# @login_required
+# def add_cart_to_library():
+#     user_id = current_user.id
+#     cart_games = CartGame.query.filter_by(user_id=user_id).all()
+#     added_games = []
+#     added_game_ids = set()
+
+#     # Group cart games by game_id and user_id
+#     grouped_cart_games = {}
+#     for cart_game in cart_games:
+#         if (cart_game.game_id, cart_game.user_id) in grouped_cart_games:
+#             grouped_cart_games[(cart_game.game_id, cart_game.user_id)].append(cart_game)
+#         else:
+#             grouped_cart_games[(cart_game.game_id, cart_game.user_id)] = [cart_game]
+
+#     for (game_id, user_id), cart_games in grouped_cart_games.items():
+#         game = Game.query.get(game_id)
+#         if game:
+#             if LibraryGame.query.filter_by(user_id=user_id, game_id=game_id).first():
+#                 continue
+#             elif game_id in added_game_ids:
+#                 continue
+#             else:
+#                 library_game = LibraryGame(user_id=user_id, game_id=game_id)
+#                 db.session.add(library_game)
+#                 added_games.append(game.to_dict())
+#                 added_game_ids.add(game_id)
+#         else:
+#             continue
+
+#     # Remove all games in cart after adding to user's library
+#     CartGame.query.filter_by(user_id=user_id).delete()
+#     db.session.commit()
+
+#     return jsonify({added_games}), 200
 
 
 
