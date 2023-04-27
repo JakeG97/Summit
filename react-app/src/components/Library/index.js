@@ -50,29 +50,35 @@ const Library = () => {
         </div>
       ) : (
         Object.values(library).map((game) => (
-          <div className="game-card" key={game.id}>
-            <img
-              className="games-list-image"
-              src={game.banner_image}
-              alt={game.title}
-            />
-            <h2 className="cart-game-titles">{game.title}</h2>
-            <button
-              className="remove-button"
-              onClick={() => handleRemove(game)}
-            >
-              Remove
-            </button>
-            <button
-              className="review-buttons"
-              onClick={() => handleUpdateClick(game)}
-            >
-              Update
-            </button>
+          <div className="game-container" key={game.id}>
+            <div className="game-card">
+              <img
+                className="games-list-image"
+                src={game.banner_image}
+                alt={game.title}
+              />
+              <h2 className="cart-game-titles">{game.title}</h2>
+              <button
+                className="remove-button"
+                onClick={() => handleRemove(game)}
+              >
+                Remove
+              </button>
+              <button
+                className="review-buttons"
+                onClick={() => handleUpdateClick(game)}
+              >
+                Update
+              </button>
+            </div>
+            {showUpdateForm && selectedGame && selectedGame.id === game.id && (
+              <div className="update-form">
+                <UpdateGame game={selectedGame} onClose={handleFormClose} />
+              </div>
+            )}
           </div>
         ))
       )}
-      {showUpdateForm && <UpdateGame game={selectedGame} onClose={handleFormClose} />}
     </div>
   );
 };

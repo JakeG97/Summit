@@ -115,7 +115,7 @@ const libraryReducer = (state = initialState, action) => {
   let newState = { ...state }
   switch (action.type) {
     case LOAD_LIBRARY:
-    return { ...action.payload };
+    return { ...state, ...action.payload };
     case ADD_TO_LIBRARY:
       return { ...state, [action.payload.id]: action.payload };
     case UPDATE_LIBRARY_GAME:

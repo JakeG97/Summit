@@ -1,0 +1,30 @@
+.library-update {
+    margin-left: .4em;
+}
+
+.library-update-form{
+    background: linear-gradient(-60deg,rgba(226,244,255,.3) 5%,rgba(84,107,115,.3) 95%);
+    width: 586px;
+    height: 37px;
+    padding: 1em;
+    margin-bottom: 1em;
+    /* display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start; */
+}
+
+
+.library-inputs {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start; 
+}
+
+.library-submits {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end; 
+}

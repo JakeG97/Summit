@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updatedGameThunk, getAllLibraryGamesThunk } from '../../store/library';
-
+import './LibraryUpdate.css'
 
 const UpdateGame = ({ game, onClose }) => {
   const dispatch = useDispatch();
@@ -20,25 +20,31 @@ const UpdateGame = ({ game, onClose }) => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Update Game</h3>
-      <label htmlFor="title">Title:</label>
-      <input
-        type="text"
-        id="title"
-        value={newTitle}
-        onChange={(e) => setNewTitle(e.target.value)}
-      />
-      <label htmlFor="banner_image">Banner Image:</label>
-      <input
-        type="text"
-        id="banner_image"
-        value={newBannerImage}
-        onChange={(e) => setNewBannerImage(e.target.value)}
-      />
-      <button type="submit">Update</button>
-      <button type="button" onClick={onClose}>Cancel</button>
-    </form>
+    <div className="library-update">
+    <h3>Update Game</h3>
+      <form className="library-update-form" onSubmit={handleSubmit}>
+        <div className='library-inputs'>
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+          <label htmlFor="banner_image">Banner Image:</label>
+          <input
+            type="text"
+            id="banner_image"
+            value={newBannerImage}
+            onChange={(e) => setNewBannerImage(e.target.value)}
+          />
+        </div>
+        <div className="library-submits">
+          <button className="review-buttons" type="submit">Update</button>
+          <button className="remove-button" type="button" onClick={onClose}>Cancel</button>
+        </div>
+      </form>
+    </div>
   );
 };
 
