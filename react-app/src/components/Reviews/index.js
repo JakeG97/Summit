@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllReviewsThunk, deleteReviewThunk, updateReviewThunk, updateUser, getUserByIdThunk } from "../../store/review";
+import ReviewForm from "../ReviewForm";
 import './Reviews.css'
+import { useParams } from "react-router-dom";
 
 const Review = ({ review }) => {
   const dispatch = useDispatch();
@@ -11,6 +13,7 @@ const Review = ({ review }) => {
   const [description, setDescription] = useState(review.description);
   const [activeButton, setActiveButton] = useState(null);
   const [reviewer, setReviewer] = useState(null);
+  const { gameId } = useParams();
 
   const handleDelete = () => {
     dispatch(deleteReviewThunk(review.id));
@@ -43,7 +46,7 @@ const Review = ({ review }) => {
         <div className="profile-container">
           <img
             className="profile-pic-review-list"
-            src={reviewer?.profile_picture}
+            src={reviewer?.profile_picture || "https://avatars.cloudflare.steamstatic.com/8ac27aecdce197c83213d6fb7257f7b55eb18a6c_full.jpg"}
             alt="User profile picture"
           />
           <p>{reviewer?.username}</p>
@@ -79,6 +82,7 @@ const Review = ({ review }) => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     rows={5}
+                    maxLength={1000}
                   />
               </div>
               <div className="edit-thumb-buttons">

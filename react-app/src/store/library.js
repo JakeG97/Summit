@@ -114,17 +114,7 @@ const initialState = {};
 const libraryReducer = (state = initialState, action) => {
   let newState = { ...state }
   switch (action.type) {
-    case LOAD_LIBRARY: //{
-    //   console.log('LOAD_LIBRARY called with payload', action.payload);
-    //   const newState = { ...state };
-    //   Object.values(action.payload).forEach((game) => {
-    //     if (game) {
-    //       newState[game.id] = game;
-    //     }
-    //   });
-    //   console.log('LOAD_LIBRARY new state', newState);
-    //   return newState;
-    // }
+    case LOAD_LIBRARY:
     return { ...action.payload };
     case ADD_TO_LIBRARY:
       return { ...state, [action.payload.id]: action.payload };

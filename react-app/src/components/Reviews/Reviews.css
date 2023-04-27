@@ -14,10 +14,13 @@
   
 .profile-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     margin-right: 20px;
     padding: 1em;
-    gap: 1em;
+    gap: .4em;
+    font-size: 13px;
+    width: 132px;
 }
   
 .review-info {
@@ -42,13 +45,15 @@
 }
 
 .review-description {
-    border-bottom: 1px solid #363f4c;
-    padding-bottom: 1em;
-    width: 90%;
+  border-bottom: 1px solid #363f4c;
+  padding-bottom: 1em;
+  word-wrap: break-word;
+  width: 70%;
 }
 
+
 .review-details {
-    width: 80%;
+    width: 100%;
 }
   
 .review-buttons {

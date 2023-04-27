@@ -42,12 +42,12 @@ const Library = () => {
     <div className="library">
       <h2 className="library-title">Library</h2>
       {Object.values(library).length === 0 ? (
-        <>
+        <div className="no-games">
           <p>Looks like you don't have any games in your library yet...</p>
           <Link to="/">
             <button>Let's change that!</button>
           </Link>
-        </>
+        </div>
       ) : (
         Object.values(library).map((game) => (
           <div className="game-card" key={game.id}>
