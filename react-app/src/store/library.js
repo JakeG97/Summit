@@ -44,25 +44,24 @@ export const getAllLibraryGamesThunk = () => async (dispatch) => {
 
 
 
-export const addGameToLibraryThunk = (gameId) => async (dispatch) => {
-  console.log('addGameToLibraryThunk called with gameId', gameId);
+export const addToLibraryThunk = () => async (dispatch, getState) => {
+  const cartGames = getState().cart;
 
   const response = await fetch('/api/cart/add-to-library', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ game_id: gameId }),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      cartGames
+    })
   });
 
-  console.log('addGameToLibraryThunk response', response);
-
   if (response.ok) {
-    const game = await response.json();
-    console.log('addGameToLibraryThunk game added to library', game);
-    dispatch(addToLibrary(game));
-  } else {
-    console.log('addGameToLibraryThunk error', response.status, response.statusText);
+    const addedGames = await response.json();
+    dispatch(addToLibrary(addedGames));
   }
-};
+}
 
 
 
@@ -115,9 +114,9 @@ const libraryReducer = (state = initialState, action) => {
   let newState = { ...state }
   switch (action.type) {
     case LOAD_LIBRARY:
-    return { ...action.payload };
+    return { ...state, ...action.payload };
     case ADD_TO_LIBRARY:
-      return { ...state, [action.payload.id]: action.payload };
+      return { ...state, ...action.payload };
     case UPDATE_LIBRARY_GAME:
       console.log('Updating game in reducer:', action.payload);
       return { ...state, ...action.payload, };

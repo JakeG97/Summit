@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { getAllCartThunk, clearCartThunk, removeCartGameThunk } from "../../store/cart";
-import { addGameToLibraryThunk, getAllLibraryGamesThunk } from "../../store/library"
+import { addToLibraryThunk, getAllLibraryGamesThunk } from "../../store/library"
 import './ShoppingCart.css';
 
 const Cart = () => {
@@ -29,7 +29,7 @@ const Cart = () => {
   
   const handlePurchase = () => {
     Object.values(cart).forEach((game) => {
-      dispatch(addGameToLibraryThunk(game.id));
+      dispatch(addToLibraryThunk(game.id));
     });
     dispatch(clearCartThunk(cart));
     dispatch(getAllLibraryGamesThunk());
