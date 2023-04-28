@@ -29,7 +29,7 @@ const Cart = () => {
   
   const handlePurchase = async () => {
     // Get an array of all game IDs in the cart
-    const gameIds = Object.values(cart).map((game) => game.id);
+    const gameIds = Object.values(cart).map((game) => game.game_id);
   
     // Add all games to the library
     for (const gameId of gameIds) {
