@@ -52,6 +52,7 @@ export const getAllLibraryGamesThunk = () => async (dispatch) => {
 
 
 export const addToLibraryThunk = (gameId) => async (dispatch) => {
+  console.log('gameId:', gameId);
   const response = await fetch(`/api/cart/add-to-library`, {
     method: 'POST',
     headers: {
