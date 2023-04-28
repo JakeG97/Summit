@@ -31,6 +31,13 @@ type: REMOVE_FROM_CART,
 payload: gameId
 })
 
+const showError = (errorMessage) => {
+  return {
+    type: 'SHOW_ERROR',
+    payload: errorMessage,
+  };
+};
+
 
 // export const getAllCartThunk = () => async (dispatch) => {
 //   const response = await fetch(`/api/cart`);
@@ -54,8 +61,25 @@ export const getAllCartThunk = () => async (dispatch) => {
   }
 };
 
+// export const addToCartThunk = (gameId) => async (dispatch) => {
+//   const response = await fetch('/api/cart', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({ game_id: gameId }),
+//   });
+
+//   if (response.ok) {
+//       const newCartGame = await response.json();
+//       dispatch(addGameToCart(newCartGame));
+//   } else {
+//     const error = await response.json();
+//     dispatch(showError(error.message));
+//   }
+// };
+
 export const addToCartThunk = (gameId) => async (dispatch) => {
-  console.log("!!!cart gameId:", gameId)
   const response = await fetch('/api/cart', {
     method: 'POST',
     headers: {
@@ -64,11 +88,18 @@ export const addToCartThunk = (gameId) => async (dispatch) => {
     body: JSON.stringify({ game_id: gameId }),
   });
 
-  if (response.ok) {
-      const newCartGame = await response.json();
-      dispatch(addGameToCart(newCartGame));
-  }
+  const data = await response.json();
+
+  return {
+    ok: response.ok,
+    data: data,
+  };
 };
+
+
+
+
+
 
 export const clearCartThunk = () => async (dispatch) => {
 const response = await fetch(`api/cart/clear`, {

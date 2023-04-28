@@ -13,6 +13,7 @@ const GameDetails = () => {
   const game = useSelector((state) => state.games[gameId]);
   const [loading, setLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
 
@@ -37,16 +38,50 @@ const GameDetails = () => {
   }
 
 
-  const handleAddToCart = () => {
-    dispatch(addToCartThunk(game.id));
-    setShowPopup(true);
-    const cartButton = document.querySelector(".add-button");
-    if (cartButton) {
-      cartButton.textContent = "In Cart";
-      cartButton.disabled = true;
+  // const handleAddToCart = async () => {
+  //   const response = await dispatch(addToCartThunk(game.id));
+  //   if (response.payload?.error) {
+  //     setErrorMessage(response.payload.error);
+  //   } else {
+  //     setShowPopup(true);
+  //     const cartButton = document.querySelector(".add-button");
+  //     if (cartButton) {
+  //       cartButton.textContent = "In Cart";
+  //       cartButton.disabled = true;
+  //     }
+  //   }
+  // };
+  const handleAddToCart = async () => {
+    console.log('handleAddToCart called');
+    try {
+      const response = await dispatch(addToCartThunk(game.id));
+      if (!response.ok) {
+        const error = response.data.error;
+        setErrorMessage(error);
+        console.log('Response:', response);
+        console.log('Error:', error);
+        setShowPopup(false);
+        setTimeout(() => {
+          setShowPopup(true);
+        }, 0);
+      } else {
+        setShowPopup(true);
+        console.log('Popup should be shown');
+        const cartButton = document.querySelector(".add-button");
+        if (cartButton) {
+          cartButton.textContent = "In Cart";
+          cartButton.disabled = true;
+        }
+      }
+    } catch (error) {
+      console.log('Error:', error);
     }
-  };
+  };  
   
+  
+  
+
+  console.log('showPopup:', showPopup);  
 
   return (
     <>
@@ -111,15 +146,21 @@ const GameDetails = () => {
           </button>
           {showPopup && (
             <div className="popup">
-              <p className="title-text">Item added to cart!</p>
-              <div className="popup-button-container">
-                <a id="cart-redirect" className="popup-buttons" href="/">
-                  Continue Shopping
-                </a>
-                <a id="cart-redirect" className="popup-buttons" href="/cart">
-                  Go to Cart
-                </a>
-              </div>
+              <p className="title-text">{errorMessage ? errorMessage : 'Item added to cart!'}</p>
+              {errorMessage ? (
+                <div className="popup-button-container">
+                  <button className="popup-buttons" onClick={() => setShowPopup(false)}>OK</button>
+                </div>
+              ) : (
+                <div className="popup-button-container">
+                  <a id="cart-redirect" className="popup-buttons" href="/">
+                    Continue Shopping
+                  </a>
+                  <a id="cart-redirect" className="popup-buttons" href="/cart">
+                    Go to Cart
+                  </a>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -141,7 +182,7 @@ const GameDetails = () => {
         )}
       </div>
     </>
-  );  
+  );    
 };
 
 export default GameDetails;
