@@ -65,13 +65,13 @@ def add_to_library():
     #     return jsonify({'error': 'game not found'}), 404
 
     # Check if the user already owns the game
-    # if LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first():
-    #     return jsonify({'error': 'This game is already in your library'}), 400
+    if LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first():
+        return jsonify({'error': 'This game is already in your library'}), 400
 
     # Check if the game is in the cart
-    # cart_game = CartGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
-    # if not cart_game:
-    #     return jsonify({'error': 'game is not in cart'}), 400
+    cart_game = CartGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
+    if not cart_game:
+        return jsonify({'error': 'game is not in cart'}), 400
 
     # Add the game to the library
     library_game = LibraryGame(user_id=current_user.id, game_id=game_id)
@@ -85,7 +85,7 @@ def add_to_library():
     # Get the most up-to-date version of the LibraryGame object
     library_game = LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
 
-    # return jsonify("success")
+    return jsonify("success")
 
 
 
