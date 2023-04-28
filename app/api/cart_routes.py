@@ -53,6 +53,7 @@ def add_to_cart():
 #TODO -----------  POST  --------------
 #Add single game to library
 
+# Add single game to library
 @cart_routes.route('/add-to-library', methods=['POST'])
 @login_required
 def add_to_library():
@@ -60,10 +61,10 @@ def add_to_library():
     if not game_id:
         return jsonify({'error': 'game_id is required'}), 400
 
-    # # Check if the game exists
-    # game = Game.query.get(game_id)
-    # if not game:
-    #     return jsonify({'error': 'game not found'}), 404
+    # Check if the game exists
+    game = Game.query.get(game_id)
+    if not game:
+        return jsonify({'error': 'game not found'}), 404
 
     # Check if the user already owns the game
     if LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first():
@@ -72,7 +73,7 @@ def add_to_library():
     # Check if the game is in the cart
     cart_game = CartGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
     if not cart_game:
-        return jsonify({'error': 'game is not in cart'}), 400
+        return jsonify({'error': 'game is not in cart, please add it to your cart before adding it to your library'}), 400
 
     # Add the game to the library
     library_game = LibraryGame(user_id=current_user.id, game_id=game_id)
