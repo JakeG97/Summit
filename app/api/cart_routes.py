@@ -33,11 +33,13 @@ def add_to_cart():
         return jsonify({'error': 'game not found'}), 404
 
     # Check if the user already owns the game
-    if LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first():
+    library_game = LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
+    if library_game:
         return jsonify({'error': 'This game is already in your library'}), 400
 
     # Check if the game is already in the cart
-    if CartGame.query.filter_by(user_id=current_user.id, game_id=game_id).first():
+    cart_game = CartGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
+    if cart_game:
         return jsonify({'error': 'game is already in cart'}), 400
 
     # Add the game to the cart
@@ -46,7 +48,6 @@ def add_to_cart():
     db.session.commit()
 
     return jsonify({'success': f'{game.title} added to cart'})
-
 
 
 #TODO -----------  POST  --------------
