@@ -37,6 +37,11 @@ def add_to_cart():
     if cart_game:
         return jsonify({'error': 'game is already in cart'}), 400
 
+    # Check if the game is already in the user's library
+    library_game = LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
+    if library_game:
+        return jsonify({'error': 'This game is already in your library'}), 400
+
     # Add the game to the cart
     cart_game = CartGame(user_id=current_user.id, game_id=game_id)
     db.session.add(cart_game)
