@@ -59,10 +59,10 @@ def add_to_library():
     if not game_id:
         return jsonify({'error': 'game_id is required'}), 400
 
-    # Check if the game exists
-    game = Game.query.get(game_id)
-    if not game:
-        return jsonify({'error': 'game not found'}), 404
+    # # Check if the game exists
+    # game = Game.query.get(game_id)
+    # if not game:
+    #     return jsonify({'error': 'game not found'}), 404
 
     # Check if the user already owns the game
     if LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first():
