@@ -23,7 +23,6 @@ const Library = () => {
     };
     fetchLibrary();
   }, [dispatch]);
-  
 
   const handleRemove = async (game) => {
     await dispatch(removeGameThunk(game.game_id));
@@ -41,47 +40,51 @@ const Library = () => {
   };
 
   return (
-      <>
-        {!isLoaded ? (
-            <div className="loading-container">
-              <img  className="loading-gif" src={loadingGif} alt="Loading..." />
+    <>
+      {!isLoaded ? (
+        <div className="loading-container">
+          <img  className="loading-gif" src={loadingGif} alt="Loading..." />
+        </div>
+      ) : (
+        <div className="library">
+          <h2 className="library-title">Library</h2>
+          {Object.values(library).length === 0 ? (
+            <div className="no-games">
+              <p>Looks like you don't have any games in your library yet...</p>
+              <Link to="/">
+                <button>Let's change that!</button>
+              </Link>
             </div>
-        ) : (
-      <div className="library">
-        <h2 className="library-title">Library</h2>
-        {Object.values(library).length === 0 ? (
-          <div className="no-games">
-            <p>Looks like you don't have any games in your library yet...</p>
-            <Link to="/">
-              <button>Let's change that!</button>
-            </Link>
-          </div>
-        ) : (
-          Object.values(library).map((game) => (
-            <div className="game-card" key={game.id}>
-              <img
-                className="games-list-image"
-                src={game.banner_image}
-                alt={game.title}
-              />
-              <h2 className="cart-game-titles">{game.title}</h2>
-              <button
-                className="remove-button"
-                onClick={() => handleRemove(game)}
-              >
-                Remove
-              </button>
-              <button
-                className="review-buttons"
-                onClick={() => handleUpdateClick(game)}
-              >
-                Update
-              </button>
-            </div>
-          ))
-        )}
-        {showUpdateForm && <UpdateGame game={selectedGame} onClose={handleFormClose} />}
-      </div>
+          ) : (
+            Object.values(library).map((game) => (
+              <div key={game.id}>
+                <div className="game-card">
+                  <img
+                    className="games-list-image"
+                    src={game.banner_image}
+                    alt={game.title}
+                  />
+                  <h2 className="cart-game-titles">{game.title}</h2>
+                  <button
+                    className="remove-button"
+                    onClick={() => handleRemove(game)}
+                  >
+                    Remove
+                  </button>
+                  <button
+                    className="review-buttons"
+                    onClick={() => handleUpdateClick(game)}
+                  >
+                    Update
+                  </button>
+                </div>
+                {showUpdateForm && selectedGame?.id === game.id && (
+                  <UpdateGame game={selectedGame} onClose={handleFormClose} />
+                )}
+              </div>
+            ))
+          )}
+        </div>
       )}
     </>
   );
