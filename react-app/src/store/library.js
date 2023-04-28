@@ -52,7 +52,7 @@ export const getAllLibraryGamesThunk = () => async (dispatch) => {
 
 
 export const addToLibraryThunk = (gameId) => async (dispatch) => {
-  console.log('gameId:', gameId);
+  console.log('addToLibraryThunk called with gameId:', gameId);
   const response = await fetch(`/api/cart/add-to-library`, {
     method: 'POST',
     headers: {
@@ -63,9 +63,11 @@ export const addToLibraryThunk = (gameId) => async (dispatch) => {
 
   if (response.ok) {
     const newLibraryGame = await response.json();
+    console.log('addToLibraryThunk received newLibraryGame:', newLibraryGame);
     dispatch(addToLibrary(newLibraryGame));
   }
 };
+
 
 
 export const removeGameThunk = (gameId) => async (dispatch) => {

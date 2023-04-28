@@ -82,7 +82,7 @@ def add_to_library():
     # Get the most up-to-date version of the LibraryGame object
     library_game = LibraryGame.query.filter_by(user_id=current_user.id, game_id=game_id).first()
 
-    return jsonify("success")
+    return jsonify({'id': library_game.game_id})
 
 
 
