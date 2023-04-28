@@ -55,6 +55,7 @@ export const getAllCartThunk = () => async (dispatch) => {
 };
 
 export const addToCartThunk = (gameId) => async (dispatch) => {
+  console.log("!!!cart gameId:", gameId)
   const response = await fetch('/api/cart', {
     method: 'POST',
     headers: {
