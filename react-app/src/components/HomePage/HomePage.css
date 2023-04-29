@@ -114,3 +114,13 @@
     align-items: center;
     height: 100vh;
 }
+
+.message-button {
+    background-color: #262625;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    height: 24px;
+    margin-right: 6px;
+    width: 27px;
+}

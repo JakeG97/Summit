@@ -41,21 +41,25 @@ function SignupFormPage() {
       errors.push('Confirm Password field must be the same as the Password field');
     }
   
+    if (username.length > 30) {
+      errors.push('Username must be 30 characters or less');
+    }
+  
     if (errors.length > 0) {
       setErrors(errors);
       return;
     }
   
-
     if (password === confirmPassword) {
       const data = await dispatch(signUp(username, email, profilePicture, password));
       if (data) {
-        setErrors(data)
+        setErrors(data);
       }
     } else {
       setErrors(['Confirm Password field must be the same as the Password field']);
     }
-};
+  };
+  
   
   
   

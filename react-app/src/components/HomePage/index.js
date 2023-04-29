@@ -28,7 +28,7 @@ const HomePage = () => {
   //     .then(() => {
   //       setTimeout(() => {
   //         setIsLoaded(true);
-  //       }, 2500);
+  //       }, 3000);
   //     });
   // }, [dispatch]);
 
