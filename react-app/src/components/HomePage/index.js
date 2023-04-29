@@ -5,6 +5,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import { getAllGamesThunk } from "../../store/game";
 import "./HomePage.css";
 import loadingGif from "./loading-2.gif";
+import mainBanner from "../LibraryImages/AC6.png"
 
 const HomePage = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -34,46 +35,46 @@ const HomePage = () => {
 
 
 
-return (
+  return (
     <>
-    {!isLoaded ? (
-    <div className="loading-container">
-      <img  className="loading-gif" src={loadingGif} alt="Loading..." />
-    </div>
-    ) : (
-      <div className="games-page">
-        <a className="cart-details-page" href="/cart">
-          <button className="cart-button">CART</button>
-        </a>
-        <div className="games-container">
-          {games.map((game, index) => (
-            <NavLink
-              to={`/games/${game.id}`}
-              style={{ textDecoration: "none", color: "#fff", fontFamily: "Motiva Sans, sans-serif" }}
-              className={`game-card ${index === activeIndex ? "active" : ""}`}
-              onMouseEnter={() => setActiveIndex(index)}
-            >
-              <img className="games-list-image" src={game.image} alt={game.title} />
-              <h2 className="title-text">{game.title}</h2>
-              <p id="home-price" className="title-text">{game.price}</p>
+      {!isLoaded ? (
+        <div className="loading-container">
+          <img className="loading-gif" src={loadingGif} alt="Loading..." />
+        </div>
+      ) : (
+        <>
+          <img className="main-banner" src={mainBanner} />
+          <div className="games-page">
+            <a className="cart-details-page" href="/cart">
+              <button className="cart-button">CART</button>
+            </a>
+            <div className="games-container">
+              {games.map((game, index) => (
+                <NavLink
+                  to={`/games/${game.id}`}
+                  style={{ textDecoration: "none", color: "#fff", fontFamily: "Motiva Sans, sans-serif" }}
+                  className={`game-card ${index === activeIndex ? "active" : ""}`}
+                  onMouseEnter={() => setActiveIndex(index)}
+                >
+                  <img className="games-list-image" src={game.image} alt={game.title} />
+                  <h2 className="title-text">{game.title}</h2>
+                  <p id="home-price" className="title-text">{game.price}</p>
+                </NavLink>
+              ))}
               <div className="hover-container">
-                <h3 className="title-hover">{game.title}</h3>
+                <h3 className="title-hover">{games[activeIndex].title}</h3>
                 <div className="other-images-container">
-                  {game.other_images.map((image, index) => (
-                    <img key={index} className="game-hover-images" src={image} alt={game.title} />
+                  {games[activeIndex].other_images.map((image, index) => (
+                    <img key={index} className="game-hover-images" src={image} alt={games[activeIndex].title} />
                   ))}
                 </div>
               </div>
-              {index === activeIndex && (
-                <div className="gap-filler" style={{ height: `${document.querySelector('.active').offsetHeight}px` }}></div>
-              )}
-            </NavLink>
-          ))}
-        </div>
-      </div>
-        )}
+            </div>
+          </div>
+        </>
+      )}
     </>
-  );
+  );  
 };
 
 export default HomePage;
