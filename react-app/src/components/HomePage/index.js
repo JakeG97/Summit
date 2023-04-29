@@ -41,9 +41,9 @@ return (
       <img  className="loading-gif" src={loadingGif} alt="Loading..." />
     </div>
     ) : (
-      <>
+      <div className="games-page">
         <a className="cart-details-page" href="/cart">
-        <button className="cart-button">CART</button>
+          <button className="cart-button">CART</button>
         </a>
         <div className="games-container">
           {games.map((game, index) => (
@@ -58,16 +58,19 @@ return (
               <p id="home-price" className="title-text">{game.price}</p>
               <div className="hover-container">
                 <h3 className="title-hover">{game.title}</h3>
-                  <div className="other-images-container">
+                <div className="other-images-container">
                   {game.other_images.map((image, index) => (
                     <img key={index} className="game-hover-images" src={image} alt={game.title} />
-                ))}
-                  </div>
+                  ))}
+                </div>
               </div>
+              {index === activeIndex && (
+                <div className="gap-filler" style={{ height: `${document.querySelector('.active').offsetHeight}px` }}></div>
+              )}
             </NavLink>
           ))}
         </div>
-      </>
+      </div>
         )}
     </>
   );
