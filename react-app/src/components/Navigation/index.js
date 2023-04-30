@@ -29,12 +29,12 @@ function Navigation({ isLoaded }) {
         <div className="right-container">
           {sessionUser ? (
             <>
-				<button className="install-button">
-					<i className="fa-solid fa-download"></i>	
+				<button className="install-button" onClick={() => alert('Feature Coming Soon...')}>
+        <i class="fas fa-download"></i>	
 					Install Summit
 				</button>
-				<button className="message-button">
-					<i className="fa-solid fa-envelope"></i>
+				<button className="message-button" onClick={() => alert('Feature Coming Soon...')}>
+					<i class="fas fa-envelope"></i>
 				</button>
               	<ProfileButton user={sessionUser} />
               	<NavLink to="/library" className="profile-picture-button">
