@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, NavLink } from "react-router-dom";
-// import { login } from "../../store/session";
+import { NavLink } from "react-router-dom";
 import { getAllGamesThunk } from "../../store/game";
 import "./HomePage.css";
 import loadingGif from "./loading-2.gif";
 import mainBanner from "../LibraryImages/AC6.png"
 
 const HomePage = () => {
-  // const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  // const history = useHistory();
 
   const games = useSelector((state) => Object.values(state.games));
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hoveredImage, setHoveredImage] = useState('');
+  const [index, setIndex] = useState(0);
+
+
+  useEffect(() => {
+    if (games.length > 0) {
+      setHoveredImage(games[0].image);
+    }
+  }, [games]);  
+
 
   useEffect(() => {
     dispatch(getAllGamesThunk())
@@ -34,6 +41,20 @@ const HomePage = () => {
   // }, [dispatch]);
 
   // const currentGame = games[activeIndex];
+  
+  const handleLeftButtonClick = () => {
+    if (index > 0) {
+      setIndex(index - 1);
+    }
+  };
+
+  const handleRightButtonClick = () => {
+    if (index < games.length - 1) {
+      setIndex(index + 1);
+    }
+  };
+  
+    const game = games[index];
 
   return (
     <>
@@ -49,22 +70,52 @@ const HomePage = () => {
               <button className="cart-button">CART</button>
             </a>
             <div className="games-container">
-            <div className="game-preview-container">
+            <button className="arrow-button" onClick={handleLeftButtonClick}>
+              <i class="fas fa-chevron-left"></i>
+            </button>
+              <div className="game-preview-container">
                 <div className="game-main-image-container">
-                  <img className="game-main-image" src={games[0].image} alt={games[0].title} />
+                  <img
+                    className="game-main-image"
+                    src={game.image}
+                    alt={game.title}
+                  />
                 </div>
                 <div className="right-game-preview">
-                  <h3 className="main-game-title">{games[0].title}</h3>
+                  <h3 className="main-game-title">{game.title}</h3>
                   <div className="game-other-images-container">
-                    {games[0].other_images.map((image, index) => (
-                      <img key={index} className="game-other-image" src={image} alt={games[0].title} />
-                      ))}
+                    {game.other_images.map((image, index) => (
+                      <img
+                        key={index}
+                        className="game-other-image"
+                        src={image}
+                        alt={game.title}
+                        onMouseEnter={() =>
+                          document.querySelector(".game-main-image").src = image
+                        }
+                        onMouseLeave={() =>
+                          document.querySelector(".game-main-image").src = game.image
+                        }
+                      />
+                    ))}
                   </div>
-                <div className="game-details">
-                  <div className="main-game-price">{games[0].price}</div>
+                  <div className="game-details">
+                    <div className="main-game-price">{game.price}</div>
+                  </div>
                 </div>
               </div>
+              <button className="arrow-button" onClick={handleRightButtonClick}>
+                <i class="fas fa-chevron-right"></i>
+              </button>
             </div>
+            <div className="index-squares">
+              {games.map((game, i) => (
+                <div
+                  key={i}
+                  className={`index-square ${i === index ? "active" : ""}`}
+                  onClick={() => setIndex(i)}
+                ></div>
+              ))}
             </div>
             <div className="bottom-home-container">
               <div className="left-bar-home">

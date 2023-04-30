@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, NavLink } from "react-router-dom";
 import { getSingleGameThunk } from "../../store/game";
 import { addToCartThunk } from "../../store/cart";
 import loadingGif from "../HomePage/loading-2.gif"
@@ -11,6 +11,7 @@ import './GameDetails.css'
 const GameDetails = () => {
   const { gameId } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const game = useSelector((state) => state.games[gameId]);
   const [showPopup, setShowPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,13 +19,6 @@ const GameDetails = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-
-  // useEffect(() => {
-  //   const fetchGame = async () => {
-  //     await dispatch(getSingleGameThunk(gameId))
-  //   };
-  //   fetchGame();
-  // }, [dispatch, gameId]);
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -41,21 +35,17 @@ const GameDetails = () => {
   }
 
   const handleAddToCart = async () => {
-    console.log('handleAddToCart called');
     try {
       const response = await dispatch(addToCartThunk(game.id));
       if (!response.ok) {
         const error = response.data.error;
         setErrorMessage(error);
-        console.log('Response:', response);
-        console.log('Error:', error);
         setShowPopup(false);
         setTimeout(() => {
           setShowPopup(true);
         }, 0);
       } else {
         setShowPopup(true);
-        console.log('Popup should be shown');
         const cartButton = document.querySelector(".add-button");
         if (cartButton) {
           cartButton.textContent = "In Cart";
@@ -66,9 +56,10 @@ const GameDetails = () => {
       console.log('Error:', error);
     }
   };  
-  
-  
-  
+
+  const handleLogin = () => {
+    history.push("/login");
+  };
 
   console.log('showPopup:', showPopup);  
 
@@ -80,11 +71,13 @@ const GameDetails = () => {
           </div>
       ) : (
       <>
-        <a className="cart-details-page" href="/cart">
-          <button className="cart-button">CART</button>
-        </a>
-        <h1 id="details-title">{game.title}</h1>
         <div className="game-detail-container">
+        <a className="cart-details-page" href="/cart">
+          <button id ="detail-cart" className="cart-button">CART</button>
+        </a>
+        <div className="main-detail-title">
+          <h1>{game.title}</h1>
+        </div>
           <div className="top-half-container">
             <div className="left-bar">
               <div className="selected-image-container">
@@ -136,9 +129,15 @@ const GameDetails = () => {
           </div>
           <div className="purchase-box">
             <p id="actual-price">{game.price}</p>
-            <button className="add-button" onClick={handleAddToCart}>
-              Add to Cart
-            </button>
+            {sessionUser ? (
+              <button className="add-button" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
+            ) : (
+              <button className="add-button" onClick={handleLogin}>
+                Login
+              </button>
+            )}
             {showPopup && (
               <div className="popup">
                 <p className="title-text">{errorMessage ? errorMessage : 'Item added to cart!'}</p>
@@ -171,9 +170,11 @@ const GameDetails = () => {
               <Reviews gameId={gameId} />
             </>
           ) : (
-            <p>Please log in to leave a review</p>
-            //! need to fix the profile picture and username for this to work
-            // <Reviews gameId={gameId} />
+            <>
+            <p className="logged-out-message">Please log in to leave a review</p>
+            <NavLink to="/login" className="logout-redirect">Login</NavLink>
+            <Reviews gameId={gameId} />
+            </>
           )}
         </div>
       </>

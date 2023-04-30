@@ -67,12 +67,13 @@
 }
   
 .selected-image {
-    max-height: 338px;
-    max-width: 600;
+    height: 338px;
+    width: 600px;
 }
   
 .game-detail-images.selected {
-    border: 3px solid #3d3d3d;
+    border: 3px solid #fff;
+    margin: 0;
 }
 
 .small-images-container {
@@ -80,9 +81,10 @@
     flex-direction: row;
 }
 
-#details-title {
-    margin-left: 8.2em;
-    margin-top: 0;
+.main-detail-title {
+    display: flex;
+    justify-content: flex-start;
+    width: 945px;
 }
 
 .price-container{
@@ -95,6 +97,7 @@
     width: 616px;
     height: 72px;
     display: flex;
+    position: relative;
     align-items: center;
     padding: 20px 16px 26px;
 }
@@ -109,9 +112,10 @@
     justify-content: space-between;
     padding: 2px;
     position: absolute;
+    top: 54em;
     right: 50em;
-    top: 53em;
 }
+
 
 .add-button {
     background: linear-gradient(90deg,#75b022 5%,#588a1b 95%);
@@ -171,4 +175,50 @@
     padding: 0 15px;
     text-shadow: 1px 1px 0 rgba(0,0,0,.3);
     cursor: pointer;
+}
+
+
+.logged-out-message {
+    margin-top: 4em;
+}
+
+.logout-redirect {
+    width: 270px;
+    height: 50px;
+    background: linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%);
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Motiva Sans 500', sans-serif;
+    font-size: 18px;
+    color: white;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin-bottom: 3em;
+}
+
+.logout-redirect:hover {
+    background: linear-gradient(90deg, #06BFFF 30%, #2D73FF 100%);
+    cursor: pointer;
+}
+
+#detail-cart {
+    margin-right: 19em;
+}
+
+@media screen and (min-width: 1920px) and (min-height: 1080px) {
+    .purchase-box {
+        top: 54em;
+        right: 68em;
+    }
+}
+
+@media screen and (min-width: 2560px) and (min-height: 1440px) {
+    .purchase-box {
+        top: 54em;
+        right: 92em;
+    }
 }

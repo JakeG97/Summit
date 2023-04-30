@@ -64,7 +64,7 @@ const Review = ({ review }) => {
             )}
             <p className="review-content">Posted: {new Date(review.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
             <p className="review-description">{review.description}</p>
-            {review.reviewer_id === sessionUser.id && (
+            {review?.reviewer_id === sessionUser?.id && (
               <>
                 <button className="review-buttons" onClick={handleDelete}>Delete</button>
                 <button className="review-buttons" onClick={() => setShowEditForm(true)}>
