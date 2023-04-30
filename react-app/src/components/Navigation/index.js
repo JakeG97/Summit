@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import mainLogo from "../LibraryImages/summit-logo-transparent.png"
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -10,7 +11,14 @@ function Navigation({ isLoaded }) {
   return (
     <div className="navbar-container">
       <div className="left-container">
-        <NavLink className="main-title" exact to="/">SUMMIT</NavLink>
+        <div className='main-title-container'>
+          <NavLink className="main-logo-nav" exact to="/">
+            <img  className="main-logo" src={mainLogo} />
+          </NavLink>
+          <NavLink className="main-title" exact to="/">
+            SUMMIT
+          </NavLink>
+        </div>
 		<p className='trademark'></p>
         <NavLink className="other-main-title" exact to="/">STORE</NavLink>
         <NavLink className="other-main-title" exact to="/Library">LIBRARY</NavLink>

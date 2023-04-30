@@ -119,3 +119,15 @@
     padding: 0 10px;
     width: 110px;
 }
+
+.main-logo {
+  width: 100px;
+  height: 100px;
+}
+
+.main-title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
