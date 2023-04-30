@@ -8,9 +8,9 @@ import loadingGif from "./loading-2.gif";
 import mainBanner from "../LibraryImages/AC6.png"
 
 const HomePage = () => {
-  const sessionUser = useSelector((state) => state.session.user);
+  // const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   const games = useSelector((state) => Object.values(state.games));
 
@@ -33,7 +33,7 @@ const HomePage = () => {
   //     });
   // }, [dispatch]);
 
-  const currentGame = games[activeIndex];
+  // const currentGame = games[activeIndex];
 
   return (
     <>
@@ -51,17 +51,17 @@ const HomePage = () => {
             <div className="games-container">
             <div className="game-preview-container">
                 <div className="game-main-image-container">
-                  <img className="game-main-image" src={currentGame.image} alt={currentGame.title} />
+                  <img className="game-main-image" src={games[0].image} alt={games[0].title} />
                 </div>
                 <div className="right-game-preview">
-                  <h3 className="main-game-title">{currentGame.title}</h3>
+                  <h3 className="main-game-title">{games[0].title}</h3>
                   <div className="game-other-images-container">
-                    {currentGame.other_images.map((image, index) => (
-                      <img key={index} className="game-other-image" src={image} alt={currentGame.title} />
+                    {games[0].other_images.map((image, index) => (
+                      <img key={index} className="game-other-image" src={image} alt={games[0].title} />
                       ))}
                   </div>
                 <div className="game-details">
-                  <div className="main-game-price">{currentGame.price}</div>
+                  <div className="main-game-price">{games[0].price}</div>
                 </div>
               </div>
             </div>

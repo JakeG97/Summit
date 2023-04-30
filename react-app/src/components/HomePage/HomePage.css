@@ -38,10 +38,13 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 1rem;
-    /* margin-top: 6rem; */
+    margin-top: 3rem;
     height: 150px;
 }
 
+.right-game-preview {
+   background-image: url(../LibraryImages/game_background.jpeg)
+}
 
 .game-main-image {
     width: 618px;
@@ -68,6 +71,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    margin-right: 0.5em;
 }
 
 .main-game-title {
@@ -75,7 +79,8 @@
 }
 
 .main-game-price {
-    margin-top: 7em;
+    margin-top: 8em;
+    font-size: 11px;
     margin-left: 1em;
 }
 
@@ -100,8 +105,13 @@
     padding: 10px;
     background-color: #a4c8de;
     color: #181f26;
+    transition: 0.5s ease-in-out;
 }
 
+
+.hover-container.fade-in {
+    opacity: 1;
+  }
 
 .game-card {
     background: #202d39;
