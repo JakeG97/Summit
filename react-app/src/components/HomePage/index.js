@@ -70,10 +70,10 @@ const HomePage = () => {
               <button className="cart-button">CART</button>
             </a>
             <div className="games-container">
-            <button className="arrow-button" onClick={handleLeftButtonClick}>
-              <i class="fas fa-chevron-left"></i>
-            </button>
-              <div className="game-preview-container">
+              <button className="arrow-button" onClick={handleLeftButtonClick}>
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <a href={`/games/${game.id}`} className="game-preview-container">
                 <div className="game-main-image-container">
                   <img
                     className="game-main-image"
@@ -103,7 +103,7 @@ const HomePage = () => {
                     <div className="main-game-price">{game.price}</div>
                   </div>
                 </div>
-              </div>
+              </a>
               <button className="arrow-button" onClick={handleRightButtonClick}>
                 <i class="fas fa-chevron-right"></i>
               </button>
@@ -119,6 +119,7 @@ const HomePage = () => {
             </div>
             <div className="bottom-home-container">
               <div className="left-bar-home">
+                <div className="see-more">See more</div>
               {games.map((game, index) => (
                 <NavLink
                   to={`/games/${game.id}`}

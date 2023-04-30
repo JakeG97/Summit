@@ -22,6 +22,7 @@
     display: flex;
     /* flex-direction: column; */
     margin-top: 2rem;
+    text-decoration: none;
 }
 
 .game-images-container {
@@ -44,7 +45,7 @@
 }
 
 .right-game-preview {
-   background-image: url(../LibraryImages/game_background.jpeg)
+   background-image: url(../LibraryImages/game_background.jpeg);
 }
 
 .game-main-image {
@@ -77,19 +78,23 @@
 
 .main-game-title {
     margin-left: 1em;
+    text-decoration: none !important;
+    color: #fff;
 }
 
 .main-game-price {
     margin-top: 8em;
     font-size: 11px;
     margin-left: 2.2em;
+    text-decoration: none;
+    color: #fff;
 }
 
 .left-bar-home {
     display: flex;
     flex-direction: column;
     width: 600px;
-    margin-top: 3em;
+    /* margin-top: 1em; */
     margin-right: 20px;
 }
 
@@ -123,7 +128,9 @@
     align-items: center;
     width: 640px;
     height: 69px;
-    margin: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 8px;
     cursor: pointer;
 }
 
@@ -239,10 +246,26 @@
     height: 9px;
     margin: 15px 2px;
     width: 15px;
+    cursor: pointer;
   }
   
   .index-square.active {
     background-color: #7a8b9c;
+  }
+
+  .see-more {
+    align-items: center;
+    background-color: rgba(0,0,0,.2);
+    box-sizing: border-box;
+    color: #c6d4df;
+    display: flex;
+    font-size: 12px;
+    height: 40px;
+    justify-content: flex-end;
+    padding: 0 20px;
+    width: 100%;
+    margin-left: 0.33em;
+    margin-bottom: 0;
   }
 
 
