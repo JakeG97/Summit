@@ -172,3 +172,43 @@
     text-shadow: 1px 1px 0 rgba(0,0,0,.3);
     cursor: pointer;
 }
+
+.main-detail-title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.logged-out-message {
+    margin-top: 4em;
+}
+
+.logout-redirect {
+    width: 270px;
+    height: 50px;
+    background: linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%);
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Motiva Sans 500', sans-serif;
+    font-size: 18px;
+    color: white;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin-bottom: 3em;
+}
+
+.logout-redirect:hover {
+    background: linear-gradient(90deg, #06BFFF 30%, #2D73FF 100%);
+    cursor: pointer;
+}
+
+/* @media screen and (min-width: 1470px) {
+    .purchase-box {
+        right: 50em;
+        top: 53em;
+    }
+} */

@@ -81,7 +81,7 @@
 .main-game-price {
     margin-top: 8em;
     font-size: 11px;
-    margin-left: 1em;
+    margin-left: 2.2em;
 }
 
 .left-bar-home {
@@ -207,7 +207,7 @@
 
 
 
-@media screen and (min-width: 1470px) {
+@media screen and (min-width: 1000px) {
     .games-page {
       height: 100vh;
     }

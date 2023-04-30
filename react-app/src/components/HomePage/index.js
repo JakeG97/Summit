@@ -17,6 +17,8 @@ const HomePage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hoveredImage, setHoveredImage] = useState('');
+  const [currentGameIndex, setCurrentGameIndex] = useState(0);
+
 
   useEffect(() => {
     if (games.length > 0) {
@@ -42,6 +44,14 @@ const HomePage = () => {
   // }, [dispatch]);
 
   // const currentGame = games[activeIndex];
+
+  const handlePrevGame = () => {
+    setActiveIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  const handleNextGame = () => {
+    setActiveIndex((prevIndex) => Math.min(prevIndex + 1, 2));
+  };
 
   return (
     <>

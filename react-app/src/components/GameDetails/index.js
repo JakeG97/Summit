@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, NavLink } from "react-router-dom";
 import { getSingleGameThunk } from "../../store/game";
 import { addToCartThunk } from "../../store/cart";
 import loadingGif from "../HomePage/loading-2.gif"
@@ -83,8 +83,10 @@ const GameDetails = () => {
         <a className="cart-details-page" href="/cart">
           <button className="cart-button">CART</button>
         </a>
-        <h1 id="details-title">{game.title}</h1>
         <div className="game-detail-container">
+        <div className="main-detail-title">
+          <h1 id="details-title">{game.title}</h1>
+        </div>
           <div className="top-half-container">
             <div className="left-bar">
               <div className="selected-image-container">
@@ -171,9 +173,11 @@ const GameDetails = () => {
               <Reviews gameId={gameId} />
             </>
           ) : (
-            <p>Please log in to leave a review</p>
-            //! need to fix the profile picture and username for this to work
-            // <Reviews gameId={gameId} />
+            <>
+            <p className="logged-out-message">Please log in to leave a review</p>
+            <NavLink to="/login" className="logout-redirect">Login</NavLink>
+            <Reviews gameId={gameId} />
+            </>
           )}
         </div>
       </>
