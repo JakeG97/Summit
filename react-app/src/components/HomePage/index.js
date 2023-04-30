@@ -49,6 +49,7 @@ const HomePage = () => {
               <button className="cart-button">CART</button>
             </a>
             <div className="games-container">
+              <div className="left-bar-home">
               {games.map((game, index) => (
                 <NavLink
                   to={`/games/${game.id}`}
@@ -59,14 +60,17 @@ const HomePage = () => {
                   <img className="games-list-image" src={game.image} alt={game.title} />
                   <h2 className="title-text">{game.title}</h2>
                   <p id="home-price" className="title-text">{game.price}</p>
-                </NavLink>
+                </NavLink> 
               ))}
-              <div className="hover-container">
-                <h3 className="title-hover">{games[activeIndex].title}</h3>
-                <div className="other-images-container">
-                  {games[activeIndex].other_images.map((image, index) => (
-                    <img key={index} className="game-hover-images" src={image} alt={games[activeIndex].title} />
-                  ))}
+              </div>
+              <div className="right-bar-home">
+                <div className="hover-container">
+                  <h3 className="title-hover">{games[activeIndex].title}</h3>
+                  <div className="other-images-container">
+                    {games[activeIndex].other_images.map((image, index) => (
+                      <img key={index} className="game-hover-images" src={image} alt={games[activeIndex].title} />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
