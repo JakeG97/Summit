@@ -16,6 +16,14 @@ const HomePage = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hoveredImage, setHoveredImage] = useState('');
+
+  useEffect(() => {
+    if (games.length > 0) {
+      setHoveredImage(games[0].image);
+    }
+  }, [games]);  
+
 
   useEffect(() => {
     dispatch(getAllGamesThunk())
@@ -49,22 +57,37 @@ const HomePage = () => {
               <button className="cart-button">CART</button>
             </a>
             <div className="games-container">
-            <div className="game-preview-container">
+              <div className="game-preview-container">
                 <div className="game-main-image-container">
-                  <img className="game-main-image" src={games[0].image} alt={games[0].title} />
+                  <img
+                    className="game-main-image"
+                    src={games[0].image}
+                    alt={games[0].title}
+                  />
                 </div>
                 <div className="right-game-preview">
                   <h3 className="main-game-title">{games[0].title}</h3>
                   <div className="game-other-images-container">
                     {games[0].other_images.map((image, index) => (
-                      <img key={index} className="game-other-image" src={image} alt={games[0].title} />
-                      ))}
+                      <img
+                        key={index}
+                        className="game-other-image"
+                        src={image}
+                        alt={games[0].title}
+                        onMouseEnter={() =>
+                          document.querySelector(".game-main-image").src = image
+                        }
+                        onMouseLeave={() =>
+                          document.querySelector(".game-main-image").src = games[0].image
+                        }
+                      />
+                    ))}
                   </div>
-                <div className="game-details">
-                  <div className="main-game-price">{games[0].price}</div>
+                  <div className="game-details">
+                    <div className="main-game-price">{games[0].price}</div>
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
             <div className="bottom-home-container">
               <div className="left-bar-home">
