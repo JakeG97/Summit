@@ -71,12 +71,12 @@ const GameDetails = () => {
           </div>
       ) : (
       <>
-        <a className="cart-details-page" href="/cart">
-          <button className="cart-button">CART</button>
-        </a>
         <div className="game-detail-container">
+        <a className="cart-details-page" href="/cart">
+          <button id ="detail-cart" className="cart-button">CART</button>
+        </a>
         <div className="main-detail-title">
-          <h1 id="details-title">{game.title}</h1>
+          <h1>{game.title}</h1>
         </div>
           <div className="top-half-container">
             <div className="left-bar">
