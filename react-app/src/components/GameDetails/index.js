@@ -11,6 +11,7 @@ import './GameDetails.css'
 const GameDetails = () => {
   const { gameId } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const game = useSelector((state) => state.games[gameId]);
   const [showPopup, setShowPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,13 +19,6 @@ const GameDetails = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-
-  // useEffect(() => {
-  //   const fetchGame = async () => {
-  //     await dispatch(getSingleGameThunk(gameId))
-  //   };
-  //   fetchGame();
-  // }, [dispatch, gameId]);
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -41,21 +35,17 @@ const GameDetails = () => {
   }
 
   const handleAddToCart = async () => {
-    console.log('handleAddToCart called');
     try {
       const response = await dispatch(addToCartThunk(game.id));
       if (!response.ok) {
         const error = response.data.error;
         setErrorMessage(error);
-        console.log('Response:', response);
-        console.log('Error:', error);
         setShowPopup(false);
         setTimeout(() => {
           setShowPopup(true);
         }, 0);
       } else {
         setShowPopup(true);
-        console.log('Popup should be shown');
         const cartButton = document.querySelector(".add-button");
         if (cartButton) {
           cartButton.textContent = "In Cart";
@@ -66,9 +56,10 @@ const GameDetails = () => {
       console.log('Error:', error);
     }
   };  
-  
-  
-  
+
+  const handleLogin = () => {
+    history.push("/login");
+  };
 
   console.log('showPopup:', showPopup);  
 
@@ -138,9 +129,15 @@ const GameDetails = () => {
           </div>
           <div className="purchase-box">
             <p id="actual-price">{game.price}</p>
-            <button className="add-button" onClick={handleAddToCart}>
-              Add to Cart
-            </button>
+            {sessionUser ? (
+              <button className="add-button" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
+            ) : (
+              <button className="add-button" onClick={handleLogin}>
+                Login
+              </button>
+            )}
             {showPopup && (
               <div className="popup">
                 <p className="title-text">{errorMessage ? errorMessage : 'Item added to cart!'}</p>
