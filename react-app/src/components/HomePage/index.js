@@ -33,7 +33,7 @@ const HomePage = () => {
   //     });
   // }, [dispatch]);
 
-
+  const currentGame = games[activeIndex];
 
   return (
     <>
@@ -49,6 +49,24 @@ const HomePage = () => {
               <button className="cart-button">CART</button>
             </a>
             <div className="games-container">
+            <div className="game-preview-container">
+                <div className="game-main-image-container">
+                  <img className="game-main-image" src={currentGame.image} alt={currentGame.title} />
+                </div>
+                <div className="right-game-preview">
+                  <h3 className="main-game-title">{currentGame.title}</h3>
+                  <div className="game-other-images-container">
+                    {currentGame.other_images.map((image, index) => (
+                      <img key={index} className="game-other-image" src={image} alt={currentGame.title} />
+                      ))}
+                  </div>
+                <div className="game-details">
+                  <div className="main-game-price">{currentGame.price}</div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div className="bottom-home-container">
               <div className="left-bar-home">
               {games.map((game, index) => (
                 <NavLink
