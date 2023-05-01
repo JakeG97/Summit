@@ -41,8 +41,8 @@ function SignupFormPage() {
       errors.push('Confirm Password field must be the same as the Password field');
     }
   
-    if (username.length > 30) {
-      errors.push('Username must be 30 characters or less');
+    if (username.length > 20) {
+      errors.push('Username must be 20 characters or less');
     }
   
     if (errors.length > 0) {
@@ -98,6 +98,7 @@ function SignupFormPage() {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="(max 20 charaters)"
           />
           <label htmlFor="profile_picture">Profile Picture</label>
           <input

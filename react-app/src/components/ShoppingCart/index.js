@@ -60,6 +60,19 @@ const Cart = () => {
     await dispatch(removeCartGameThunk(game.game_id));
     dispatch(getAllCartThunk());
   };
+
+  if (!sessionUser) {
+    return (
+      <div className="library">
+        <h2 className="no-games">
+          You'll need to be signed into an account in order to start purchasing games
+        </h2>
+        <Link to="/login">
+          <button className="library-login">Let's get you logged in!</button>
+        </Link>
+      </div>
+    );
+  }
   
 
   return (

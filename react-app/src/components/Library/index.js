@@ -8,6 +8,7 @@ import loadingGif from "../HomePage/loading-2.gif"
 
 const Library = () => {
   const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
   const library = useSelector((state) => {
     console.log('Library state:', state.library);
     return state.library;
@@ -38,6 +39,19 @@ const Library = () => {
     setShowUpdateForm(false);
     setSelectedGame(null);
   };
+
+  if (!sessionUser) {
+    return (
+      <div className="library">
+        <h2 className="no-games">
+          You'll need to be signed into an account in order to start your library.
+        </h2>
+        <Link to="/login">
+          <button className="library-login">Let's get you logged in!</button>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <>
