@@ -22,7 +22,7 @@ function Footer() {
           <a>React</a> |
           <a>Redux</a> |
           <a>Flask</a> |
-          <a>PostgreSQL</a>
+          <a>SQLAlchemy</a>
         </span>
       </div>
     </footer>

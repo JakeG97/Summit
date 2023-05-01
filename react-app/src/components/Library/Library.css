@@ -3,7 +3,7 @@
     margin-top: 0;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     height: 110vh;
 }
@@ -14,6 +14,7 @@
     text-transform: uppercase;
 }
 
+.library-login,
 .no-games button {
     width: 270px;
     height: 50px;
@@ -27,6 +28,7 @@
     margin: 0 auto;
 }
 
+.library-login:hover,
 .no-games button:hover {
     background: linear-gradient(90deg, #06BFFF 30%, #2D73FF 100%);
     cursor: pointer;
