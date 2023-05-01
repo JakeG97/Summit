@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { getAllGamesThunk } from "../../store/game";
 import "./HomePage.css";
 import loadingGif from "./loading-2.gif";
@@ -8,6 +8,7 @@ import mainBanner from "../LibraryImages/AC6.png"
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const games = useSelector((state) => Object.values(state.games));
 
@@ -53,6 +54,10 @@ const HomePage = () => {
       setIndex(index + 1);
     }
   };
+
+  const mainImageClick = () => {
+    history.push('/games/10')
+  }
   
     const game = games[index];
 
@@ -64,7 +69,7 @@ const HomePage = () => {
         </div>
       ) : (
         <>
-          <img className="main-banner" src={mainBanner} />
+          <img className="main-banner" src={mainBanner} onClick={mainImageClick} />
           <div className="games-page">
             <a className="cart-details-page" href="/cart">
               <button className="cart-button">CART</button>
