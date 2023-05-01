@@ -17,10 +17,10 @@ def seed_users():
         profile_picture='https://b2059463.smushcdn.com/2059463/wp-content/uploads/2019/09/crash-testing-dummies1.jpg'
         )
     user_3 = User(
-        username='bobbie', 
-        email='bobbie@aa.io', 
+        username='StogieGeneral', 
+        email='arnold@aa.io', 
         password='password',
-        profile_picture='https://b2059463.smushcdn.com/2059463/wp-content/uploads/2019/09/crash-testing-dummies1.jpg'
+        profile_picture='https://cdn.britannica.com/11/222411-050-D3D66895/American-politician-actor-athlete-Arnold-Schwarzenegger-2016.jpg'
         )
 
     db.session.add(user_1)

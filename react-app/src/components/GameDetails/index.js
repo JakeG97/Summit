@@ -161,7 +161,7 @@ const GameDetails = () => {
           <div className="about-container">
             <h2 className="title-text">About This Game</h2>
             <div className="full-description-container">
-              <p>{game.full_description}</p>
+              <p className="full-description">{game.full_description}</p>
             </div>
           </div>
           {sessionUser ? (
