@@ -126,37 +126,39 @@ const GameDetails = () => {
           </div>
           <div className="price-container">
             <p>Buy {game.title}</p>
+          <div className="purchase-box-container">
+            <div className="purchase-box">
+              <p id="actual-price">{game.price}</p>
+              {sessionUser ? (
+                <button className="add-button" onClick={handleAddToCart}>
+                  Add to Cart
+                </button>
+              ) : (
+                <button className="add-button" onClick={handleLogin}>
+                  Login
+                </button>
+              )}
+              {showPopup && (
+                <div className="popup">
+                  <p className="title-text">{errorMessage ? errorMessage : 'Item added to cart!'}</p>
+                  {errorMessage ? (
+                    <div className="popup-button-container">
+                      <button className="popup-buttons" onClick={() => setShowPopup(false)}>OK</button>
+                    </div>
+                  ) : (
+                    <div className="popup-button-container">
+                      <a id="cart-redirect" className="popup-buttons" href="/">
+                        Continue Shopping
+                      </a>
+                      <a id="cart-redirect" className="popup-buttons" href="/cart">
+                        Go to Cart
+                      </a>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-          <div className="purchase-box">
-            <p id="actual-price">{game.price}</p>
-            {sessionUser ? (
-              <button className="add-button" onClick={handleAddToCart}>
-                Add to Cart
-              </button>
-            ) : (
-              <button className="add-button" onClick={handleLogin}>
-                Login
-              </button>
-            )}
-            {showPopup && (
-              <div className="popup">
-                <p className="title-text">{errorMessage ? errorMessage : 'Item added to cart!'}</p>
-                {errorMessage ? (
-                  <div className="popup-button-container">
-                    <button className="popup-buttons" onClick={() => setShowPopup(false)}>OK</button>
-                  </div>
-                ) : (
-                  <div className="popup-button-container">
-                    <a id="cart-redirect" className="popup-buttons" href="/">
-                      Continue Shopping
-                    </a>
-                    <a id="cart-redirect" className="popup-buttons" href="/cart">
-                      Go to Cart
-                    </a>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
           <div className="about-container">
             <h2 className="title-text">About This Game</h2>

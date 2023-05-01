@@ -41,6 +41,9 @@ function App() {
           <Route path="/">
             <HomePage />
           </Route>
+          <Route>
+            <p>Page Not Found ¯\_(ツ)_/¯ </p>
+          </Route>
         </Switch>
       )}
       <Footer />
