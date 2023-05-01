@@ -134,7 +134,7 @@ const GameDetails = () => {
                   Add to Cart
                 </button>
               ) : (
-                <button className="add-button" onClick={handleLogin}>
+                <button className="add-button-login" onClick={handleLogin}>
                   Login
                 </button>
               )}

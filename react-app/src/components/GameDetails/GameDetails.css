@@ -119,6 +119,7 @@
     display: flex;
     font-size: 13px;
     height: 32px;
+    width: 175px;
     padding: 2px;
     margin-left: 14em;
     margin-top: 6em;
@@ -133,8 +134,24 @@
     color: #d2efa9;
     font-size: 15px;
     height: 30px;
+    width: 106px;
     margin-right: 1px;
-    margin-left: 10px;
+    margin-left: 12px;
+    padding: 0 15px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.3);
+    cursor: pointer;
+}
+
+.add-button-login {
+    background: linear-gradient(90deg,#75b022 5%,#588a1b 95%);
+    border: none;
+    border-radius: 2px;
+    color: #d2efa9;
+    font-size: 15px;
+    height: 30px;
+    width: 106px;
+    margin-right: 1px;
+    margin-left: 12px;
     padding: 0 15px;
     text-shadow: 1px 1px 0 rgba(0,0,0,.3);
     cursor: pointer;
@@ -142,6 +159,7 @@
 
 #actual-price {
     margin-left: 10px;
+    width: 45px
 }
 
 .about-container {
