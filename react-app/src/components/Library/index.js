@@ -16,6 +16,8 @@ const Library = () => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
+  const [gameToRemove, setGameToRemove] = useState(null);
 
   useEffect(() => {
     const fetchLibrary = async () => {
@@ -25,8 +27,22 @@ const Library = () => {
     fetchLibrary();
   }, [dispatch]);
 
-  const handleRemove = async (game) => {
-    await dispatch(removeGameThunk(game.game_id));
+  const handleRemove = (game) => {
+    setGameToRemove(game);
+    setShowConfirmationPopup(true);
+  };
+
+  const handleConfirmRemove = async () => {
+    if (gameToRemove) {
+      await dispatch(removeGameThunk(gameToRemove.game_id));
+      setGameToRemove(null);
+      setShowConfirmationPopup(false);
+    }
+  };
+
+  const handleCancelRemove = () => {
+    setGameToRemove(null);
+    setShowConfirmationPopup(false);
   };
 
   const handleUpdateClick = (game) => {
@@ -42,7 +58,7 @@ const Library = () => {
 
   if (!sessionUser) {
     return (
-      <div className="library">
+      <div className="library-logged-out">
         <h2 className="no-games">
           You'll need to be signed into an account in order to start your library.
         </h2>
@@ -95,13 +111,24 @@ const Library = () => {
                 {showUpdateForm && selectedGame?.id === game.id && (
                   <UpdateGame game={selectedGame} onClose={handleFormClose} />
                 )}
+                {showConfirmationPopup && gameToRemove?.id === game.id && (
+                  <div className="library-remove-form">
+                    <div className="library-remove-container">
+                      <p>Are you sure you want to uninstall {game.title}?</p>
+                      <div className="uninstall-buttons">
+                        <button className="remove-yes" onClick={handleConfirmRemove}>Yes</button>
+                        <button className="remove-no" onClick={handleCancelRemove}>No</button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             ))
           )}
         </div>
       )}
     </>
-  );
+  );  
 };
 
 export default Library;
