@@ -84,6 +84,8 @@
 #purchase-button {
     margin-right: 2em;
     margin-bottom: 1em;
+    width: 167px;
+    height: 30px;
 }
 
 #continue-shopping-cart{
