@@ -59,7 +59,7 @@ const HomePage = () => {
     history.push('/games/10')
   }
   
-    const game = games[index];
+  const game = games[index];
 
   return (
     <>
