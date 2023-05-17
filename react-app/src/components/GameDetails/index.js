@@ -13,6 +13,7 @@ const GameDetails = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const game = useSelector((state) => state.games[gameId]);
+  const reviews = useSelector((state) => Object.values(state.reviews));
   const [showPopup, setShowPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const sessionUser = useSelector((state) => state.session.user);
@@ -110,17 +111,23 @@ const GameDetails = () => {
                 />
                 <p className="side-text-details">{game.short_description}</p>
                 <p className="side-text-details">
-                  <span className="game-detail-subtext">Release Date:</span>{" "}
-                  {game.release_date}
+                  <span className="game-detail-subtext">ALL REVIEWS:</span>{" "}
+                  <span className="review-length">({reviews.length})</span>
                 </p>
                 <p className="side-text-details">
-                  <span className="game-detail-subtext">Developer:</span>{" "}
-                  {game.developer}
+                  <span className="game-detail-subtext">RELEASE DATE:</span>{" "}
+                  <span className="release-date">{game.release_date}</span>
+                </p>
+                <div className="developer-publisher-container">
+                <p className="side-text-details">
+                  <span className="game-detail-subtext">DEVELOPER:</span>{" "}
+                  <span className="dev-pub">{game.developer}</span>
                 </p>
                 <p className="side-text-details">
-                  <span className="game-detail-subtext">Publisher:</span>{" "}
-                  {game.publisher}
+                  <span className="game-detail-subtext">PUBLISHER:</span>{" "}
+                  <span className="dev-pub">{game.publisher}</span>
                 </p>
+                </div>
               </div>
             </div>
           </div>
