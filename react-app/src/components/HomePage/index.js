@@ -146,8 +146,8 @@ const HomePage = () => {
               <div className="right-bar-home">
                 <div className="hover-container">
                   <h3 className="title-hover">{games[activeIndex].title}</h3>
-                  <p>Overall user reviews:</p>
-                  <span className="review-length">({reviewsArray.length})</span>
+                  {/* <p>Overall user reviews:</p>
+                  <span className="review-length">({reviewsArray.length})</span> */}
                   <div className="other-images-container">
                     {games[activeIndex].other_images.map((image, index) => (
                       <img key={index} className="game-hover-images" src={image} alt={games[activeIndex].title} />
