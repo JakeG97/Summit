@@ -55,3 +55,16 @@ def create_game():
         return new_game.to_dict()
     else:
         return {"errors": form.errors}, 400
+
+
+#! -----------  DELETE  --------------
+@game_routes.route('/<int:game_id>', methods=['DELETE'])
+@login_required
+def delete_game(game_id):
+    game = Game.query.get(game_id)
+    if game:
+        db.session.delete(game)
+        db.session.commit()
+        return {"message": "Game deleted"}
+    else:
+        return {"errors": "Game not found"}, 404
