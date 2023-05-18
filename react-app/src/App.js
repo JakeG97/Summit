@@ -10,6 +10,7 @@ import Library from "./components/Library";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import GameForm from "./components/GameForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/library">
             <Library />
+          </Route>
+          <Route path="/create_game">
+            <GameForm />
           </Route>
           <Route path="/login" >
             <LoginFormPage />

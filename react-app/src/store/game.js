@@ -45,23 +45,19 @@ const normalizer = (data) => {
     }
   };
 
-  export const createGameThunk = (formData) => async (dispatch) => {
-    try {
-      const response = await fetch('/create_game', {
-        method: 'POST',
-        body: formData,
+  export const createGameThunk = (game) => async (dispatch) => {
+      const res = await fetch('/api/games/create_game', {
+        method:"POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(game),
       });
   
-      if (response.ok) {
-        const newGame = await response.json();
+      if (res.ok) {
+        const newGame = await res.json();
         dispatch(createGame(newGame));
-      } else {
-        throw new Error('Failed to create game.');
       }
-    } catch (error) {
-      console.log("Error:", error);
-      throw new Error('An unexpected error occurred.');
-    }
   };
 
 
