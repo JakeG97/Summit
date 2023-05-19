@@ -148,11 +148,13 @@ const HomePage = () => {
                   <h3 className="title-hover">{games[activeIndex].title}</h3>
                   {/* <p>Overall user reviews:</p>
                   <span className="review-length">({reviewsArray.length})</span> */}
-                  <div className="other-images-container">
-                    {games[activeIndex].other_images.map((image, index) => (
-                      <img key={index} className="game-hover-images" src={image} alt={games[activeIndex].title} />
-                    ))}
-                  </div>
+                 {games[activeIndex]?.other_images && Array.isArray(games[activeIndex].other_images) && (
+                    <div className="other-images-container">
+                      {games[activeIndex].other_images.map((image, index) => (
+                        <img key={index} className="game-hover-images" src={image} alt={games[activeIndex].title} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

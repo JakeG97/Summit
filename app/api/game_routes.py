@@ -36,6 +36,10 @@ def create_game():
     form.csrf_token.data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+        other_images = request.json.get('other_images', [])
+        if not isinstance(other_images, list):
+            other_images = [other_images]
+
         new_game = Game(
             title=form.title.data,
             image=form.image.data,
@@ -46,7 +50,7 @@ def create_game():
             developer=form.developer.data,
             publisher=form.publisher.data,
             banner_image=form.banner_image.data,
-            other_images=form.other_images.data
+            other_images=other_images
         )
 
         db.session.add(new_game)
@@ -55,6 +59,7 @@ def create_game():
         return new_game.to_dict()
     else:
         return {"errors": form.errors}, 400
+
 
 
 #! -----------  DELETE  --------------

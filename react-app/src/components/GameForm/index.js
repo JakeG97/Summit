@@ -14,7 +14,7 @@ const GameForm = () => {
   const [developer, setDeveloper] = useState("");
   const [publisher, setPublisher] = useState("");
   const [bannerImage, setBannerImage] = useState("");
-  const [otherImages, setOtherImages] = useState("");
+  const [otherImages, setOtherImages] = useState([]);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -53,7 +53,8 @@ const GameForm = () => {
   };
 
   const handleOtherImagesChange = (e) => {
-    setOtherImages(e.target.value);
+    const urls = e.target.value.split(",").map((url) => url.trim());
+    setOtherImages(urls);
   };
 
   const handleSubmit = (e) => {
@@ -81,7 +82,7 @@ const GameForm = () => {
     setDeveloper("");
     setPublisher("");
     setBannerImage("");
-    setOtherImages("");
+    setOtherImages([]);
   };
 
   return (
@@ -126,7 +127,9 @@ const GameForm = () => {
         </div>
         <div>
           <label>Other Images:</label>
-          <input type="text" value={otherImages} onChange={handleOtherImagesChange} />
+          <input type="text"
+            value={otherImages.join(",")}
+            onChange={handleOtherImagesChange} />
         </div>
         <button type="submit">Create Game</button>
       </form>
