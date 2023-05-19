@@ -54,7 +54,11 @@
     height: 353px;
     display: block;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    transition: 0.5s ease-in-out;
+    /* transition: opacity 0.5s ease, visibility 0s linear 0.5s, transform 0.5s; */
+}
+  
+  .game-main-image.fade-in {
+    opacity: 1;
 }
 
 
@@ -81,6 +85,7 @@
 
 .main-game-title {
     margin-left: 1em;
+    height: 30px;
     text-decoration: none !important;
     color: #fff;
 }

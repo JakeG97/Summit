@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllGamesThunk } from "../../store/game";
+import { getAllReviewsThunk } from "../../store/review";
 import "./HomePage.css";
 import loadingGif from "./loading-2.gif";
 import mainBanner from "../LibraryImages/AC6.png"
@@ -11,6 +12,9 @@ const HomePage = () => {
   const history = useHistory();
 
   const games = useSelector((state) => Object.values(state.games));
+  const reviews = useSelector((state) => state.reviews);
+  const reviewsArray = Object.values(reviews);
+  
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -25,9 +29,10 @@ const HomePage = () => {
   }, [games]);  
 
 
+
   useEffect(() => {
-    dispatch(getAllGamesThunk())
-      .then(() => setIsLoaded(true));
+    dispatch(getAllGamesThunk()).then(() => setIsLoaded(true));
+    dispatch(getAllReviewsThunk());
   }, [dispatch]);
 
 
@@ -141,11 +146,15 @@ const HomePage = () => {
               <div className="right-bar-home">
                 <div className="hover-container">
                   <h3 className="title-hover">{games[activeIndex].title}</h3>
-                  <div className="other-images-container">
-                    {games[activeIndex].other_images.map((image, index) => (
-                      <img key={index} className="game-hover-images" src={image} alt={games[activeIndex].title} />
-                    ))}
-                  </div>
+                  {/* <p>Overall user reviews:</p>
+                  <span className="review-length">({reviewsArray.length})</span> */}
+                 {games[activeIndex]?.other_images && Array.isArray(games[activeIndex].other_images) && (
+                    <div className="other-images-container">
+                      {games[activeIndex].other_images.map((image, index) => (
+                        <img key={index} className="game-hover-images" src={image} alt={games[activeIndex].title} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
