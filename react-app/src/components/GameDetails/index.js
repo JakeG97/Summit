@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, NavLink } from "react-router-dom";
-import { getSingleGameThunk } from "../../store/game";
+import { getSingleGameThunk, deleteGameThunk } from "../../store/game";
 import { addToCartThunk } from "../../store/cart";
 import loadingGif from "../HomePage/loading-2.gif"
 import Reviews from "../Reviews";
@@ -61,6 +61,12 @@ const GameDetails = () => {
   const handleLogin = () => {
     history.push("/login");
   };
+
+  const handleDeleteGame = async () => {
+    await dispatch(deleteGameThunk(gameId));
+    history.push("/");
+  };
+  
 
   console.log('showPopup:', showPopup);  
 
@@ -185,6 +191,7 @@ const GameDetails = () => {
             <Reviews gameId={gameId} />
             </>
           )}
+          <button onClick={handleDeleteGame}>Delete Game</button>
         </div>
       </>
       )}
