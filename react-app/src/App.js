@@ -11,6 +11,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import GameForm from "./components/GameForm";
+import EditGameForm from "./components/EditGameForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path="/games/:gameId/edit">
+            <EditGameForm />
+          </Route>
           <Route path="/games/:gameId">
             <GameDetails />
           </Route>
@@ -33,7 +37,7 @@ function App() {
           <Route path="/library">
             <Library />
           </Route>
-          <Route path="/create_game">
+          <Route path="/create-game">
             <GameForm />
           </Route>
           <Route path="/login" >
