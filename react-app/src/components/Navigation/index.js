@@ -22,22 +22,22 @@ function Navigation({ isLoaded }) {
 		<p className='trademark'></p>
         <NavLink className="other-main-title" exact to="/">STORE</NavLink>
         <NavLink className="other-main-title" exact to="/Library">LIBRARY</NavLink>
-        <NavLink className="other-main-title" exact to="/create_game">CREATE</NavLink>
-        <NavLink className="other-main-title" exact to="/Library">{sessionUser?.username}</NavLink>
+        <NavLink className="other-main-title" exact to="/create-game">CREATE</NavLink>
+        <NavLink className="other-main-title" exact to="/profile/:userId">{sessionUser?.username}</NavLink>
       </div>
       {isLoaded && (
         <div className="right-container">
           {sessionUser ? (
             <>
-				<button className="install-button" onClick={() => alert('Feature Coming Soon...')}>
+				{/* <button className="install-button" onClick={() => alert('Feature Coming Soon...')}>
         <i class="fas fa-download"></i>	
 					Install Summit
 				</button>
 				<button className="message-button" onClick={() => alert('Feature Coming Soon...')}>
 					<i class="fas fa-envelope"></i>
-				</button>
+				</button> */}
               	<ProfileButton user={sessionUser} />
-              	<NavLink to="/library" className="profile-picture-button">
+              	<NavLink to="/profile/:userId" className="profile-picture-button">
                 <img className="profile-pic-review-list" src={sessionUser.profile_picture || "https://avatars.cloudflare.steamstatic.com/8ac27aecdce197c83213d6fb7257f7b55eb18a6c_full.jpg"} alt="Profile" />
               </NavLink>
             </>

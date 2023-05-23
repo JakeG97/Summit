@@ -77,7 +77,8 @@ const HomePage = () => {
 
   const handleNextPage = () => {
     setPageNumber(pageNumber + 1);
-  };
+    setActiveIndex(index);
+  };  
 
   return (
     <>
@@ -156,7 +157,7 @@ const HomePage = () => {
             </div>
             <div className="bottom-home-container">
               <div className="left-bar-home">
-                <div className="see-more">See more</div>
+                <div className="see-more" onClick={handleNextPage}>See more</div>
                 {games.map((game, index) => (
                   <NavLink
                     to={`/games/${game.id}`}
