@@ -22,6 +22,7 @@ const HomePage = () => {
   const [index, setIndex] = useState(0);
 
 
+
   useEffect(() => {
     if (games.length > 0) {
       setHoveredImage(games[0].image);
@@ -65,6 +66,7 @@ const HomePage = () => {
   }
   
   const game = games[index];
+
 
   return (
     <>

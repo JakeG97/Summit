@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import { createGameThunk } from "../../store/game";
 import "./GameForm.css";
 
 const GameForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { gameId } = useParams();
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
@@ -73,6 +76,10 @@ const GameForm = () => {
         other_images: otherImages,
       })
     );
+
+    // const gameId = newGame.id;
+    history.push(`/`);
+
     setTitle("");
     setImage("");
     setPrice("");
@@ -84,6 +91,8 @@ const GameForm = () => {
     setBannerImage("");
     setOtherImages([]);
   };
+
+  
 
   return (
     <div className="game-form">
@@ -154,10 +163,10 @@ const GameForm = () => {
               />
             </div>
           {/* </div> */}
+          <div className="create-game-container">
+            <button id="create-game-button" type="submit">Create Game</button>
+          </div>
         </form>
-      </div>
-      <div className="create-game-container">
-        <button id="create-game-button" type="submit">Create Game</button>
       </div>
     </div>
   );
