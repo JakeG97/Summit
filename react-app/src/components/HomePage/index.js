@@ -77,7 +77,8 @@ const HomePage = () => {
 
   const handleNextPage = () => {
     setPageNumber(pageNumber + 1);
-  };
+    setActiveIndex(index);
+  };  
 
   return (
     <>
