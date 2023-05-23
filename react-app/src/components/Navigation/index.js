@@ -22,7 +22,7 @@ function Navigation({ isLoaded }) {
 		<p className='trademark'></p>
         <NavLink className="other-main-title" exact to="/">STORE</NavLink>
         <NavLink className="other-main-title" exact to="/Library">LIBRARY</NavLink>
-        <NavLink className="other-main-title" exact to="/">COMMUNITY</NavLink>
+        <NavLink className="other-main-title" exact to="/create_game">CREATE</NavLink>
         <NavLink className="other-main-title" exact to="/Library">{sessionUser?.username}</NavLink>
       </div>
       {isLoaded && (

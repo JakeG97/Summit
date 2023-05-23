@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { createGameThunk } from "../../store/game";
-import "./GameForm.css";
+import { updateGameThunk } from "../../store/game";
 
-const GameForm = () => {
+
+const EditGameForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { gameId } = useParams();
@@ -63,7 +63,7 @@ const GameForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      createGameThunk({
+      updateGameThunk(gameId, {
         title,
         image,
         price,
@@ -76,27 +76,41 @@ const GameForm = () => {
         other_images: otherImages,
       })
     );
+  
+    history.push(`/games/${gameId}`);
+  };  
 
-    // const gameId = newGame.id;
-    history.push(`/`);
-
-    setTitle("");
-    setImage("");
-    setPrice("");
-    setReleaseDate("");
-    setShortDescription("");
-    setFullDescription("");
-    setDeveloper("");
-    setPublisher("");
-    setBannerImage("");
-    setOtherImages([]);
-  };
-
+  useEffect(() => {
+    const fetchGame = async () => {
+      try {
+        const response = await fetch(`/api/games/${gameId}`); // Replace with your API endpoint for fetching a single game
+        if (response.ok) {
+          const gameData = await response.json();
+          setTitle(gameData.title);
+          setImage(gameData.image);
+          setPrice(gameData.price);
+          setReleaseDate(gameData.release_date);
+          setShortDescription(gameData.short_description);
+          setFullDescription(gameData.full_description);
+          setDeveloper(gameData.developer);
+          setPublisher(gameData.publisher);
+          setBannerImage(gameData.banner_image);
+          setOtherImages(gameData.other_images);
+        } else {
+          throw new Error("Failed to fetch game data");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchGame();
+  }, [gameId]);  
   
 
   return (
     <div className="game-form">
-      <h3 className="game-form-title">Create your new game</h3>
+      <h3 className="game-form-title">Edit your game</h3>
       <div className="game-form-container">
         <form id="gameform" className="login-form" onSubmit={handleSubmit}>
           <div className="form-row">
@@ -164,7 +178,7 @@ const GameForm = () => {
             </div>
           {/* </div> */}
           <div className="create-game-container">
-            <button id="create-game-button" type="submit">Create Game</button>
+            <button id="create-game-button" type="submit">Update Game</button>
           </div>
         </form>
       </div>
@@ -172,4 +186,4 @@ const GameForm = () => {
   );
 }
 
-export default GameForm;
+export default EditGameForm;

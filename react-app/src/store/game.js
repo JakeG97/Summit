@@ -7,8 +7,10 @@ const normalizer = (data) => {
 };
 
   const LOAD_GAMES = "games/LOAD_GAMES";
-  const LOAD_SINGLE_GAME = "games/LOAD_SINGLE_GAME"
-  const CREATE_GAME = "games/CREATE_GAME"
+  const LOAD_SINGLE_GAME = "games/LOAD_SINGLE_GAME";
+  const CREATE_GAME = "games/CREATE_GAME";
+  const DELETE_GAME = "games/DELETE_GAME";
+  const UPDATE_GAME = "games/UPDATE_GAME";
 
   const loadGames = (allGameData) => ({
     type: LOAD_GAMES,
@@ -25,12 +27,21 @@ const normalizer = (data) => {
     payload: game
   });
 
+  const deleteGame = (gameId) => ({
+    type: DELETE_GAME,
+    payload: gameId
+  });
+
+  const updateGame = (game) => ({
+    type: UPDATE_GAME,
+    payload: game,
+  });
+
   export const getAllGamesThunk = () => async (dispatch) => {
     const response = await fetch(`/api/games`);
   
     if (response.ok) {
       const allGameData = await response.json();
-      // console.log("HEY LOOK HERE", allGameData)
       const normalizedGameData = normalizer(allGameData);
       dispatch(loadGames(normalizedGameData));
     }
@@ -60,7 +71,30 @@ const normalizer = (data) => {
       }
   };
 
+  export const deleteGameThunk = (gameId) => async (dispatch) => {
+    const res = await fetch(`/api/games/${gameId}`, {
+      method: "DELETE",
+    });
 
+    if (res.ok) {
+      dispatch(deleteGame(gameId))
+    }
+  }
+
+  export const updateGameThunk = (gameId, gameData) => async (dispatch) => {
+    const res = await fetch(`/api/games/${gameId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(gameData),
+    });
+
+    if (res.ok) {
+      const game = await res.json();
+      dispatch(updateGame(game));
+    }
+  };
 
 const initialState = {};
 
@@ -73,6 +107,11 @@ const gamesReducer = (state = initialState, action) => {
           return { ...state, [action.payload.id]: action.payload };
         case CREATE_GAME:
           return { ...state, [action.payload.id]: action.payload };
+        case DELETE_GAME:
+          delete newState[action.payload];
+          return newState;
+        case UPDATE_GAME:
+          return { ...state, [action.payload.id]: action.payload, };
         default:
             return state;
     }

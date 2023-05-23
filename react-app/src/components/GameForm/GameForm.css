@@ -19,9 +19,9 @@
     color: #1999ff;
 }
 
-.game-form-title {
+/* .game-form-title {
 
-}
+} */
 
 .form-row {
     display: flex;
@@ -64,4 +64,10 @@
 
 .create-game-container {
     display: flex;
+    flex-direction: row;
+}
+
+#gameform {
+    height: 764px;
+    width: 850px;
 }
