@@ -61,6 +61,30 @@ def create_game():
         return {"errors": form.errors}, 400
 
 
+#? -----------  PUT  --------------
+@game_routes.route('/int:game_id', methods=['PUT'])
+@login_required
+def update_game(game_id):
+    game = Gae.query.get(game_id)
+
+    if game:
+        game.title = request.json.get('title', game.title)
+        game.image = request.json.get('image', game.image)
+        game.price = request.json.get('price', game.price)
+        game.release_date = request.json.get('release_date', game.release_date)
+        game.short_description = request.json.get('short_description', game.short_description)
+        game.full_description = request.json.get('full_description', game.full_description)
+        game.developer = request.json.get('developer', game.developer)
+        game.publisher = request.json.get('publisher', game.publisher)
+        game.banner_image = request.json.get('banner_image', game.banner_image)
+        game.other_images = request.json.get('other_images', game.other_images)
+
+        db.session.commit()
+
+        return game.to_dict(), 200
+    else:
+        return {'error': 'Game not found'}, 404
+
 
 #! -----------  DELETE  --------------
 @game_routes.route('/<int:game_id>', methods=['DELETE'])

@@ -98,7 +98,7 @@ const GameForm = () => {
     <div className="game-form">
       <h3 className="game-form-title">Create your new game</h3>
       <div className="game-form-container">
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form id="gameform" className="login-form" onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-column">
               <label className="login-form-label">Title:</label>
