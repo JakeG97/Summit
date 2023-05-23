@@ -66,6 +66,10 @@ const GameDetails = () => {
     await dispatch(deleteGameThunk(gameId));
     history.push("/");
   };
+
+  const handleUpdateGame = async () => {
+    history.push(`/games/${gameId}/edit`)
+  }
   
 
   console.log('showPopup:', showPopup);  
@@ -192,6 +196,7 @@ const GameDetails = () => {
             </>
           )}
           <button onClick={handleDeleteGame}>Delete Game</button>
+          <button onClick={handleUpdateGame}>Update Game</button>
         </div>
       </>
       )}
