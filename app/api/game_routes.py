@@ -62,10 +62,10 @@ def create_game():
 
 
 #? -----------  PUT  --------------
-@game_routes.route('/int:game_id', methods=['PUT'])
+@game_routes.route('/<int:game_id>', methods=['PUT'])
 @login_required
 def update_game(game_id):
-    game = Gae.query.get(game_id)
+    game = Game.query.get(game_id)
 
     if game:
         game.title = request.json.get('title', game.title)
