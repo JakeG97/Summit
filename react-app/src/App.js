@@ -12,6 +12,7 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import GameForm from "./components/GameForm";
 import EditGameForm from "./components/EditGameForm";
+import ProfilePage from "./User/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route path="/library">
             <Library />
+          </Route>
+          <Route path="/profile/:userId">
+            <ProfilePage />
           </Route>
           <Route path="/create-game">
             <GameForm />
