@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import User, Workspace, Channel
+from app.models import User
 from app import db
 import random
 user_routes = Blueprint('users', __name__)
