@@ -18,8 +18,6 @@ const EditGameForm = () => {
   const [publisher, setPublisher] = useState("");
   const [bannerImage, setBannerImage] = useState("");
   const [otherImages, setOtherImages] = useState([]);
-//   const game = useSelector((state) => state.game.game);
-//   const loading = useSelector((state) => state.game.loading);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -65,7 +63,7 @@ const EditGameForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      updateGameThunk({
+      updateGameThunk(gameId, {
         title,
         image,
         price,
@@ -78,10 +76,9 @@ const EditGameForm = () => {
         other_images: otherImages,
       })
     );
-
-    // const gameId = newGame.id;
-    history.push(`/game/${gameId}`);
-  };
+  
+    history.push(`/games/${gameId}`);
+  };  
 
   useEffect(() => {
     const fetchGame = async () => {
