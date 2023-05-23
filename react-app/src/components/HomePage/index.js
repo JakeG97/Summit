@@ -11,7 +11,14 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const games = useSelector((state) => Object.values(state.games));
+  const [pageNumber, setPageNumber] = useState(1);
+  const gamesPerPage = 10;
+
+  const games = useSelector((state) => {
+    const gameList = Object.values(state.games);
+    const startIndex = (pageNumber - 1) * gamesPerPage;
+    return gameList.slice(startIndex, startIndex + gamesPerPage);
+  });
   const reviews = useSelector((state) => state.reviews);
   const reviewsArray = Object.values(reviews);
   
@@ -20,6 +27,7 @@ const HomePage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hoveredImage, setHoveredImage] = useState('');
   const [index, setIndex] = useState(0);
+  
 
 
 
@@ -67,6 +75,9 @@ const HomePage = () => {
   
   const game = games[index];
 
+  const handleNextPage = () => {
+    setPageNumber(pageNumber + 1);
+  };
 
   return (
     <>
@@ -76,14 +87,21 @@ const HomePage = () => {
         </div>
       ) : (
         <>
-          <img className="main-banner" src={mainBanner} onClick={mainImageClick} />
+          <img
+            className="main-banner"
+            src={mainBanner}
+            onClick={mainImageClick}
+          />
           <div className="games-page">
             <a className="cart-details-page" href="/cart">
               <button className="cart-button">CART</button>
             </a>
             <div className="games-container">
-              <button className="arrow-button" onClick={handleLeftButtonClick}>
-                <i class="fas fa-chevron-left"></i>
+              <button
+                className="arrow-button"
+                onClick={handleLeftButtonClick}
+              >
+                <i className="fas fa-chevron-left"></i>
               </button>
               <a href={`/games/${game.id}`} className="game-preview-container">
                 <div className="game-main-image-container">
@@ -103,10 +121,14 @@ const HomePage = () => {
                         src={image}
                         alt={game.title}
                         onMouseEnter={() =>
-                          document.querySelector(".game-main-image").src = image
+                          (document.querySelector(
+                            ".game-main-image"
+                          ).src = image)
                         }
                         onMouseLeave={() =>
-                          document.querySelector(".game-main-image").src = game.image
+                          (document.querySelector(
+                            ".game-main-image"
+                          ).src = game.image)
                         }
                       />
                     ))}
@@ -116,8 +138,11 @@ const HomePage = () => {
                   </div>
                 </div>
               </a>
-              <button className="arrow-button" onClick={handleRightButtonClick}>
-                <i class="fas fa-chevron-right"></i>
+              <button
+                className="arrow-button"
+                onClick={handleRightButtonClick}
+              >
+                <i className="fas fa-chevron-right"></i>
               </button>
             </div>
             <div className="index-squares">
@@ -132,31 +157,54 @@ const HomePage = () => {
             <div className="bottom-home-container">
               <div className="left-bar-home">
                 <div className="see-more">See more</div>
-              {games.map((game, index) => (
-                <NavLink
-                  to={`/games/${game.id}`}
-                  style={{ textDecoration: "none", color: "#fff", fontFamily: "Motiva Sans, sans-serif" }}
-                  className={`game-card ${index === activeIndex ? "active" : ""}`}
-                  onMouseEnter={() => setActiveIndex(index)}
-                >
-                  <img className="games-list-image" src={game.image} alt={game.title} />
-                  <h2 className="title-text">{game.title}</h2>
-                  <p id="home-price" className="title-text">{game.price}</p>
-                </NavLink> 
-              ))}
+                {games.map((game, index) => (
+                  <NavLink
+                    to={`/games/${game.id}`}
+                    style={{
+                      textDecoration: "none",
+                      color: "#fff",
+                      fontFamily: "Motiva Sans, sans-serif",
+                    }}
+                    className={`game-card ${
+                      index === activeIndex ? "active" : ""
+                    }`}
+                    onMouseEnter={() => setActiveIndex(index)}
+                  >
+                    <img
+                      className="games-list-image"
+                      src={game.image}
+                      alt={game.title}
+                    />
+                    <h2 className="title-text">{game.title}</h2>
+                    <p id="home-price" className="title-text">
+                      {game.price}
+                    </p>
+                  </NavLink>
+                ))}
+                {games.length === gamesPerPage && (
+                  <button className="next-page-button" onClick={handleNextPage}>
+                    Next Page
+                  </button>
+                )}
               </div>
               <div className="right-bar-home">
                 <div className="hover-container">
-                  <h3 className="title-hover">{games[activeIndex].title}</h3>
+                  <h3 className="title-hover">{games[activeIndex]?.title}</h3>
                   {/* <p>Overall user reviews:</p>
                   <span className="review-length">({reviewsArray.length})</span> */}
-                 {games[activeIndex]?.other_images && Array.isArray(games[activeIndex].other_images) && (
-                    <div className="other-images-container">
-                      {games[activeIndex].other_images.map((image, index) => (
-                        <img key={index} className="game-hover-images" src={image} alt={games[activeIndex].title} />
-                      ))}
-                    </div>
-                  )}
+                  {games[activeIndex]?.other_images &&
+                    Array.isArray(games[activeIndex].other_images) && (
+                      <div className="other-images-container">
+                        {games[activeIndex].other_images.map((image, index) => (
+                          <img
+                            key={index}
+                            className="game-hover-images"
+                            src={image}
+                            alt={games[activeIndex].title}
+                          />
+                        ))}
+                      </div>
+                    )}
                 </div>
               </div>
             </div>
