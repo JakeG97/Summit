@@ -38,7 +38,7 @@ function App() {
           <Route path="/library">
             <Library />
           </Route>
-          <Route path="/profile/:userId">
+          <Route path="/profile">
             <ProfilePage />
           </Route>
           <Route path="/create-game">
