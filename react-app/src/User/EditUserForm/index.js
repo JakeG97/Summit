@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { updateUserThunk, setUser } from "../../store/session";
-
+import { useHistory } from "react-router-dom";
 
 const EditUserForm = () => {
   const dispatch = useDispatch();
@@ -10,7 +9,7 @@ const EditUserForm = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const [username, setUsername] = useState(sessionUser.username);
   const [email, setEmail] = useState(sessionUser.email);
-  const [profilePicture, setProfilePicture] = useState("");
+  const [profilePicture, setProfilePicture] = useState(sessionUser.profile_picture);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,11 +29,6 @@ const EditUserForm = () => {
       .catch((error) => {
         console.error("Error updating user:", error);
       });
-  };
-
-  const handleProfilePictureChange = (e) => {
-    const file = e.target.files[0];
-    setProfilePicture(file);
   };
 
   return (
@@ -60,10 +54,10 @@ const EditUserForm = () => {
       <div>
         <label htmlFor="profilePicture">Profile Picture</label>
         <input
-          type="file"
+          type="text"
           id="profilePicture"
-          accept="image/*"
-          onChange={handleProfilePictureChange}
+          value={profilePicture}
+          onChange={(e) => setProfilePicture(e.target.value)}
         />
       </div>
       <button type="submit">Update User</button>
