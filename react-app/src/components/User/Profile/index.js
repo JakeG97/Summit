@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import DeleteUserModal from "../DeleteUser";
-import OpenModalButton from "../../components/OpenModalButton";
+import OpenModalButton from "../../../components/OpenModalButton";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllLibraryGamesThunk } from "../../store/library";
+import { getAllLibraryGamesThunk } from "../../../store/library";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../../context/Modal";
 
 import "./Profile.css";
 
@@ -15,6 +15,7 @@ const ProfilePage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const library = useSelector((state) => state.library);
   const isLoaded = useSelector((state) => state.library.isLoaded);
+  const backgroundImage = useSelector((state) => state.session.user.background_image);
 
   useEffect(() => {
     if (!isLoaded) {
@@ -44,7 +45,7 @@ const ProfilePage = () => {
   const gameCount = Object.values(library).length;
 
   return (
-    <div className="profile-page-container">
+    <div className="profile-page-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="profile-top-container">
         <div className="top-container-contents">
           <div className="profile-picture-container">

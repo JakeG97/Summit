@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'MotivaSansThin';
-    src: url('../../fonts/MotivaSansThin.ttf') format('truetype');
+    src: url('../../../fonts/MotivaSansThin.ttf') format('truetype');
 }
   
 
@@ -10,6 +10,7 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
+    /* background-image: url('../BackgroundImage/bb.jpg'); */
 }
 
 .profile-top-container {

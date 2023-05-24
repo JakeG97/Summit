@@ -12,8 +12,8 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import GameForm from "./components/GameForm";
 import EditGameForm from "./components/EditGameForm";
-import EditUserForm from "./User/EditUserForm";
-import ProfilePage from "./User/Profile";
+import EditUserForm from "./components/User/EditUserForm";
+import ProfilePage from "./components/User/Profile";
 
 function App() {
   const dispatch = useDispatch();

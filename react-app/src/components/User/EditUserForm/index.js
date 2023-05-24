@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserThunk, setUser } from "../../store/session";
+import { updateUserThunk, setUser } from "../../../store/session";
 import { useHistory } from "react-router-dom";
 
 const EditUserForm = () => {
@@ -10,6 +10,11 @@ const EditUserForm = () => {
   const [username, setUsername] = useState(sessionUser.username);
   const [email, setEmail] = useState(sessionUser.email);
   const [profilePicture, setProfilePicture] = useState(sessionUser.profile_picture);
+  const [backgroundImage, setBackgroundImage] = useState(sessionUser.background_image);
+
+  const handleBackgroundChange = (e) => {
+    setBackgroundImage(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +23,7 @@ const EditUserForm = () => {
       username,
       email,
       profile_picture: profilePicture,
+      background_image: backgroundImage,
     };
 
     dispatch(updateUserThunk(newUserData, sessionUser.id))
@@ -59,6 +65,14 @@ const EditUserForm = () => {
           value={profilePicture}
           onChange={(e) => setProfilePicture(e.target.value)}
         />
+      </div>
+      <div>
+        <label htmlFor="backgroundImage">Background Image</label>
+        <select id="backgroundImage" value={backgroundImage} onChange={handleBackgroundChange}>
+          <option value="">None</option>
+          <option value="/components/User/BackgroundImages/AC.jpeg">Image 1</option>
+          <option value="/components/User/BackgroundImages/bb.jpg">Image 2</option>
+        </select>
       </div>
       <button type="submit">Update User</button>
     </form>
