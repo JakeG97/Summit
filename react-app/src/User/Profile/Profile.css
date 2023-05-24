@@ -1,10 +1,15 @@
+@font-face {
+    font-family: 'MotivaSansThin';
+    src: url('../../fonts/MotivaSansThin.ttf') format('truetype');
+}
+  
+
 .profile-page-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100vw;
     height: 100vh;
-    /* background-color: black; */
 }
 
 .profile-top-container {
@@ -18,8 +23,8 @@
 }
 
 .top-container-contents {
-    margin-top: 3em;
-    margin-left: 3em;
+    margin-top: 2.2em;
+    margin-left: 2.2em;
     display: flex;
     gap: 2em;
     flex-direction: row;
@@ -41,11 +46,46 @@
     width: 404px;
     height: 30px;
     font-size: 24px;
-    font-weight: lighter;
+    font-family: 'MotivaSansThin', Arial, sans-serif;
 }
 
 .level {
     font-size: 24px;
+    font-family: 'MotivaSansThin', Arial, sans-serif;
+}
+
+.game-count {
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 50%;
+    border: solid #c02942 2px;
+    height: 28px;
+    width: 28px;
+    line-height: 26px;
+    text-align: center;
+    cursor: default;
+    margin-top: 2px;
+}
+
+.level-container {
+    margin-top: .5em;
+}
+
+.edit-profile-button {
+    color: #D3D3D3;
+    font-size: 15px;
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 2px;
+    display: block;
+    background-color: rgba(43, 52, 68);
+    margin-top: 6.5em;
+}
+
+.edit-profile-button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgb(53, 62, 78);
 }
 
 .profile-email {

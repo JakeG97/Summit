@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DeleteUserModal from "../DeleteUser";
 import OpenModalButton from "../../components/OpenModalButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllLibraryGamesThunk } from "../../store/library";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 
@@ -9,8 +10,16 @@ import "./Profile.css";
 
 const ProfilePage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const library = useSelector((state) => state.library);
+  const isLoaded = useSelector((state) => state.library.isLoaded);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      dispatch(getAllLibraryGamesThunk());
+    }
+  }, [dispatch, isLoaded]);
 
   if (!sessionUser) {
     history.push(`/home`);
@@ -53,7 +62,8 @@ const ProfilePage = () => {
             <div className="profile-email">{sessionUser.email}</div>
           </div>
           <div className="level-container">
-            <div className="level">Level {gameCount}</div>
+            <div className="level">Level <span className="game-count">{gameCount}</span></div>
+            <div className="edit-profile-button">Edit Profile</div>
           </div>
         </div>
       </div>
