@@ -12,6 +12,7 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import GameForm from "./components/GameForm";
 import EditGameForm from "./components/EditGameForm";
+import EditUserForm from "./User/EditUserForm";
 import ProfilePage from "./User/Profile";
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/games/:gameId">
             <GameDetails />
+          </Route>
+          <Route path="/profile/edit">
+            <EditUserForm />
           </Route>
           <Route path="/cart">
             <Cart />

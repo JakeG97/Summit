@@ -73,6 +73,7 @@
 
 .edit-profile-button {
     color: #D3D3D3;
+    text-decoration: none;
     font-size: 15px;
     line-height: 30px;
     padding: 0 10px;

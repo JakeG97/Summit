@@ -4,6 +4,7 @@ import OpenModalButton from "../../components/OpenModalButton";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllLibraryGamesThunk } from "../../store/library";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 
 import "./Profile.css";
@@ -63,7 +64,7 @@ const ProfilePage = () => {
           </div>
           <div className="level-container">
             <div className="level">Level <span className="game-count">{gameCount}</span></div>
-            <div className="edit-profile-button">Edit Profile</div>
+            <Link to="/profile/edit" className="edit-profile-button">Edit Profile</Link>
           </div>
         </div>
       </div>
