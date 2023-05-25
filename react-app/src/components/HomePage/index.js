@@ -75,15 +75,19 @@ const HomePage = () => {
   
   const game = games[index];
 
-  const handleNextPage = () => {
-    setPageNumber(pageNumber + 1);
-    setActiveIndex(index);
-  };  
+  const handleNewTrending = () => {
+    if (pageNumber === 1) {
+      setPageNumber(2);
+      setActiveIndex(0);
+      setIndex(0);
+    }
+  };
 
-  const handlePreviousPage = () => {
-    if (pageNumber > 1) {
-      setPageNumber(pageNumber - 1);
-      setActiveIndex(index);
+  const handleTopSellers = () => {
+    if (pageNumber === 2) {
+      setPageNumber(1);
+      setActiveIndex(0);
+      setIndex(0);
     }
   };
 
@@ -166,13 +170,13 @@ const HomePage = () => {
             <div className="bottom-home-container">
               <div className="left-bar-home">
               <div className="button-container">
-                <button className="new-trending-button" onClick={handleNextPage}>
+                <button className="new-trending-button" onClick={handleNewTrending}>
                   New & Trending
                 </button>
-                <button className="top-sellers-button" onClick={handlePreviousPage}>
+                <button className="top-sellers-button" onClick={handleTopSellers}>
                   Top Sellers
                 </button>
-                <div className="see-more" onClick={handleNextPage}>See more</div>
+                <div className="see-more" onClick={handleNewTrending}>See more</div>
               </div>
                 {games.map((game, index) => (
                   <NavLink
@@ -199,12 +203,12 @@ const HomePage = () => {
                   </NavLink>
                 ))}
                 {/* {pageNumber > 1 && (
-                  <button className="previous-page-button" onClick={handlePreviousPage}>
+                  <button className="previous-page-button" onClick={handleTopSellers}>
                     Previous Page
                   </button>
                 )}
                 {games.length === gamesPerPage && (
-                  <button className="next-page-button" onClick={handleNextPage}>
+                  <button className="next-page-button" onClick={handleNewTrending}>
                     Next Page
                   </button>
                 )} */}
