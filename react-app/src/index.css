@@ -12,3 +12,8 @@ body {
     margin: 0;
 }
 
+.modal-button {
+    background-color: transparent !important;
+    border: none !important;
+    color: white
+}

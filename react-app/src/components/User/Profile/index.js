@@ -38,6 +38,14 @@ const ProfilePage = () => {
         buttonText="Delete My Account"
         modalComponent={<DeleteUserModal />}
         className="delete-user-account-button"
+        style={{
+          backgroundColor: "transparent",
+          border: "none",
+          color: "inherit",
+          padding: 0,
+          fontSize: "inherit",
+          lineHeight: "inherit",
+        }}
       />
     </div>
   );
