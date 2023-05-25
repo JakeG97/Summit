@@ -27,12 +27,6 @@ const Library = () => {
     fetchLibrary();
   }, [dispatch]);
 
-  useEffect(() => {
-    if (gameToRemove && !library[gameToRemove.id]) {
-      setShowConfirmationPopup(false);
-    }
-  }, [library, gameToRemove]);
-
   const handleRemove = (game) => {
     setGameToRemove(game);
     setShowConfirmationPopup(true);
@@ -75,9 +69,6 @@ const Library = () => {
     );
   }
 
-  // Filter out games that are not present in the store
-  const filteredLibrary = Object.values(library).filter((game) => game);
-
   return (
     <>
       {!isLoaded ? (
@@ -87,7 +78,7 @@ const Library = () => {
       ) : (
         <div className="library">
           <h2 className="library-title">Library</h2>
-          {filteredLibrary.length === 0 ? (
+          {Object.values(library).length === 0 ? (
             <div className="no-games">
               <p>Looks like you don't have any games in your library yet...</p>
               <Link to="/">
@@ -95,7 +86,7 @@ const Library = () => {
               </Link>
             </div>
           ) : (
-            filteredLibrary.map((game) => (
+            Object.values(library).map((game) => (
               <div key={game.id}>
                 <div className="game-card">
                   <img
