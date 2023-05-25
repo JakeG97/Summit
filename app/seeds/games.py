@@ -1,8 +1,11 @@
-from app.models import db, Game, environment, SCHEMA
+from app.models import db, Game, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
 def seed_games():
+
+    owner3 = User.query.get(3)
+
     game_1 = Game(
         title = "Elden Ring",
         image = "https://images4.alphacoders.com/115/thumb-1920-1151249.jpg",
@@ -17,7 +20,8 @@ def seed_games():
             "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iQho0e5kgNvs/v0/-1x-1.jpg", 
             "https://npr.brightspotcdn.com/dims4/default/cb18431/2147483647/strip/true/crop/3813x2144+0+0/resize/1760x990!/format/webp/quality/90/?url=https%3A%2F%2Fmedia.npr.org%2Fassets%2Fimg%2F2022%2F02%2F23%2Feldenring_21_4k-25120461292d0c3a0414.08944875_wide-319af7cfd3c138293a179491fcfc58e15405f536.jpg",
             "https://media.wbur.org/wp/2022/12/ss_b70e156adf9e40aed24c10fb352b7813586e7290-1000x563.jpg",
-            "https://i.pcmag.com/imagery/articles/02s4c2TYdlF5USyDFRjb85x-1.fit_lim.size_1600x900.v1634568542.jpg"]
+            "https://i.pcmag.com/imagery/articles/02s4c2TYdlF5USyDFRjb85x-1.fit_lim.size_1600x900.v1634568542.jpg"],
+        owner=owner3 
     )
     game_2 = Game(
         title = "Red Dead Redemption 2",
@@ -33,7 +37,8 @@ def seed_games():
             "https://assets.rockpapershotgun.com/images/2019/10/Red-Dead-Redemption-2-4K-screen2-690x388.jpg", 
             "https://i.pcmag.com/imagery/articles/057aIMAOvxvccho9Qhc2ve3-1.fit_lim.size_1600x900.v1626288959.png",
             "https://www.pcgamesn.com/wp-content/sites/pcgamesn/2020/02/red-dead-redemption-2-red-dead-online-hackers-gta-online-snowing-mountains-580x334.jpg",
-            "https://s26162.pcdn.co/wp-content/uploads/2020/05/red-dead-redemption-2-xbox-game-pass.jpg"]
+            "https://s26162.pcdn.co/wp-content/uploads/2020/05/red-dead-redemption-2-xbox-game-pass.jpg"],
+        owner=owner3
     )
     game_3 = Game(
         title = "Counter-Strike: Global Offensive",
@@ -49,7 +54,8 @@ def seed_games():
             "https://www.nme.com/wp-content/uploads/2021/04/Counter-strike-esports-cheating-FBI-1392x884.jpg", 
             "https://www.club386.com/wp-content/uploads/2023/03/CS-GO-Screen.jpg",
             "https://www.nme.com/wp-content/uploads/2021/06/CS-GO-jumping-screenshot-1392x884.jpg",
-            "https://cdn.mos.cms.futurecdn.net/sw32BTYCJpX5JYZpVK6baj-1920-80.jpg.webp"]
+            "https://cdn.mos.cms.futurecdn.net/sw32BTYCJpX5JYZpVK6baj-1920-80.jpg.webp"],
+        owner=owner3
     )
     game_4 = Game(
         title = "Rainbow Six Seige",
@@ -65,7 +71,8 @@ def seed_games():
             "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/ss_7086825658bb256d2b8394f849ebf2abbee27f27.600x338.jpg", 
             "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/ss_cf69958ed0aa46ae6c9a15979c8d4f62f7fb694a.600x338.jpg",
             "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/ss_e3611e379f1b6778330c26fe98bc18e119ff2af9.600x338.jpg",
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/ss_acb266bd8b4deedbc72bf8fa506138700e408155.600x338.jpg"]
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/359550/ss_acb266bd8b4deedbc72bf8fa506138700e408155.600x338.jpg"],
+        owner=owner3
     )
     game_5 = Game(
         title = "Furi",
@@ -81,7 +88,8 @@ def seed_games():
             "https://cdn.cloudflare.steamstatic.com/steam/apps/423230/ss_c8e726dc261e4180224d5f0d459e609390594c8e.600x338.jpg", 
             "https://cdn.cloudflare.steamstatic.com/steam/apps/423230/ss_99a46681e5cbf7078be1e8cb22c7b885b6dcbc54.600x338.jpg",
             "https://cdn.cloudflare.steamstatic.com/steam/apps/423230/ss_6a3030e27c35fead4be7ed87e22d9c78e577bf4b.600x338.jpg",
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/423230/ss_8eb0947db73b59a2fb20e6a961362bc6eb909759.600x338.jpg"]
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/423230/ss_8eb0947db73b59a2fb20e6a961362bc6eb909759.600x338.jpg"],
+        owner=owner3
     )
     game_6 = Game(
         title = "DiRT Rally 2.0",
@@ -97,7 +105,8 @@ def seed_games():
             "https://cdn.cloudflare.steamstatic.com/steam/apps/690790/ss_d665b13a0e96e1dd39037a1c2983c250a694a2a6.600x338.jpg", 
             "https://cdn.cloudflare.steamstatic.com/steam/apps/690790/ss_02582d5f9a1fa7e8e06f4808b2e96ae1afa8450c.600x338.jpg",
             "https://cdn.cloudflare.steamstatic.com/steam/apps/690790/ss_ac43282741554b3e5f93e99c6637f66d45e864fc.600x338.jpg",
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/690790/ss_d33aab79aaa9d1e60f4783db9567313c571aa7fe.600x338.jpg"]
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/690790/ss_d33aab79aaa9d1e60f4783db9567313c571aa7fe.600x338.jpg"],
+        owner=owner3
     )
     game_7 = Game(
         title = "Devil May Cry 5",
@@ -113,7 +122,8 @@ def seed_games():
             "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/ss_4410bada2565843dae693b03ac3a50256ff5dd66.600x338.jpg", 
             "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/ss_4ce180ed8979a51c72de51f985e9e9ba13500508.600x338.jpg",
             "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/ss_e2be70565f94a7f6c392cccddce08c67f2f87612.600x338.jpg",
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/ss_d1e0b403f593f17ad195c5382a7788d71c6f406a.600x338.jpg"]
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/601150/ss_d1e0b403f593f17ad195c5382a7788d71c6f406a.600x338.jpg"],
+        owner=owner3
     )
     game_8 = Game(
         title = "Portal 2",
@@ -129,7 +139,8 @@ def seed_games():
             "https://cdn.cloudflare.steamstatic.com/steam/apps/620/ss_f3f6787d74739d3b2ec8a484b5c994b3d31ef325.600x338.jpg", 
             "https://cdn.cloudflare.steamstatic.com/steam/apps/620/ss_6a4f5afdaa98402de9cf0b59fed27bab3256a6f4.600x338.jpg",
             "https://cdn.cloudflare.steamstatic.com/steam/apps/620/ss_0cdd90fafc160b52d08b303d205f9fd4e83cf164.600x338.jpg",
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/620/ss_3d13161104a04603a0524536770c5f74626db4c0.600x338.jpg"]
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/620/ss_3d13161104a04603a0524536770c5f74626db4c0.600x338.jpg"],
+        owner=owner3
     )
     game_9 = Game(
         title = "Hunt: Showdown",
@@ -145,7 +156,8 @@ def seed_games():
             "https://cdn.cloudflare.steamstatic.com/steam/apps/594650/ss_ecccaab1143081ca96d8bf00d8b1c4d3d3291e64.600x338.jpg", 
             "https://cdn.cloudflare.steamstatic.com/steam/apps/594650/ss_36f6d959f75d1cca48c2a98d892d2697f6d4bde6.600x338.jpg",
             "https://cdn.cloudflare.steamstatic.com/steam/apps/594650/ss_f2a2d3445a568c0748aca08a44f45ceac4810cb4.600x338.jpg",
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/594650/ss_4697d48347130eaf48e03e92556252f6b8744428.600x338.jpg"]
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/594650/ss_4697d48347130eaf48e03e92556252f6b8744428.600x338.jpg"],
+        owner=owner3
     )
     game_10 = Game(
         title = "ARMORED CORE VI FIRES OF RUBICON",
@@ -161,7 +173,8 @@ def seed_games():
             "https://cdn.cloudflare.steamstatic.com/steam/apps/1888160/ss_f79bb13f5d9cee64c4aafc4f0c01af7f6f6816d5.600x338.jpg", 
             "https://cdn.cloudflare.steamstatic.com/steam/apps/1888160/ss_430ab6ad267888137775aa68eb5baffce165dbce.600x338.jpg",
             "https://cdn.cloudflare.steamstatic.com/steam/apps/1888160/ss_293bb8d15306d36527d9ecee75bff94280e390bf.600x338.jpg",
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/1888160/ss_8368f9fbb0f17b92e98bcb65464d088daca2e7aa.600x338.jpg"]
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/1888160/ss_8368f9fbb0f17b92e98bcb65464d088daca2e7aa.600x338.jpg"],
+        owner=owner3
     )
     
 
