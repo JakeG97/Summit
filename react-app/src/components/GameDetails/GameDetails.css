@@ -253,3 +253,14 @@
 #detail-cart {
     margin-right: 19em;
 }
+
+
+#game-update{
+    width: 150px;
+    margin-bottom: 2em;
+}
+
+#game-remove{
+    width: 150px;
+    margin-left: 4em;
+}

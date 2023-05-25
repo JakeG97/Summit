@@ -19,6 +19,7 @@ const GameDetails = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -59,9 +60,17 @@ const GameDetails = () => {
     history.push("/login");
   };
 
-  const handleDeleteGame = async () => {
+  const handleDeleteGame = () => {
+    setShowConfirmationPopup(true);
+  };
+
+  const handleConfirmRemove = async () => {
     await dispatch(deleteGameThunk(gameId));
     history.push("/");
+  };
+
+  const handleCancelRemove = () => {
+    setShowConfirmationPopup(false);
   };
 
   const handleUpdateGame = async () => {
@@ -179,10 +188,21 @@ const GameDetails = () => {
             </div>
             {sessionUser && game.owner && sessionUser.id === game.owner.id && (
               <div>
-                <button onClick={handleDeleteGame}>Delete Game</button>
-                <button onClick={handleUpdateGame}>Update Game</button>
+                <button id="game-update" className="remove-no" onClick={handleUpdateGame}>Update Game</button>
+                <button id="game-remove" className="remove-yes" onClick={handleDeleteGame}>Delete Game</button>
               </div>
             )}
+            {showConfirmationPopup && (
+            <div className="library-remove-form">
+              <div className="library-remove-container">
+                <p>Are you sure you want to delete this game from the store?</p>
+                <div className="uninstall-buttons">
+                  <button className="remove-yes" onClick={handleConfirmRemove}>Yes</button>
+                  <button className="remove-no" onClick={handleCancelRemove}>No</button>
+                </div>
+              </div>
+            </div>
+          )}
             {sessionUser ? (
               <>
                 <ReviewForm gameId={gameId} />
