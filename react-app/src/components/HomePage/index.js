@@ -27,6 +27,8 @@ const HomePage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hoveredImage, setHoveredImage] = useState('');
   const [index, setIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState('topSellers');
+
   
 
 
@@ -76,20 +78,24 @@ const HomePage = () => {
   const game = games[index];
 
   const handleNewTrending = () => {
-    if (pageNumber === 1) {
+    if (pageNumber === 1 && games.length > 0) {
+      setActiveTab('newTrending');
       setPageNumber(2);
       setActiveIndex(0);
       setIndex(0);
     }
-  };
-
+  };  
+  
+  
   const handleTopSellers = () => {
-    if (pageNumber === 2) {
+    setActiveTab('topSellers');
+    if (pageNumber === 2 && games.length > 0) {
       setPageNumber(1);
       setActiveIndex(0);
       setIndex(0);
     }
   };
+  
 
   return (
     <>
@@ -166,16 +172,18 @@ const HomePage = () => {
                 ></div>
               ))}
             </div>
+                <div className="tab-container">
+                  <button className={`new-trending-button ${activeTab === 'newTrending' ? 'active' : ''}`} onClick={handleNewTrending}>
+                    New & Trending
+                  </button>
+                  <button className={`top-sellers-button ${activeTab === 'topSellers' ? 'active' : ''}`} onClick={handleTopSellers}>
+                    Top Sellers
+                  </button>
+                </div>
             </div>
             <div className="bottom-home-container">
               <div className="left-bar-home">
-              <div className="button-container">
-                <button className="new-trending-button" onClick={handleNewTrending}>
-                  New & Trending
-                </button>
-                <button className="top-sellers-button" onClick={handleTopSellers}>
-                  Top Sellers
-                </button>
+              <div className="home-button-container">
                 <div className="see-more" onClick={handleNewTrending}>See more</div>
               </div>
                 {games.map((game, index) => (
