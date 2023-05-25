@@ -14,7 +14,7 @@ const EditUserForm = () => {
 
   const handleBackgroundChange = (e) => {
     setBackgroundImage(e.target.value);
-  };
+  };  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,14 +66,14 @@ const EditUserForm = () => {
           onChange={(e) => setProfilePicture(e.target.value)}
         />
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="backgroundImage">Background Image</label>
         <select id="backgroundImage" value={backgroundImage} onChange={handleBackgroundChange}>
           <option value="">None</option>
           <option value="/components/User/BackgroundImages/AC.jpeg">Image 1</option>
           <option value="/components/User/BackgroundImages/bb.jpg">Image 2</option>
         </select>
-      </div>
+      </div> */}
       <button type="submit">Update User</button>
     </form>
   );

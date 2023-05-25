@@ -9,13 +9,17 @@
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    height: 100vh;
-    /* background-image: url('../BackgroundImage/bb.jpg'); */
+    height: 550px;
+    background-image: url('../BackgroundImage/pong.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .profile-top-container {
     width: 976px;
-    height: 100vh;
+    height: 250px;
+    margin-top: 8em;
     margin-right: 1em;
     background: radial-gradient( farthest-side at top right, rgba(109, 38, 44, 0.301), transparent 500px ), radial-gradient( farthest-corner at top left, rgba(50, 255, 193, 0.103), transparent 600px ), radial-gradient( farthest-corner at bottom right, rgba(109, 38, 44, 0), transparent 500px ), radial-gradient( farthest-corner at bottom left, rgba(50, 255, 193, 0.103), transparent 600px );
     background-color: rgba(34, 35, 48, 0.93);
@@ -101,14 +105,16 @@
     border: none;
     color: #ffffff;
     padding: 1em;
+    background: linear-gradient(90deg, #e06463 0%, #542429 100%);
 }
   
 .no-delete-button {
     border-radius: 1em;
     border: none;
-    color: #ffffff;
+    /* color: #ffffff; */
     padding: 1em;
     margin-top: 2em;
+    background: linear-gradient(90deg, #e06463 0%, #542429 100%);
 }
 
   
@@ -116,5 +122,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
   

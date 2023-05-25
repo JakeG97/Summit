@@ -45,7 +45,7 @@ const ProfilePage = () => {
   const gameCount = Object.values(library).length;
 
   return (
-    <div className="profile-page-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="profile-page-container">
       <div className="profile-top-container">
         <div className="top-container-contents">
           <div className="profile-picture-container">
