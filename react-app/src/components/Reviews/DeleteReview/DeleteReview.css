@@ -1,0 +1,16 @@
+#review-yes{
+    font-size: 10px;
+    height: 17px;
+    width: 50px;
+    margin-right: 1em;
+}
+
+#review-no{
+    font-size: 10px;
+    height: 17px;
+    width: 50px;
+}
+
+.delete-review-buttons{
+    margin-bottom: 1em;
+}

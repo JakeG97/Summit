@@ -1,9 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { getAllReviewsThunk, deleteReviewThunk, updateReviewThunk, updateUser, getUserByIdThunk } from "../../store/review";
+import { getAllReviewsThunk, updateReviewThunk } from "../../store/review";
 import ReviewForm from "../ReviewForm";
 import './Reviews.css'
 import { useParams } from "react-router-dom";
+import { useModal } from "../../context/Modal";
+import DeleteReviewModal from "./DeleteReview";
+
 
 const Review = ({ review }) => {
   const dispatch = useDispatch();
@@ -13,12 +16,13 @@ const Review = ({ review }) => {
   const [description, setDescription] = useState(review.description);
   const [activeButton, setActiveButton] = useState(null);
   const [reviewer, setReviewer] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const { gameId } = useParams();
 
   const handleDelete = () => {
-    dispatch(deleteReviewThunk(review.id));
+    setShowModal(true);
   };
-
+  
   const handleEdit = (e) => {
     e.preventDefault();
     dispatch(updateReviewThunk(review.id, { recommended, description }));
@@ -66,8 +70,13 @@ const Review = ({ review }) => {
             <p className="review-description">{review.description}</p>
             {review?.reviewer_id === sessionUser?.id && (
               <>
-                <button className="review-buttons" onClick={handleDelete}>Delete</button>
-                <button className="review-buttons" onClick={() => setShowEditForm(true)}>
+                <button className="review-buttons" onClick={handleDelete}>
+                  Delete
+                </button>
+                <button
+                  className="review-buttons"
+                  onClick={() => setShowEditForm(true)}
+                >
                   <i className="fas fa-pen-square"></i> Edit Review
                 </button>
               </>
@@ -76,47 +85,47 @@ const Review = ({ review }) => {
           {showEditForm && (
             <form onSubmit={handleEdit}>
               <div className="edit-form-container">
-                  <p>Update your review: </p>
-                  <textarea
-                    className="review-edit-textarea"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    rows={5}
-                    maxLength={1000}
-                  />
+                <p>Update your review:</p>
+                <textarea
+                  className="review-edit-textarea"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  rows={5}
+                  maxLength={1000}
+                />
               </div>
               <div className="edit-thumb-buttons">
-              <button
-                id="yes-button"
-                type="button"
-                className={
-                  recommended
-                  ? "active thumb-button"
-                  : "hover thumb-button"
-                }
-                onClick={() => handleRecommendationClick(true)}
-              >
-                <i className="fas fa-thumbs-up fa-flip-horizontal"></i>
-                {" "}
-                Yes
-              </button>
-              <button
-                id="no-button"
-                type="button"
-                className={
-                  !recommended
-                  ? "active thumb-button"
-                  : "hover thumb-button"
-                }
-                onClick={() => handleRecommendationClick(false)}
-              >
-                <i className="fas fa-thumbs-down fa-flip-horizontal"></i>
-                {" "}
-                No
-              </button>
-              <button className="edit-review-button" type="submit">Update Review</button>
-            </div>
+                <button
+                  id="yes-button"
+                  type="button"
+                  className={
+                    recommended ? "active thumb-button" : "hover thumb-button"
+                  }
+                  onClick={() => handleRecommendationClick(true)}
+                >
+                  <i className="fas fa-thumbs-up fa-flip-horizontal"></i> Yes
+                </button>
+                <button
+                  id="no-button"
+                  type="button"
+                  className={
+                    !recommended ? "active thumb-button" : "hover thumb-button"
+                  }
+                  onClick={() => handleRecommendationClick(false)}
+                >
+                  <i className="fas fa-thumbs-down fa-flip-horizontal"></i> No
+                </button>
+                <button className="edit-review-button" type="submit">
+                  Update Review
+                </button>
+              </div>
             </form>
+          )}
+          {showModal && (
+            <DeleteReviewModal
+              reviewId={review.id}
+              onClose={() => setShowModal(false)}
+            />
           )}
         </div>
       </div>
