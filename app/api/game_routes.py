@@ -50,7 +50,8 @@ def create_game():
             developer=form.developer.data,
             publisher=form.publisher.data,
             banner_image=form.banner_image.data,
-            other_images=other_images
+            other_images=other_images,
+            owner_id=current_user.id
         )
 
         db.session.add(new_game)

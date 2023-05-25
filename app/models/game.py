@@ -47,6 +47,12 @@ class Game(db.Model):
             'publisher': self.publisher,
             'banner_image': self.banner_image,
             'other_images': self.other_images,
+            'owner': {
+                'id': self.owner.id,
+                'username': self.owner.username,
+                'email': self.owner.email,
+                'profile_picture': self.owner.profile_picture
+            }
         }
 
     
