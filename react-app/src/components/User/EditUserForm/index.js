@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk, setUser } from "../../../store/session";
 import { useHistory } from "react-router-dom";
+import './EditUserForm.css'
 
 const EditUserForm = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,8 @@ const EditUserForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="edit-user-page">
+    <form id="edit-user-form" className="login-form" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="username">Username</label>
         <input
@@ -76,6 +78,7 @@ const EditUserForm = () => {
       </div> */}
       <button type="submit">Update User</button>
     </form>
+    </div>
   );
 };
 
