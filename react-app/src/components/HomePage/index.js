@@ -80,6 +80,13 @@ const HomePage = () => {
     setActiveIndex(index);
   };  
 
+  const handlePreviousPage = () => {
+    if (pageNumber > 1) {
+      setPageNumber(pageNumber - 1);
+      setActiveIndex(index);
+    }
+  };
+
   return (
     <>
       {!isLoaded ? (
@@ -155,9 +162,18 @@ const HomePage = () => {
                 ></div>
               ))}
             </div>
+            </div>
             <div className="bottom-home-container">
               <div className="left-bar-home">
+              <div className="button-container">
+                <button className="new-trending-button" onClick={handleNextPage}>
+                  New & Trending
+                </button>
+                <button className="top-sellers-button" onClick={handlePreviousPage}>
+                  Top Sellers
+                </button>
                 <div className="see-more" onClick={handleNextPage}>See more</div>
+              </div>
                 {games.map((game, index) => (
                   <NavLink
                     to={`/games/${game.id}`}
@@ -182,11 +198,16 @@ const HomePage = () => {
                     </p>
                   </NavLink>
                 ))}
+                {/* {pageNumber > 1 && (
+                  <button className="previous-page-button" onClick={handlePreviousPage}>
+                    Previous Page
+                  </button>
+                )}
                 {games.length === gamesPerPage && (
                   <button className="next-page-button" onClick={handleNextPage}>
                     Next Page
                   </button>
-                )}
+                )} */}
               </div>
               <div className="right-bar-home">
                 <div className="hover-container">
@@ -209,7 +230,6 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-          </div>
         </>
       )}
     </>

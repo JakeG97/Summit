@@ -46,12 +46,12 @@ function ProfileButton({ user }) {
         {user ? (
           <div className="dropdown-list">
             <ul>
-            <NavLink to="/library" className="dropdown-text">
+            <NavLink to="/profile" className="dropdown-text">
               View Profile
             </NavLink>
             </ul>
             <ul>
-            <NavLink to="/library" className="dropdown-text">
+            <NavLink to="/profile" className="dropdown-text">
               Account Details
             </NavLink>
             </ul>
