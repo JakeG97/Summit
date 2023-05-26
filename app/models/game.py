@@ -19,7 +19,10 @@ class Game(db.Model):
     banner_image = db.Column(db.String(255))
     other_images = db.Column(db.JSON)
 
-
+    
+    # * Relationship to owner (User)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    owner = db.relationship('User', back_populates='games')
     
     # * Relationship to reviews
     reviews = db.relationship('Review', back_populates='game')
@@ -44,6 +47,12 @@ class Game(db.Model):
             'publisher': self.publisher,
             'banner_image': self.banner_image,
             'other_images': self.other_images,
+            'owner': {
+                'id': self.owner.id,
+                'username': self.owner.username,
+                'email': self.owner.email,
+                'profile_picture': self.owner.profile_picture
+            }
         }
 
     

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk, setUser } from "../../../store/session";
 import { useHistory } from "react-router-dom";
+import './EditUserForm.css'
 
 const EditUserForm = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const EditUserForm = () => {
 
   const handleBackgroundChange = (e) => {
     setBackgroundImage(e.target.value);
-  };
+  };  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +39,8 @@ const EditUserForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="edit-user-page">
+    <form id="edit-user-form" className="login-form" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="username">Username</label>
         <input
@@ -66,16 +68,17 @@ const EditUserForm = () => {
           onChange={(e) => setProfilePicture(e.target.value)}
         />
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="backgroundImage">Background Image</label>
         <select id="backgroundImage" value={backgroundImage} onChange={handleBackgroundChange}>
           <option value="">None</option>
           <option value="/components/User/BackgroundImages/AC.jpeg">Image 1</option>
           <option value="/components/User/BackgroundImages/bb.jpg">Image 2</option>
         </select>
-      </div>
+      </div> */}
       <button type="submit">Update User</button>
     </form>
+    </div>
   );
 };
 

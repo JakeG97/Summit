@@ -15,6 +15,10 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_picture = db.Column(db.String)
 
+
+    # * Relationship to games
+    games = db.relationship('Game', back_populates='owner')
+
     # * Relationship to reviews
     reviews = db.relationship('Review', back_populates='reviewer')
 

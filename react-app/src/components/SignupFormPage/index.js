@@ -51,7 +51,7 @@ function SignupFormPage() {
     }
   
     if (password === confirmPassword) {
-      const data = await dispatch(signUp(username, email, profilePicture, password));
+      const data = await dispatch(signUp(username, email, password, profilePicture));
       if (data) {
         setErrors(data);
       }

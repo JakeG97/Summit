@@ -1,0 +1,28 @@
+#remove-account {
+    margin-bottom: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+    padding: 1em;
+}
+
+.confirm-delete{
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+}
+
+.remove-account-text{
+    padding: 0;
+    margin-bottom: 2em;
+}
+
+.remove-user-buttons {
+    margin-top: 3em;
+    margin-left: 4em;
+}
+
+#user-remove-yes {
+    margin-right: 1em;
+}

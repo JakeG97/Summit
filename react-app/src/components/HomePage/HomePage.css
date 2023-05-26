@@ -4,7 +4,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    min-height: 170vh;
 }
 
 .main-banner {
@@ -31,9 +30,16 @@
     margin-right: 2rem;
 }
 
+.home-button-container {
+    margin-top: 1em;
+}
+
 .bottom-home-container {
     display: flex;
-    margin-top: 10vh;
+    /* align-items: center; */
+    justify-content: center;
+    min-height: 865px;
+    background: linear-gradient( to bottom, rgba(42,71,94,1.0) 5%, rgba(42,71,94,0.0) 70%);
 }
 
 .game-other-images-container {
@@ -105,6 +111,7 @@
     width: 600px;
     /* margin-top: 1em; */
     margin-right: 20px;
+    margin-bottom: 2em;
 }
 
 .right-bar-home {
@@ -120,8 +127,8 @@
     padding: 10px;
     background-color: #a4c8de;
     color: #181f26;
-    transition: 0.5s ease-in-out;
     height: 782px;
+    margin-top: 1em;
 }
 
 
@@ -251,22 +258,22 @@
     justify-content: center;
     margin-top: 20px;
     margin-right: 1em;
-  }
+}
   
-  .index-square {
+.index-square {
     background-color: #4d657b;
     border-radius: 2px;
     height: 9px;
     margin: 15px 2px;
     width: 15px;
     cursor: pointer;
-  }
+}
   
-  .index-square.active {
+.index-square.active {
     background-color: #7a8b9c;
-  }
+}
 
-  .see-more {
+.see-more {
     align-items: center;
     background-color: rgba(0,0,0,.2);
     box-sizing: border-box;
@@ -279,18 +286,39 @@
     width: 100%;
     margin-left: 0.34em;
     margin-bottom: 0;
-  }
+}
 
   .see-more:hover {
     cursor: pointer;
     text-decoration: underline;
-  }
+}
+
+.top-sellers-button,
+.new-trending-button {
+    background-color: transparent;
+    border: none;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    color: white;
+    font-size: 14px;
+    padding: 8px;
+}
+
+.tab-container{
+    margin-top: 2em;
+    margin-right: 47em;
+}
+
+.top-sellers-button.active,
+.new-trending-button.active {
+    background-color: #2a475e;
+}
 
 
 @media screen and (min-width: 1000px) {
-    .games-page {
+    /* .games-page {
       height: 100vh;
-    }
+    } */
   
     .games-container {
       max-width: 940px;

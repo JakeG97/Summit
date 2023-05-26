@@ -88,11 +88,9 @@
     font-family: 'Motiva Sans 500', sans-serif;
     font-size: 18px;
     margin: 0 auto;
-}
-
-.remove-yes {
     cursor: pointer;
 }
+
 
 .remove-no {
     background: linear-gradient(90deg, #06BFFF 0%, #2D73FF 100%);
@@ -106,6 +104,15 @@
     font-size: 18px;
     margin: 0 auto;
 }
+
+.remove-yes:hover{
+    background: linear-gradient(90deg, #f38382 0%, #8d1d1b 100%);
+}
+
+.remove-no:hover {
+    background: linear-gradient(90deg, #06BFFF 30%, #2D73FF 100%);
+}
+
 
 .uninstall-buttons {
     display: flex;

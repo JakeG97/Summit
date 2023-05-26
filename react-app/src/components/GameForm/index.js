@@ -18,6 +18,7 @@ const GameForm = () => {
   const [publisher, setPublisher] = useState("");
   const [bannerImage, setBannerImage] = useState("");
   const [otherImages, setOtherImages] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -62,24 +63,47 @@ const GameForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  
+    let errors = [];
+  
+    if (title.length < 3 || title.length > 40) {
+      errors.push("Title must be between 3 and 40 characters");
+    }
+  
+    const urlRegex = /\.(jpg|jpeg|png)$/;
+    if (!urlRegex.test(image)) {
+      errors.push("Image URL must end with 'jpg', 'jpeg', or 'png'");
+    }
+  
+    const otherImageUrls = otherImages.filter(Boolean);
+    if (otherImageUrls.length > 4) {
+      errors.push("Maximum 4 URLs are allowed for other images");
+    }
+  
+    if (errors.length > 0) {
+      setErrors(errors);
+      return;
+    }
+  
+    const finalPrice = price.trim() === "" ? "Free To Play" : price.trim();
+  
     dispatch(
       createGameThunk({
         title,
         image,
-        price,
+        price: finalPrice,
         release_date: releaseDate,
         short_description: shortDescription,
         full_description: fullDescription,
         developer,
         publisher,
         banner_image: bannerImage,
-        other_images: otherImages,
+        other_images: otherImageUrls,
       })
     );
-
-    // const gameId = newGame.id;
-    history.push(`/`);
-
+  
+    history.push("/");
+  
     setTitle("");
     setImage("");
     setPrice("");
@@ -90,12 +114,19 @@ const GameForm = () => {
     setPublisher("");
     setBannerImage("");
     setOtherImages([]);
+    setErrors([]);
   };
-
   
 
   return (
     <div className="game-form">
+      {errors.length > 0 && (
+        <ul className="game-form-errors">
+          {errors.map((error, index) => (
+            <li key={index}>{error}</li>
+          ))}
+        </ul>
+      )}
       <h3 className="game-form-title">Create your new game</h3>
       <div className="game-form-container">
         <form id="gameform" className="login-form" onSubmit={handleSubmit}>
@@ -112,11 +143,11 @@ const GameForm = () => {
           <div className="form-row">
             <div className="form-column">
               <label className="login-form-label">Price:</label>
-              <input type="text" value={price} onChange={handlePriceChange} />
+              <input type="text" value={price} onChange={handlePriceChange} placeholder="Must include $ (Leave empty if it's Free To Play)" />
             </div>
             <div className="form-column">
               <label className="login-form-label">Release Date:</label>
-              <input type="text" value={releaseDate} onChange={handleReleaseDateChange} />
+              <input type="text" value={releaseDate} onChange={handleReleaseDateChange} placeholder="Month D,Y (ie. Feb 20, 2020)" />
             </div>
           </div>
           <div className="form-row">

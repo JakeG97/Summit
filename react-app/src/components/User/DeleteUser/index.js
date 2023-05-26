@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { deleteUserThunk, logout } from "../../../store/session"
+import "./DeleteUser.css"
 
 function DeleteUserModal() {
   const history = useHistory();
@@ -25,14 +26,16 @@ function DeleteUserModal() {
 
   return (
     <div>
-      <h1 className="title-text">Confirm Delete</h1>
-      <h2 className="title-text">Are you sure you want to delete yourself? </h2>
-      <button
-        className="yes-delete-yeet"
-        onClick={handleDeleteUser}
-      >{`Yes`}</button>
-
-      <button className="no-delete" onClick={handleKeepUser}>{`No`}</button>
+      <div id="remove-account" className="library-remove-container">
+        <div className="remove-account-text">
+          <p className="confirm-delete">Confirm Delete</p>
+          <p className="title-text">Are you sure you want to delete yourself? </p>
+        <div className="remove-user-buttons">
+          <button id="user-remove-yes" className="remove-yes" onClick={handleDeleteUser}>{`Yes`}</button>
+          <button className="remove-no" onClick={handleKeepUser}>{`No`}</button>
+        </div>
+        </div>
+      </div>
     </div>
   );
 }
