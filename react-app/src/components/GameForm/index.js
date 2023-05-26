@@ -75,10 +75,6 @@ const GameForm = () => {
       errors.push("Image URL must end with 'jpg', 'jpeg', or 'png'");
     }
   
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(releaseDate)) {
-      errors.push("Release date must be formatted as 'YYYY-MM-DD'");
-    }
-  
     const otherImageUrls = otherImages.filter(Boolean);
     if (otherImageUrls.length > 4) {
       errors.push("Maximum 4 URLs are allowed for other images");
@@ -147,11 +143,11 @@ const GameForm = () => {
           <div className="form-row">
             <div className="form-column">
               <label className="login-form-label">Price:</label>
-              <input type="text" value={price} onChange={handlePriceChange} placeholder="Must include (Leave empty if it's Free To Play)" />
+              <input type="text" value={price} onChange={handlePriceChange} placeholder="Must include $ (Leave empty if it's Free To Play)" />
             </div>
             <div className="form-column">
               <label className="login-form-label">Release Date:</label>
-              <input type="text" value={releaseDate} onChange={handleReleaseDateChange} placeholder="YYYY-MM-DD" />
+              <input type="text" value={releaseDate} onChange={handleReleaseDateChange} placeholder="Month D,Y (ie. Feb 20, 2020)" />
             </div>
           </div>
           <div className="form-row">

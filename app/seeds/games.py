@@ -4,6 +4,8 @@ from sqlalchemy.sql import text
 
 def seed_games():
 
+    owner1 = User.query.get(1)
+    owner2 = User.query.get(2)
     owner3 = User.query.get(3)
 
     game_1 = Game(
@@ -176,6 +178,41 @@ def seed_games():
             "https://cdn.cloudflare.steamstatic.com/steam/apps/1888160/ss_8368f9fbb0f17b92e98bcb65464d088daca2e7aa.600x338.jpg"],
         owner=owner3
     )
+    game_11 = Game(
+        title = "Sekiro™: Shadows Die Twice - GOTY Edition",
+        image = "https://wallpapercave.com/wp/wp3925307.jpg",
+        price = "$59.99",
+        release_date = "Mar 21, 2019",
+        short_description = "Game of the Year - The Game Awards 2019 Best Action Game of 2019 - IGN Carve your own clever path to vengeance in the award winning adventure from developer FromSoftware, creators of Bloodborne and the Dark Souls series. Take Revenge. Restore Your Honor. Kill Ingeniously.",
+        full_description = "Game of the Year - The Game Awards 2019\nBest Action Game of 2019 - IGN\nOver 50 awards and nominations\n\nCarve your own clever path to vengeance in the critically acclaimed adventure from developer FromSoftware, creators of the Dark Souls series.\n\nIn Sekiro™: Shadows Die Twice you are the 'one-armed wolf', a disgraced and disfigured warrior rescued from the brink of death. Bound to protect a young lord who is the descendant of an ancient bloodline, you become the target of many vicious enemies, including the dangerous Ashina clan. When the young lord is captured, nothing will stop you on a perilous quest to regain your honor, not even death itself.\n\nExplore late 1500s Sengoku Japan, a brutal period of constant life and death conflict, as you come face to face with larger than life foes in a dark and twisted world. Unleash an arsenal of deadly prosthetic tools and powerful ninja abilities while you blend stealth, vertical traversal, and visceral head to head combat in a bloody confrontation.\n\nTake Revenge. Restore Your Honor. Kill Ingeniously.",
+        developer = "FromSoftware Inc.",
+        publisher = "FromSoftware Inc, Bandai Namco Entertainment",
+        banner_image = "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/header.jpg",
+        other_images=[
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/ss_0f7b0f8ed9ffc49aba26f9328caa9a1d59ad60f0.600x338.jpg",
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/ss_2685dd844a2a523b6c7ec207d46a538db6a908cd.600x338.jpg",
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/ss_15f0e9982621aed44900215ad283811af0779b1d.600x338.jpg",
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/814380/ss_1e6f5540866a5564d65df915c22fe1e57e336a6f.600x338.jpg"],
+        owner=owner3
+    )
+    game_12 = Game(
+        title = "Hades II",
+        image = "https://venturebeat.com/wp-content/uploads/2022/12/hades2.jpg",
+        price = "$29.99",
+        release_date = "Dec 31, 2023",
+        short_description = "Battle beyond the Underworld using dark sorcery to take on the Titan of Time in this bewitching sequel to the award-winning rogue-like dungeon crawler.",
+        full_description = "The first-ever sequel from Supergiant Games builds on the best aspects of the original god-like rogue-like dungeon crawler in an all-new, action-packed, endlessly replayable experience rooted in the Underworld of Greek myth and its deep connections to the dawn of witchcraft.\n\nBATTLE BEYOND THE UNDERWORLD\nAs the immortal Princess of the Underworld, you'll explore a bigger, deeper mythic world, vanquishing the forces of the Titan of Time with the full might of Olympus behind you, in a sweeping story that continually unfolds through your every setback and accomplishment.\n\nMASTER WITCHCRAFT AND DARK SORCERY\nInfuse your legendary weapons of Night with ancient magick, so that none may stand in your way. Become stronger still with powerful Boons from more than a dozen Olympian gods, from Apollo to Zeus. There are nearly limitless ways to build your abilities.",
+        developer = "Supergiant Games",
+        publisher = "Supergiant Games",
+        banner_image = "https://cdn.cloudflare.steamstatic.com/steam/apps/1145350/header.jpg",
+        other_images=[
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/1145350/ss_7076c6458f45cff9fd4af5fd8ef7262ac405e631.600x338.jpg",
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/1145350/ss_56850756d45b99543117c86e1a1eefb049c26f07.600x338.jpg",
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/1145350/ss_bcc617bb9bf3d078c9d4fb4afc4e7e8b0b7a6d50.600x338.jpg",
+            "https://cdn.cloudflare.steamstatic.com/steam/apps/1145350/ss_226e4cf7ce0762fbee16683b17b5dc3d7724f325.600x338.jpg"],
+        owner=owner1
+    )
+    
     
 
     db.session.add(game_1)
@@ -188,6 +225,8 @@ def seed_games():
     db.session.add(game_8)
     db.session.add(game_9)
     db.session.add(game_10)
+    db.session.add(game_11)
+    db.session.add(game_12)
 
     db.session.commit()
 

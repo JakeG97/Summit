@@ -88,6 +88,7 @@ export const signUp = (username, email, password, profile_picture) => async (dis
       profile_picture,
     }),
   });
+  
     if (response.ok) {
       const data = await response.json();
       dispatch(setUser(data));
