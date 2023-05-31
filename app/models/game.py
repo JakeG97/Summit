@@ -21,7 +21,7 @@ class Game(db.Model):
 
     
     # * Relationship to owner (User)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     owner = db.relationship('User', back_populates='games')
     
     # * Relationship to reviews
