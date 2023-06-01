@@ -1,11 +1,3 @@
-// const normalizer = (data) => {
-//   const obj = {};
-//   data.forEach((item) => {
-//     obj[item.id] = item;
-//   });
-// return obj;
-// };
-
 const LOAD_CART = "cart_games/LOAD_CART";
 const ADD_TO_CART = "cart_games/ADD_TO_CART"
 const CLEAR_CART = "cart_games/CLEAR_CART";
@@ -31,23 +23,7 @@ type: REMOVE_FROM_CART,
 payload: gameId
 })
 
-const showError = (errorMessage) => {
-  return {
-    type: 'SHOW_ERROR',
-    payload: errorMessage,
-  };
-};
 
-
-// export const getAllCartThunk = () => async (dispatch) => {
-//   const response = await fetch(`/api/cart`);
-
-//   if (response.ok) {
-//       const allCartData = await response.json();
-//       const normalizedCartData = normalizer(allCartData);
-//       dispatch(loadCartGames(normalizedCartData));
-//   }
-// };
 export const getAllCartThunk = () => async (dispatch) => {
   const response = await fetch(`/api/cart`);
 
@@ -61,23 +37,6 @@ export const getAllCartThunk = () => async (dispatch) => {
   }
 };
 
-// export const addToCartThunk = (gameId) => async (dispatch) => {
-//   const response = await fetch('/api/cart', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ game_id: gameId }),
-//   });
-
-//   if (response.ok) {
-//       const newCartGame = await response.json();
-//       dispatch(addGameToCart(newCartGame));
-//   } else {
-//     const error = await response.json();
-//     dispatch(showError(error.message));
-//   }
-// };
 
 export const addToCartThunk = (gameId) => async (dispatch) => {
   const response = await fetch('/api/cart', {
