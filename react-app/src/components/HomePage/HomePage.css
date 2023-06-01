@@ -315,8 +315,8 @@
 }
 
 .search-result {
-    background: #202d39;
     background: rgba(0, 0, 0, 0.2);
+    background-color: #202d39;
     display: flex;
     position: relative;
     flex-direction: row;
@@ -325,12 +325,43 @@
     height: 69px;
     margin-left: 4px;
     margin-right: 4px;
-    margin-bottom: 8px;
     cursor: pointer;
+    gap: 1em;
+}
+
+.search-result:hover {
+    background-color: #CCD8E3;
+    color: #202d39
+}
+
+.search-results {
+    margin-left: 4.98em;
+    position: absolute;
+}
+
+
+
+.search-input {
+    margin-left: 57.3em;
+    color: #0e1c25;
+    border: none;
+    font-size: 14px;
+    margin-top: 1px;
+    font-weight: 300;
+    font-style: italic;
+    background-color: #305d8a;
+    outline: none;
+    line-height: 26px;
+    padding-left: 1em;
+     border: 1px solid transparent;
+}
+
+.search-input:hover {
+    border: 1px solid #1A9FFF;
 }
 
 .game-search-image {
-    width: 180px;
+    min-width: 180px;
     height: 50px;
 }
 

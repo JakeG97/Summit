@@ -158,17 +158,17 @@ const HomePage = () => {
             </a>
             <input
               type="text"
-              placeholder="Search for a game..."
+              placeholder="search"
               value={searchInput}
               onClick={handleSearchInputClick}
               onChange={handleSearchInputChange}
               className="search-input"
             />
             <div className="search-container" ref={searchContainerRef}>
-            {isInputClicked && (
+              {isInputClicked && (
                 <div className="search-results">
-                  {searchInput.trim() !== '' ? (
-                    filteredGames.map((game) => (
+                  {searchInput.trim() !== "" ? (
+                    filteredGames.slice(0, 5).map((game) => (
                       <div
                         key={game.id}
                         className="search-result"
@@ -183,7 +183,7 @@ const HomePage = () => {
                       </div>
                     ))
                   ) : (
-                    games.map((game) => (
+                    games.slice(0, 5).map((game) => (
                       <div
                         key={game.id}
                         className="search-result"
@@ -199,7 +199,7 @@ const HomePage = () => {
                     ))
                   )}
                 </div>
-            )}
+              )}
             </div>
             <div className="games-container">
               <button
