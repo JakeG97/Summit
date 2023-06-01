@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllGamesThunk } from "../../store/game";
@@ -31,6 +31,8 @@ const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredGames, setFilteredGames] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+  const [isInputClicked, setIsInputClicked] = useState(false);
+  const searchContainerRef = useRef(null);
 
 
 
@@ -97,20 +99,41 @@ const HomePage = () => {
     }
   };
 
-  const handleSearch = () => {
-    if (searchQuery.trim() !== '') {
-      history.push(`/search?query=${encodeURIComponent(searchQuery)}`);
-    }
+  const handleSearchInputClick = () => {
+    setIsInputClicked(true);
+    searchContainerRef.current.focus();
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(e.target)
+      ) {
+        setIsInputClicked(false);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);  
+  
 
   const handleSearchInputChange = (e) => {
     const inputValue = e.target.value;
     setSearchInput(inputValue);
   
-    const filtered = games.filter((game) =>
-      game.title.toLowerCase().includes(inputValue.toLowerCase())
-    );
-    setFilteredGames(filtered);
+    if (inputValue.trim() !== '') {
+      const filtered = games.filter((game) =>
+        game.title.toLowerCase().includes(inputValue.toLowerCase())
+      );
+      setFilteredGames(filtered);
+    } else {
+      setFilteredGames([]);
+    }
   };
   
   
@@ -137,24 +160,47 @@ const HomePage = () => {
               type="text"
               placeholder="Search for a game..."
               value={searchInput}
+              onClick={handleSearchInputClick}
               onChange={handleSearchInputChange}
+              className="search-input"
             />
-            {searchInput && (
-              <div className="search-results">
-                {filteredGames.map((game) => (
-                  <div
-                    key={game.id}
-                    className="search-result"
-                    onClick={() => history.push(`/games/${game.id}`)}
-                  >
-                    {game.title}
-                  </div>
-                ))}
-              </div>
+            <div className="search-container" ref={searchContainerRef}>
+            {isInputClicked && (
+                <div className="search-results">
+                  {searchInput.trim() !== '' ? (
+                    filteredGames.map((game) => (
+                      <div
+                        key={game.id}
+                        className="search-result"
+                        onClick={() => history.push(`/games/${game.id}`)}
+                      >
+                        <img
+                          key={game.id}
+                          className="game-search-image"
+                          src={game.image}
+                        />
+                        {game.title}
+                      </div>
+                    ))
+                  ) : (
+                    games.map((game) => (
+                      <div
+                        key={game.id}
+                        className="search-result"
+                        onClick={() => history.push(`/games/${game.id}`)}
+                      >
+                        <img
+                          key={game.id}
+                          className="game-search-image"
+                          src={game.image}
+                        />
+                        {game.title}
+                      </div>
+                    ))
+                  )}
+                </div>
             )}
-            <button className="search-button" onClick={handleSearch}>
-              <i className="fas fa-search"></i>
-            </button>
+            </div>
             <div className="games-container">
               <button
                 className="arrow-button"
