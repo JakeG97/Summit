@@ -28,8 +28,9 @@ const HomePage = () => {
   const [hoveredImage, setHoveredImage] = useState('');
   const [index, setIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('topSellers');
-
-  
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredGames, setFilteredGames] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
 
 
 
@@ -95,6 +96,24 @@ const HomePage = () => {
       setIndex(0);
     }
   };
+
+  const handleSearch = () => {
+    if (searchQuery.trim() !== '') {
+      history.push(`/search?query=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
+  const handleSearchInputChange = (e) => {
+    const inputValue = e.target.value;
+    setSearchInput(inputValue);
+  
+    const filtered = games.filter((game) =>
+      game.title.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setFilteredGames(filtered);
+  };
+  
+  
   
 
   return (
@@ -114,6 +133,28 @@ const HomePage = () => {
             <a className="cart-details-page" href="/cart">
               <button className="cart-button">CART</button>
             </a>
+            <input
+              type="text"
+              placeholder="Search for a game..."
+              value={searchInput}
+              onChange={handleSearchInputChange}
+            />
+            {searchInput && (
+              <div className="search-results">
+                {filteredGames.map((game) => (
+                  <div
+                    key={game.id}
+                    className="search-result"
+                    onClick={() => history.push(`/games/${game.id}`)}
+                  >
+                    {game.title}
+                  </div>
+                ))}
+              </div>
+            )}
+            <button className="search-button" onClick={handleSearch}>
+              <i className="fas fa-search"></i>
+            </button>
             <div className="games-container">
               <button
                 className="arrow-button"
