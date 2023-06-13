@@ -8,6 +8,7 @@ const normalizer = (data) => {
 
   const LOAD_GAMES = "games/LOAD_GAMES";
   const LOAD_SINGLE_GAME = "games/LOAD_SINGLE_GAME";
+  const LOAD_USER_GAMES = "games/LOAD_USER_GAMES";
   const CREATE_GAME = "games/CREATE_GAME";
   const DELETE_GAME = "games/DELETE_GAME";
   const UPDATE_GAME = "games/UPDATE_GAME";
@@ -20,6 +21,11 @@ const normalizer = (data) => {
   const loadSingleGame = (gameData) => ({
     type: LOAD_SINGLE_GAME,
     payload: gameData,
+  });
+
+  const loadUserGames = (userGameData) => ({
+    type: LOAD_USER_GAMES,
+    payload: userGameData,
   });
 
   const createGame = (game) => ({
@@ -55,6 +61,17 @@ const normalizer = (data) => {
       dispatch(loadSingleGame(gameData));
     }
   };
+
+  export const getUserGamesThunk = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/${userId}/games`);
+  
+    if (response.ok) {
+      const userGames = await response.json();
+      const normalizedUserGames = normalizer(userGames);
+      dispatch(loadUserGames(normalizedUserGames));
+    }
+  };
+  
 
   export const createGameThunk = (game) => async (dispatch) => {
       const res = await fetch('/api/games/create_game', {
@@ -105,6 +122,8 @@ const gamesReducer = (state = initialState, action) => {
           return { ...state, ...action.payload };
         case LOAD_SINGLE_GAME:
           return { ...state, [action.payload.id]: action.payload };
+        case LOAD_USER_GAMES:
+          return { ...state, ...action.payload };
         case CREATE_GAME:
           return { ...state, [action.payload.id]: action.payload };
         case DELETE_GAME:
