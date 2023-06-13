@@ -3,6 +3,7 @@ import DeleteUserModal from "../DeleteUser";
 import OpenModalButton from "../../../components/OpenModalButton";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllLibraryGamesThunk } from "../../../store/library";
+import { getUserGamesThunk } from "../../../store/session";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
@@ -13,6 +14,7 @@ const ProfilePage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const userGames = useSelector((state) => state.games);
   const library = useSelector((state) => state.library);
   const isLoaded = useSelector((state) => state.library.isLoaded);
   const backgroundImage = useSelector((state) => state.session.user.background_image);
@@ -22,6 +24,12 @@ const ProfilePage = () => {
       dispatch(getAllLibraryGamesThunk());
     }
   }, [dispatch, isLoaded]);
+
+  useEffect(() => {
+    if (!isLoaded) {
+    dispatch(getUserGamesThunk(sessionUser.id));
+    }
+  }, [dispatch, isLoaded, sessionUser.id]);
 
   if (!sessionUser) {
     history.push(`/home`);
@@ -76,6 +84,14 @@ const ProfilePage = () => {
             <Link to="/profile/edit" className="edit-profile-button">Edit Profile</Link>
           </div>
         </div>
+          <div className="game-list-container">
+            <h2>Games You've Created</h2>
+            <ul>
+              {Object.values(userGames).map((game) => (
+                <li key={game.id}>{game.title}</li>
+              ))}
+            </ul>
+          </div>
       </div>
       <div className="delete-user-container">
         <div className="no-delete-button">{deleteButton}</div>

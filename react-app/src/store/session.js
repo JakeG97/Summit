@@ -1,4 +1,13 @@
+const normalizer = (data) => {
+  const obj = {};
+  data.forEach((item) => {
+    obj[item.id] = item;
+  });
+return obj;
+};
+
 const SET_USER = "session/SET_USER";
+const LOAD_USER_GAMES = "user/LOAD_USER_GAMES";
 const REMOVE_USER = "session/REMOVE_USER";
 const UPDATE_USER = "session/UPDATE_USER";
 const DELETE_USER = "session/DELETE_USER";
@@ -6,6 +15,11 @@ const DELETE_USER = "session/DELETE_USER";
 export const setUser = (user) => ({
   type: SET_USER,
   payload: user,
+});
+
+const loadUserGames = (userGameData) => ({
+  type: LOAD_USER_GAMES,
+  payload: userGameData,
 });
 
 const removeUser = () => ({
@@ -103,6 +117,16 @@ export const signUp = (username, email, password, profile_picture) => async (dis
     }
   };
 
+export const getUserGamesThunk = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}/games`);
+
+  if (response.ok) {
+    const userGames = await response.json();
+    const normalizedUserGames = normalizer(userGames);
+    dispatch(loadUserGames(normalizedUserGames));
+  }
+};
+
 export const refreshUser = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}`);
   if (response.ok) {
@@ -155,6 +179,8 @@ export default function reducer(state = initialState, action) {
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
+    case LOAD_USER_GAMES:
+      return { ...state, ...action.payload };
     case UPDATE_USER:
       return { ...state, user: { ...state.user, ...action.payload } };      
     case DELETE_USER:
