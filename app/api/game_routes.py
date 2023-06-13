@@ -27,6 +27,22 @@ def get_single_game(game_id):
     return game.to_dict()
 
 
+
+# * -----------  GET  --------------
+# Returns all games that the user created/owns
+
+@game_routes.route('/users/<int:user_id>/games')
+def get_user_games(user_id):
+    user = User.query.get(user_id)
+
+    if user:
+        games = Game.query.filter_by(owner_id=user.id).all()
+        return [game.to_dict() for game in games]
+    else:
+        return {'error': 'User not found'}, 404
+
+
+
 #TODO -----------  POST  --------------
 
 @game_routes.route('/create_game', methods=['POST'])
