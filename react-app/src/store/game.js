@@ -55,6 +55,7 @@ const normalizer = (data) => {
       dispatch(loadSingleGame(gameData));
     }
   };
+  
 
   export const createGameThunk = (game) => async (dispatch) => {
       const res = await fetch('/api/games/create_game', {

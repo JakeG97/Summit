@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import User
+from app.models import User, Game
 from app import db
 import random
 user_routes = Blueprint('users', __name__)
@@ -41,6 +41,21 @@ def user(id):
 
     user = User.query.get(id)
     return user.to_dict()
+
+
+# * -----------  GET  --------------
+# Returns all the games that the user owns
+
+@user_routes.route('/<int:user_id>/games')
+@login_required
+def get_user_games(user_id):
+    user = User.query.get(user_id)
+
+    if user:
+        games = Game.query.filter_by(owner=user).all()
+        return [game.to_dict() for game in games]
+    else:
+        return {'error': 'User not found'}, 404
 
 #? -----------  PUT  --------------
 #  Update a user by id and returns that user in a dictionary
