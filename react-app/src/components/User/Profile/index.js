@@ -14,9 +14,10 @@ const ProfilePage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const userGames = useSelector((state) => state.games);
+  const userGames = useSelector((state) => state.session.games);
   const library = useSelector((state) => state.library);
   const isLoaded = useSelector((state) => state.library.isLoaded);
+  console.log("isLoaded:", isLoaded);
   const backgroundImage = useSelector((state) => state.session.user.background_image);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (!isLoaded) {
-    dispatch(getUserGamesThunk(sessionUser.id));
+      dispatch(getUserGamesThunk(sessionUser.id));
     }
   }, [dispatch, isLoaded, sessionUser.id]);
 
@@ -80,18 +81,26 @@ const ProfilePage = () => {
             <div className="profile-email">{sessionUser.email}</div>
           </div>
           <div className="level-container">
-            <div className="level">Level <span className="game-count">{gameCount}</span></div>
-            <Link to="/profile/edit" className="edit-profile-button">Edit Profile</Link>
+            <div className="level">
+              Level <span className="game-count">{gameCount}</span>
+            </div>
+            <Link to="/profile/edit" className="edit-profile-button">
+              Edit Profile
+            </Link>
           </div>
         </div>
-          <div className="game-list-container">
-            <h2>Games You've Created</h2>
+        <div className="game-list-container">
+          <h2>Games You've Created</h2>
+          {isLoaded ? (
             <ul>
               {Object.values(userGames).map((game) => (
                 <li key={game.id}>{game.title}</li>
               ))}
             </ul>
-          </div>
+          ) : (
+            <p>Loading games...</p>
+          )}
+        </div>
       </div>
       <div className="delete-user-container">
         <div className="no-delete-button">{deleteButton}</div>
