@@ -89,7 +89,7 @@ const ProfilePage = () => {
             </Link>
           </div>
         </div>
-        <div className="game-list-container">
+        {/* <div className="game-list-container">
           <h2>Games You've Created</h2>
           {isLoaded ? (
             <ul>
@@ -100,7 +100,7 @@ const ProfilePage = () => {
           ) : (
             <p>Loading games...</p>
           )}
-        </div>
+        </div> */}
       </div>
       <div className="delete-user-container">
         <div className="no-delete-button">{deleteButton}</div>
